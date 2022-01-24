@@ -2,7 +2,10 @@
 
 Team Name: webapp
 
-Team Members: aggarwah, vermav2, fadhels
+Team Members: 
+    - Himanshu Aggarwal (aggarwah)
+    - Vanshaj Verma (vermav2)
+    - Saif Fadhel (fadhels)
 
 This project is a reimplementation of ...
 
