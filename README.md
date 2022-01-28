@@ -1,4 +1,4 @@
-# Project Name
+# CryptoMetrics
 
 Team Name: L02_Group15
 
@@ -12,4 +12,6 @@ This project is a reimplementation of cryptodash, a cyrptocurrency price trackin
 The folders and files for this project are as follows:
 
 Doc - Documentation for the project
-Code - Implementation
+ProjectSchedule - Project deliverable schedule
+Reference Material - Referenced material for the implementation
+src - Implementation
