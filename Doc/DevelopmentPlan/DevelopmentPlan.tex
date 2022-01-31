@@ -1,52 +1,89 @@
-\documentclass{article}
+\documentclass[12pt,fleqn]{article}
 
+\usepackage{fullpage}
+\usepackage[round]{natbib}
+\usepackage{multirow}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{color, soul}
+\usepackage{caption}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{indentfirst}
 
-\title{SE 3XA3: Development Plan\\Title of Project}
+\newcolumntype{L}{>{\centering\arraybackslash}m{5cm}}
+\newcolumntype{l}{>{\centering\arraybackslash}m{3cm}}
 
-\author{Team \#, Team Name
-		\\ Student 1 name and macid
-		\\ Student 2 name and macid
-		\\ Student 3 name and macid
+\hypersetup{
+    colorlinks = true,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=blue,
+    urlcolor=blue
 }
+\oddsidemargin 0mm
+\evensidemargin 0mm
+\textwidth 160mm
+\textheight 200mm
 
-\date{}
+\newcommand\submissionDate{February 4, 2022}
 
-\input{../Comments}
+\usepackage{fancyhdr}
+\fancyhead[L]{\submissionDate{}}
+\fancyhead[C]{SE 3XA3: Software Project Management}
+\fancyhead[R]{Lab L02: Group 15}
+\setlength{\headheight}{52pt}
+\renewcommand{\headrulewidth}{0.2pt}
+\pagestyle{fancy}
+\usepackage[margin=2.5cm,headsep=.2in ]{geometry}
+
+\pagenumbering{arabic}
+\newcounter{stepnum}
+
+\title{\vspace*{150pt}Development Plan\\\vspace{10pt}Lab L02: Group 15}
+
+\author{
+Vanshaj Verma\\
+    \texttt{Vermav2}	
+	\\
+\and 
+Himanshu Aggarwal\\
+	\texttt{aggarwah}
+	\\
+\and
+Saif Fadhel\\
+  	\texttt{fadhels}
+  	\\
+}
+\date{\submissionDate{}}
 
 \begin{document}
-
-\begin{table}[hp]
-\caption{Revision History} \label{TblRevisionHistory}
-\begin{tabularx}{\textwidth}{llX}
-\toprule
-\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
-\midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\newpage
-
 \maketitle
+\thispagestyle{empty}
+\pagebreak
 
 Put your introductory blurb here.
 
 \section{Team Meeting Plan}
+\noindent The team will be meeting virtually two times a week for two hours during the 3XA3 lab times, using either Discord or Microsoft Teams. If more time is needed to discuss specific issues, Discord will be used to schedule additional meetings amongst the team members.
 
 \section{Team Communication Plan}
+\noindent The team has decided to use a Discord server for all communication related to this project. This allows for creation of multiple channels within the server to discuss different tasks that need to be completed. If needed, the group will be using Microsoft Teams and Emails to communicate to the TAs and the professor. The group will also use git issues to track and assign any issues within the project. 
 
 \section{Team Member Roles}
+
 
 \section{Git Workflow Plan}
 
 \section{Proof of Concept Demonstration Plan}
 
 \section{Technology}
+\noindent The project will use JavaScript as the primary programming language, along with HTML and CSS for the design. A JavaScript framework called 'NextJS' will be used as the frontend framework. (...add details about testing and documentation tools)
 
 \section{Coding Style}
 
@@ -56,4 +93,7 @@ Provide a pointer to your Gantt Chart.
 
 \section{Project Review}
 
-\end{document}
+
+ \end{document}
+
+
