@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="CryptoMetrics" company="L02 - GRP15" webLink="https://gitlab.cas.mcmaster.ca/webapp/webapp_l02_grp15" view-date="2022-01-02" view-index="0" gantt-divider-location="259" resource-divider-location="300" version="3.1.3103" locale="en_CA">
+<?xml version="1.0" encoding="UTF-8"?><project name="CryptoMetrics" company="L02 - GRP15" webLink="https://gitlab.cas.mcmaster.ca/webapp/webapp_l02_grp15" view-date="2022-01-09" view-index="0" gantt-divider-location="324" resource-divider-location="300" version="3.1.3103" locale="en_CA">
     <description/>
     <view zooming-state="default:6" id="gantt-chart">
-        <field id="tpd3" name="Name" width="128" order="0"/>
-        <field id="tpd4" name="Begin date" width="63" order="1"/>
-        <field id="tpd5" name="End date" width="62" order="2"/>
+        <field id="tpd3" name="Name" width="136" order="0"/>
+        <field id="tpd4" name="Begin date" width="91" order="1"/>
+        <field id="tpd5" name="End date" width="91" order="2"/>
     </view>
     <view id="resource-table">
         <field id="0" name="Name" width="209" order="0"/>
@@ -59,7 +59,11 @@
         <resource id="1" name="Saif Fadhel" function="1" contacts="fadhels@mcmaster.ca" phone=""/>
         <resource id="2" name="Vanshaj Verma" function="1" contacts="vermav2@mcmaster.ca" phone=""/>
     </resources>
-    <allocations/>
+    <allocations>
+        <allocation task-id="8" resource-id="0" function="1" responsible="false" load="33.3"/>
+        <allocation task-id="8" resource-id="1" function="1" responsible="false" load="33.3"/>
+        <allocation task-id="8" resource-id="2" function="1" responsible="false" load="33.3"/>
+    </allocations>
     <vacations/>
     <previous/>
     <roles roleset-name="Default"/>
