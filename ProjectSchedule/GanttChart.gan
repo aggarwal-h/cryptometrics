@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="CryptoMetrics" company="L02 - GRP15" webLink="https://gitlab.cas.mcmaster.ca/webapp/webapp_l02_grp15" view-date="2022-01-09" view-index="0" gantt-divider-location="324" resource-divider-location="300" version="3.1.3103" locale="en_CA">
+<?xml version="1.0" encoding="UTF-8"?><project name="CryptoMetrics" company="L02 - GRP15" webLink="https://gitlab.cas.mcmaster.ca/webapp/webapp_l02_grp15" view-date="2022-01-25" view-index="0" gantt-divider-location="324" resource-divider-location="298" version="3.1.3103" locale="en_CA">
     <description/>
-    <view zooming-state="default:6" id="gantt-chart">
+    <view zooming-state="default:2" id="gantt-chart">
         <field id="tpd3" name="Name" width="136" order="0"/>
         <field id="tpd4" name="Begin date" width="91" order="1"/>
         <field id="tpd5" name="End date" width="91" order="2"/>
     </view>
     <view id="resource-table">
-        <field id="0" name="Name" width="209" order="0"/>
-        <field id="1" name="Default role" width="85" order="1"/>
+        <field id="0" name="Name" width="208" order="0"/>
+        <field id="1" name="Default role" width="84" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -37,7 +37,14 @@
         <task id="5" name="Project Approval" color="#8cb6ce" meeting="false" start="2022-01-24" duration="1" complete="0" thirdDate="2022-01-11" thirdDate-constraint="0" expand="true"/>
         <task id="7" name="Problem Statement" color="#8cb6ce" meeting="false" start="2022-01-25" duration="4" complete="0" thirdDate="2022-01-11" thirdDate-constraint="0" expand="true"/>
         <task id="8" name="Development Plan" color="#8cb6ce" meeting="false" start="2022-01-31" duration="5" complete="0" thirdDate="2022-01-11" thirdDate-constraint="0" expand="true"/>
-        <task id="9" name="Requirements Document Revision 0" color="#8cb6ce" meeting="false" start="2022-01-31" duration="10" complete="0" thirdDate="2022-01-11" thirdDate-constraint="0" expand="true"/>
+        <task id="9" name="Requirements Document Revision 0" color="#8cb6ce" meeting="false" start="2022-01-31" duration="10" complete="0" thirdDate="2022-01-11" thirdDate-constraint="0" expand="true">
+            <task id="62" name="Initialize SRS Document" color="#8cb6ce" meeting="false" start="2022-01-31" duration="1" complete="0" thirdDate="2022-01-10" thirdDate-constraint="0" expand="true"/>
+            <task id="70" name="Project Issues" color="#8cb6ce" meeting="false" start="2022-02-01" duration="9" complete="0" thirdDate="2022-01-10" thirdDate-constraint="0" expand="true"/>
+            <task id="71" name="Project Drivers" color="#8cb6ce" meeting="false" start="2022-02-01" duration="9" complete="0" thirdDate="2022-01-10" thirdDate-constraint="0" expand="true"/>
+            <task id="72" name="Functional Requirements" color="#8cb6ce" meeting="false" start="2022-02-01" duration="9" complete="0" thirdDate="2022-01-10" thirdDate-constraint="0" expand="true"/>
+            <task id="73" name="Non-functional Requirements" color="#8cb6ce" meeting="false" start="2022-02-01" duration="9" complete="0" thirdDate="2022-01-10" thirdDate-constraint="0" expand="true"/>
+            <task id="74" name="Appendix" color="#8cb6ce" meeting="false" start="2022-02-01" duration="9" complete="0" thirdDate="2022-01-10" thirdDate-constraint="0" expand="true"/>
+        </task>
         <task id="10" name="Proof of Concept Demonstration" color="#8cb6ce" meeting="true" start="2022-02-28" duration="0" complete="0" thirdDate="2022-01-11" thirdDate-constraint="0" expand="true"/>
         <task id="11" name="Test Plan Revision 0" color="#8cb6ce" meeting="false" start="2022-02-28" duration="10" complete="0" thirdDate="2022-01-11" thirdDate-constraint="0" expand="true"/>
         <task id="13" name="Design &amp; Document Revision 0" color="#8cb6ce" meeting="false" start="2022-03-14" duration="5" complete="0" thirdDate="2022-01-11" thirdDate-constraint="0" expand="true"/>
@@ -60,9 +67,25 @@
         <resource id="2" name="Vanshaj Verma" function="1" contacts="vermav2@mcmaster.ca" phone=""/>
     </resources>
     <allocations>
-        <allocation task-id="8" resource-id="0" function="1" responsible="false" load="33.3"/>
-        <allocation task-id="8" resource-id="1" function="1" responsible="false" load="33.3"/>
-        <allocation task-id="8" resource-id="2" function="1" responsible="false" load="33.3"/>
+        <allocation task-id="8" resource-id="0" function="1" responsible="false" load="20.0"/>
+        <allocation task-id="62" resource-id="0" function="1" responsible="false" load="5.0"/>
+        <allocation task-id="70" resource-id="0" function="1" responsible="false" load="10.0"/>
+        <allocation task-id="72" resource-id="0" function="1" responsible="true" load="20.0"/>
+        <allocation task-id="73" resource-id="0" function="1" responsible="false" load="20.0"/>
+        <allocation task-id="71" resource-id="0" function="1" responsible="false" load="20.0"/>
+        <allocation task-id="74" resource-id="0" function="1" responsible="false" load="10.0"/>
+        <allocation task-id="8" resource-id="1" function="1" responsible="false" load="20.0"/>
+        <allocation task-id="70" resource-id="1" function="1" responsible="false" load="10.0"/>
+        <allocation task-id="72" resource-id="1" function="1" responsible="false" load="20.0"/>
+        <allocation task-id="73" resource-id="1" function="1" responsible="false" load="20.0"/>
+        <allocation task-id="74" resource-id="1" function="1" responsible="false" load="10.0"/>
+        <allocation task-id="71" resource-id="1" function="1" responsible="false" load="20.0"/>
+        <allocation task-id="8" resource-id="2" function="1" responsible="false" load="20.0"/>
+        <allocation task-id="70" resource-id="2" function="1" responsible="false" load="10.0"/>
+        <allocation task-id="72" resource-id="2" function="1" responsible="false" load="20.0"/>
+        <allocation task-id="73" resource-id="2" function="1" responsible="false" load="20.0"/>
+        <allocation task-id="74" resource-id="2" function="1" responsible="false" load="10.0"/>
+        <allocation task-id="71" resource-id="2" function="1" responsible="false" load="20.0"/>
     </allocations>
     <vacations/>
     <previous/>
