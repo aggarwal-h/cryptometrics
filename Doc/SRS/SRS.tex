@@ -88,6 +88,7 @@ The other stakeholders are the development team which is composed of software de
         Cryptocurrency & Digital currency secured by cryptography that uses a \\ & decentralized system to record transactions. \\ 
         Browser & Software application utilized to access the World Wide Web. \\ 
         TA & Teaching Assistant who is a client of the project. \\ 
+        UI & User Interface. \\
         API & Application Programming Interface \\
         JS & JavaScript. The language used to create the project. \\
         React & JavaScript library that was used to create the reference project. \\
@@ -183,45 +184,58 @@ extending its functionality to provide users with more options to interact with 
 \begin{enumerate}[label = FR-\arabic*, left=\parindent, series=fr]
     \item \textbf{Description}: The product shall display every cryptocurrency's relevant pricing information in a table-like manner.
     \newline \textbf{Rationale}: This will ensure that the information pertaining to a cryptocurrency is organized and can be sorted with filters easily.
+    \newline \textbf{Priority}: High
 
     \item \textbf{Description}: The product shall allow users to search for a desired cryptocurrency to retrieve all relevant pricing information about it.
     \newline \textbf{Rationale}: This will ensure that viewing the relevant pricing information associated with a specific cryptocurrency is efficient and quick.
+    \newline \textbf{Priority}: High
 
     \item \textbf{Description}: The product shall display a desired cryptocurrency's historical pricing information data hourly, weekly, monthly and yearly.
     \newline \textbf{Rationale}: When a cryptocurrency's historical prices are displayed, it will help the user make more informed investment decisions
     as they will be able to predict the pricing trajectory easily.
+    \newline \textbf{Priority}: High
 
     \item \textbf{Description}: The product shall allow users to directly compare the current and historical pricing of one cryptocurrency with another.
     \newline \textbf{Rationale}: Through giving users the ability to compare the performance metrics of two different cryptocurrencies, they will have
     a better idea of the scale of the discrepancies between them. 
+    \newline \textbf{Priority}: High
 
     \item \textbf{Description}: The product shall allow the users to filter and display cryptocurrencies along with their associated pricing information in a desired order. 
     \newline \textbf{Rationale}: Providing the user with the ability to filter the cryptocurrencies, for example, from highest to lowest market cap values, will save them much
     more time navigating the web application to reach their desired cryptocurrency quicker. 
+    \newline \textbf{Priority}: High
 
     \item \textbf{Description}: The product shall allow users to manually select which cryptocurrency along with its associated pricing information can be shifted around the web application.
     \newline \textbf{Rationale}: Providing the user with the ability to manually rearrange the order in which a cryptocurrency's information is displayed will give them control over specific cryptocurrencies they would like to access more information about quicker and more efficiently.
+    \newline \textbf{Priority}: High
 
     \item \textbf{Description}: The product shall consistently refresh the web application with up-to-date cryptocurrency data every minute.
     \newline \textbf{Rationale}: This will allow the user to stay informed about the current prices of cryptocurrencies to make more informed investment decisions.
+    \newline \textbf{Priority}: High
     
     \item \textbf{Description}: The product shall display an error message to the user if an API is unable to load cryptocurrency data.
     \newline \textbf{Rationale}: Giving a user direct feedback during a failed API call will allow them to identify an issue as opposed to waiting for a non-existent response from the product. 
+    \newline \textbf{Priority}: High
     
     \item \textbf{Description}: The product shall call the API at least two more times after a delay of 10 seconds if the initial API call results in an error.
     \newline \textbf{Rationale}: This will ensure that the product will have a chance to correct any initial data loading failures without the user's input.
+    \newline \textbf{Priority}: High
     
     \item \textbf{Description}: The product should display temporary skeleton placeholder graphics while data is being loaded. 
     \newline \textbf{Rationale}: This function will provide the user with a clear view of the system retrieving information and conveys the state of the product more accurately. 
+    \newline \textbf{Priority}: Low
     
     \item \textbf{Description}: The product shall timeout API calls after 10 seconds.
     \newline \textbf{Rationale}: Timing out API calls for failing after a given threshold of time ensures that the user is not wasting their time waiting longer than they need to for a response.
+    \newline \textbf{Priority}: Medium
     
     \item \textbf{Description}: The product should give the user the ability to manually change the theme.
     \newline \textbf{Rationale}: Providing the user with customisation options like changing the theme and font of the website will allow them to better personalise their experience. 
+    \newline \textbf{Priority}: Low
     
     \item \textbf{Description}: The product shall allow users to save their preferences and load them automatically upon starting the product.
     \newline \textbf{Rationale}: Automatically loading up user preferences allows the user to save time.
+    \newline \textbf{Priority}: Medium
     
 \end{enumerate}
 
@@ -466,7 +480,7 @@ The tasks for this project are set by the deliverable schedule in the course out
     \item Requirements Document
     \item Proof of Concept Demonstration
     \item Test Plan
-    \item Design Documenbts
+    \item Design Documents
     \item Revision 0 Demonstration 
     \item Final Demonstration 
     \item Test Report
@@ -485,6 +499,7 @@ The tasks for this project are set by the deliverable schedule in the course out
 \begin{itemize}
     \item Delay in updating the prices of cryptocurrencies.
     \item Not having enough data to have better accuracy on the graphs.
+    \item The APIs used by the project might cease to exist.
     \item Completing the project within the given time frame (course deadline). This could risk the quality of deliverables and the final product. 
 \end{itemize}
 
