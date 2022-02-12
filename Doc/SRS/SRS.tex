@@ -3,6 +3,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{graphicx}
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -11,6 +12,7 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
+\usepackage{enumitem}
 
 \title{SE 3XA3: Software Requirements Specification \\ CryptoMetrics}
 
@@ -20,7 +22,7 @@
 }
 
 
-\date{\today}
+\date{February 11, 2022}
 
 % \input{../Comments}
 
@@ -38,8 +40,8 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Feb 4, 2021 & 1.0 & Initialize the document \\
+Feb 11, 2021 & 1.1 & Update and finalize the document \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -48,103 +50,481 @@ Date 2 & 1.1 & Notes\\
 
 \pagenumbering{arabic}
 
-This document describes the requirements for ....  The template for the Software
-Requirements Specification (SRS) is a subset of the Volere
-template~\citep{RobertsonAndRobertson2012}.  If you make further modifications
-to the template, you should explicity state what modifications were made.
-
 \section{Project Drivers}
 
 \subsection{The Purpose of the Project}
+The purpose of the project is to implement a dashboard to display data visualizations on cryptocurrency prices and their trends.
 
 \subsection{The Stakeholders}
 
+The stakeholders of the project include the development team, cryptocurrency enthusiasts, the professor, and the teaching assistants of the course. 
+
 \subsubsection{The Client}
+
+The clients of the project includes the TAs and the professor as they have assigned the development team the task of creating software and provide valuable feedback that will directly influence the development of the software.
 
 \subsubsection{The Customers}
 
+The customers of the project includes beginner and casual cryptocurrency traders, cryptominers, small firms, local businesses and anyone who is interested in cryptocurrency.
+
 \subsubsection{Other Stakeholders}
 
+The other stakeholders are the development team which is composed of software designers, developers, and testers who are invested in the success of the project. 
+
 \subsection{Mandated Constraints}
+\textbf{C1.}
+\begin{itemize}
+    \item Description: The project shall be a web application written in JavaScript.
+    \item Rationale: Using a JavaScript framework such as Next.js, the development team can create a user-friendly web application that is modular and allows for rapid feature deployment.
+    \item Fit Criterion: The project shall run on any modern web browser supporting JavaScript such as Google Chrome, Mozilla Firefox, and Microsoft Edge.
+\end{itemize}
 
 \subsection{Naming Conventions and Terminology}
 
-\subsection{Relevant Facts and Assumptions}
+\begin{table}[!h]
+    \begin{tabular}{lll} \toprule
+        \textbf{Acronym/Term} & \textbf{Description}\\ \midrule
+        CryptoMiner & The name of the project in development. \\ 
+        Cryptocurrency & Digital currency secured by cryptography that uses a \\ & decentralized system to record transactions. \\ 
+        Browser & Software application utilized to access the World Wide Web. \\ 
+        TA & Teaching Assistant who is a client of the project. \\ 
+        API & Application Programming Interface \\
+        JS & JavaScript. The language used to create the project. \\
+        React & JavaScript library that was used to create the reference project. \\
+        NextJS/Next.js & The specific React framework that will be utilized to develop \\ & and organize the web application. \\ 
+        URL & Uniform Resource Locator. \\
+        FR & Functional Requirements. \\
+        NFR & Non-functional Requirements. \\
+        Bug & Fault in the code that produces an incorrect/unexpected result. \\
+        Database & Organized collection of data. \\
+        \bottomrule
+    \end{tabular}
+    \caption{Description of Terms and Acronyms}
+    \label{tab:my_label}
+\end{table}
 
-User characteristics should go under assumptions.
+\subsection{Relevant Facts and Assumptions}
+\subsubsection{Relevant Facts}
+The number of lines of code in the original, existing open-source project is approximately 395.
+\subsubsection{Assumptions}
+
+\begin{itemize}
+    \item The user is interacting with the web application in an up-to-date browser.
+    \item The user is proficient in the English Language. 
+    \item The user has a very basic understanding of how to navigate a website.
+    \item The user has background knowledge on Cryptocurrency and how their prices fluctuate. 
+\end{itemize}
 
 \section{Functional Requirements}
 
 \subsection{The Scope of the Work and the Product}
-
-\subsubsection{The Context of the Work}
+The scope of the project involves making the existing cryptocurrency dashboard of the original project more modular and 
+extending its functionality to provide users with more options to interact with cryptocurrency data.
 
 \subsubsection{Work Partitioning}
 
+\begin{figure}[h!]
+  \includegraphics[width=14cm]{images/workflow.png} \\ %put image name in brackets
+  \caption{Work Context Diagram}
+\end{figure}
+
+\begin{table}[hbt!]
+    \begin{tabular}{|c|c|c|}
+    \hline
+    Event Name & Input and Output & Summary \\ \hline
+    \begin{tabular}[c]{@{}c@{}}1. Search for Desired\\ Cryptocurrency\end{tabular} & \begin{tabular}[c]{@{}c@{}}In: \textit{c\_name} \\ Out: \textit{c\_name} \\ Price Information \end{tabular} & \begin{tabular}[c]{@{}c@{}} The user can search for \\ a desired Cryptocurrency's \\ price information for the \\ system to display. \end{tabular} \\ \hline
+    \begin{tabular}[c]{@{}c@{}}2. Compare Two different \\ Cryptocurrencies.\end{tabular} & \begin{tabular}[c]{@{}c@{}} In: Cryptocurrency 1 \\ and Cryptocurrency 2 \\ Out: Price Information \\ of both Cryptocurrencies  \end{tabular} & \begin{tabular}[c]{@{}c@{}}Current and Historical \\ Price Information of both \\ Cryptocurrencies are \\ directly compared. \end{tabular} \\ \hline
+    \begin{tabular}[c]{@{}c@{}}3. View Historical \\ Cryptocurrency \\ Price Information\end{tabular} & \begin{tabular}[c]{@{}c@{}}In: Cryptocurrency record \\ Out: Time-Series \\ Cryptocurrency data \end{tabular} & \begin{tabular}[c]{@{}c@{}} Historical data of the \\ desired Cryptocurrency \\ will be displayed \\ by the system in an \\ organized manner. \end{tabular} \\ \hline
+    \begin{tabular}[c]{@{}c@{}}4. Display Cryptocurrency \\ Price Information \\ Given filters\end{tabular} & \begin{tabular}[c]{@{}c@{}} In: Filter Names \\ Out: Cryptocurrency price \\ Information that pertains \\ to the selected filters. \end{tabular} & \begin{tabular}[c]{@{}c@{}} The list of cryptocurrencies \\ will be reduced down for \\ the system to display only \\ relevant cryptocurrencies \\ based on selected filters. \end{tabular} \\ \hline
+    \end{tabular}
+    \caption{Business Event List}
+\end{table}
+
 \subsubsection{Individual Product Use Cases}
+\begin{enumerate}
+    \item User wants to view time series data for a cryptocurrency
+    \begin{enumerate}
+        \item The user launches the program.
+        \item The system shows the user a table of cryptocurrencies.
+        \item The user selects a cryptocurrency.
+        \item The system navigates the user to a details page where a chart is displayed with all historical time series data related to the selected cryptocurrency.
+    \end{enumerate}
+    
+    \item User wants to sort a list of cryptocurrencies
+    \begin{enumerate}
+        \item The user launches the program.
+        \item The system shows the user a table of cryptocurrencies.
+        \item The user clicks on a heading of the table.
+        \item The system sorts the cryptocurrency list based on the heading selected.
+    \end{enumerate}
+    
+    \item User wants to filter a list of cryptocurrencies
+    \begin{enumerate}
+        \item The user launches the program.
+        \item The system shows the user a table of cryptocurrencies and buttons to add filters.
+        \item The user uses the filter buttons to add specific filters.
+        \item The system applies the filters to the cryptocurrency list and the updated list is displayed.
+    \end{enumerate}
+    
+    \item User wants to compare different cryptocurrencies
+    \begin{enumerate}
+        \item The user launches the program.
+        \item The system shows the user a table of cryptocurrencies and a "select" button.
+        \item The user clicks the "select" button.
+        \item The system displays checkboxes beside each cryptocurrency name.
+        \item The user checks all the cryptocurrencies that need to be compared and clicks on the "compare" button.
+        \item The system navigates the user to a comparison page where a chart is displayed with all historical time series data related to the selected cryptocurrencies.
+    \end{enumerate}
+    
+\end{enumerate}
 
 \subsection{Functional Requirements}
+
+\begin{enumerate}[label = FR-\arabic*, left=\parindent, series=fr]
+    \item \textbf{Description}: The product shall display every cryptocurrency's relevant pricing information in a table-like manner.
+    \newline \textbf{Rationale}: This will ensure that the information pertaining to a cryptocurrency is organized and can be sorted with filters easily.
+
+    \item \textbf{Description}: The product shall allow users to search for a desired cryptocurrency to retrieve all relevant pricing information about it.
+    \newline \textbf{Rationale}: This will ensure that viewing the relevant pricing information associated with a specific cryptocurrency is efficient and quick.
+
+    \item \textbf{Description}: The product shall display a desired cryptocurrency's historical pricing information data hourly, weekly, monthly and yearly.
+    \newline \textbf{Rationale}: When a cryptocurrency's historical prices are displayed, it will help the user make more informed investment decisions
+    as they will be able to predict the pricing trajectory easily.
+
+    \item \textbf{Description}: The product shall allow users to directly compare the current and historical pricing of one cryptocurrency with another.
+    \newline \textbf{Rationale}: Through giving users the ability to compare the performance metrics of two different cryptocurrencies, they will have
+    a better idea of the scale of the discrepancies between them. 
+
+    \item \textbf{Description}: The product shall allow the users to filter and display cryptocurrencies along with their associated pricing information in a desired order. 
+    \newline \textbf{Rationale}: Providing the user with the ability to filter the cryptocurrencies, for example, from highest to lowest market cap values, will save them much
+    more time navigating the web application to reach their desired cryptocurrency quicker. 
+
+    \item \textbf{Description}: The product shall allow users to manually select which cryptocurrency along with its associated pricing information can be shifted around the web application.
+    \newline \textbf{Rationale}: Providing the user with the ability to manually rearrange the order in which a cryptocurrency's information is displayed will give them control over specific cryptocurrencies they would like to access more information about quicker and more efficiently.
+
+    \item \textbf{Description}: The product shall consistently refresh the web application with up-to-date cryptocurrency data every minute.
+    \newline \textbf{Rationale}: This will allow the user to stay informed about the current prices of cryptocurrencies to make more informed investment decisions.
+    
+    \item \textbf{Description}: The product shall display an error message to the user if an API is unable to load cryptocurrency data.
+    \newline \textbf{Rationale}: Giving a user direct feedback during a failed API call will allow them to identify an issue as opposed to waiting for a non-existent response from the product. 
+    
+    \item \textbf{Description}: The product shall call the API at least two more times after a delay of 10 seconds if the initial API call results in an error.
+    \newline \textbf{Rationale}: This will ensure that the product will have a chance to correct any initial data loading failures without the user's input.
+    
+    \item \textbf{Description}: The product should display temporary skeleton placeholder graphics while data is being loaded. 
+    \newline \textbf{Rationale}: This function will provide the user with a clear view of the system retrieving information and conveys the state of the product more accurately. 
+    
+    \item \textbf{Description}: The product shall timeout API calls after 10 seconds.
+    \newline \textbf{Rationale}: Timing out API calls for failing after a given threshold of time ensures that the user is not wasting their time waiting longer than they need to for a response.
+    
+    \item \textbf{Description}: The product should give the user the ability to manually change the theme.
+    \newline \textbf{Rationale}: Providing the user with customisation options like changing the theme and font of the website will allow them to better personalise their experience. 
+    
+    \item \textbf{Description}: The product shall allow users to save their preferences and load them automatically upon starting the product.
+    \newline \textbf{Rationale}: Automatically loading up user preferences allows the user to save time.
+    
+\end{enumerate}
 
 \section{Non-functional Requirements}
 
 \subsection{Look and Feel Requirements}
+\subsubsection{Appearance Requirements}
+\begin{enumerate}[label = NFR-\arabic*, left=\parindent, series=nfr]
+    \item The product shall be attractive and pleasing to a younger audience.
+    \newline \textbf{Rationale}: To maintain the attention of the users, it is important that they like the look and feel of the product. 
+    \newline \textbf{Fit Criterion}: Within a minute of their first encounter with it, 85\% of a sample of young users shall start using the product without prompt.
+    \item The product shall be consistent with the user's device's theme preferences.
+    \newline \textbf{Rationale}: It is important to provide light and dark modes of the product that switch automatically with the device's preferences as this will affect how many users want to use the product.
+    \newline \textbf{Fit Criterion}: The product shall adapt to the user's device's theme preferences on first startup 99\% of times.
+\end{enumerate}
+
+\subsubsection{Style Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall feel professional, trustworthy, and informative.
+    \newline \textbf{Rationale}: To gain the trust of the users, it is important that the product feels professional, trustworthy and informative.
+    \newline \textbf{Fit Criterion}: After their first encounter with the product, 80\% of representative users shall agree that the product feels professional, trustworthy and informative.
+    \item The product shall have a consistent font and theme throughout
+    all the components.
+    \newline \textbf{Rationale}: To ensure that the components match each other, it is important that they share the same fonts and styles.
+    \newline \textbf{Fit Criterion}: 85\% of a sample group shall not be able to notice a difference in the font and theme of any of the components.
+\end{enumerate}
 
 \subsection{Usability and Humanity Requirements}
+\subsubsection{Ease of Use Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall be intuitive and easy to use by anyone above the age of 10.
+    \newline \textbf{Rationale}: For the product to reach mass audience, it is important for it to be intuitive and easy to use.
+    \newline \textbf{Fit Criterion}: 90\% of sample representative users above the age of 10 shall be able to successfully complete specified tasks within a set amount of time.
+    \item The product shall require no prior training or education, except for a basic understanding of the English language and familiarity with navigating around websites.
+    \newline \textbf{Rationale}: For the product to reach a wide range of users with different backgrounds in education, it must be not require any previous education or experience to use the product.
+    \newline \textbf{Fit Criterion}: 80\% of a sample English-speaking group shall be able to navigate through different pages of the product without any training or education.
+\end{enumerate}
+
+\subsubsection{Personalization and Internationalization Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall allow the user to save preferences.
+    \newline \textbf{Rationale}: Users should be able to save their preferences, close the web page and come back another time to the same preferences they had initially set. This will help avoid time wasting in re-adjusting the product.
+    \newline \textbf{Fit Criterion}: 95\% of sample representative users shall be able to save their preferences without errors at least 9 out of 10 times.
+\end{enumerate}
+
+\subsubsection{Learning Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall be able to be used by anyone without any training.
+    \newline \textbf{Rationale}: Users should be spending time on learning and understanding different trends in the cryptocurrency market, not on learning how to navigate through the product.
+    \newline \textbf{Fit Criterion}: 75\% of a sample group shall be able to complete a set of tasks within a specified amount of time.
+\end{enumerate}
+
+\subsubsection{Understandability and Politeness Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall use icons that are universally recognized by the users.
+    \newline \textbf{Rationale}: For the product to be usable by users around the world, it is important for the icons to be universally recognizable.
+    \newline \textbf{Fit Criterion}: 95\% of users in a diverse sample group shall be able to understand what the icons represent.
+\end{enumerate}
+
+\subsubsection{Accessibility Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall be usable on both desktop and mobile devices.
+    \newline \textbf{Rationale}: Many users around the world do not have a laptop/desktop. It is important that they be able to view the product on their phone or any other device of their choice.
+    \newline \textbf{Fit Criterion}: The product shall automatically adjust to the size of the user's screen 95\% of times.
+\end{enumerate}
 
 \subsection{Performance Requirements}
+\subsubsection{Speed and Latency Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall initialize and setup swiftly.
+    \newline \textbf{Rationale}: The product should load up fast to avoid users from getting bored or distracted.
+    \newline \textbf{Fit Criterion}: The product shall take no more than 10 seconds to initialize and setup.
+    \item The product shall have a maximum loading time of 5 seconds between any of the pages.
+    \newline \textbf{Rationale}: The user should not have to wait long times to navigate between pages.
+    \newline \textbf{Fit Criterion}: The product shall take less than 1 second 95\% of times, and less than 5 seconds rest of the times to load different pages. 
+    \item The product shall be fast enough to keep the user from losing interest.
+    \newline \textbf{Rationale}: It is important for the product to be quick and responsive to avoid losing the user's interest.
+    \newline \textbf{Fit Criterion}: A survey of a sample of users should indicate that at least 90\% users found the product quick and responsive.
+\end{enumerate}
+
+\subsubsection{Safety-Critical Requirements}
+N/A
+\subsubsection{Precision or Accuracy Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall display prices accurate to 2 decimal places.
+    \newline \textbf{Rationale}: The product may lose users' trust and not be taken seriously if the prices shown are not precise and accurate.
+    \newline \textbf{Fit Criterion}: The displayed values shall be accurate to two decimal places 100\% of the times.
+\end{enumerate}
+
+\subsubsection{Reliability and Availability Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall be available 24 hours per day.
+    \newline \textbf{Rationale}: The product will lose to competitors if not available 24 hours a day.
+    \newline \textbf{Fit Criterion}: The product shall achieve availability of 24 hours for at least 85\% of days in a year. 
+    \item The product shall meet or exceed 98\% uptime.
+    \newline \textbf{Rationale}: A product with long downtimes will not be taken seriously.
+    \newline \textbf{Fit Criterion}: The product shall not be down for more than 2\% of times.
+\end{enumerate}
+
+\subsubsection{Robustness or Fault-Tolerance Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall log any errors and continue to operate as usual.
+    \newline \textbf{Rationale}: The errors should be logged to get notified of any potential bugs that might affect the product. The product should not crash even in case of errors or else users may lose trust.
+    \newline \textbf{Fit Criterion}: A survey of users shall indicate that no more than 1\% of users faced any crashes.
+\end{enumerate}
+
+\subsubsection{Capacity Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall accommodate at least 100 users using the product simultaneously.
+    \newline \textbf{Rationale}: A user shall not have to wait if other users are using the product.
+    \newline \textbf{Fit Criterion}: A sample group of 100 users shall be able to use the product at the same time with no failures or wait time.
+\end{enumerate}
+
+\subsubsection{Scalability or Extensibility Requirements}
+N/A
+
+\subsubsection{Longevity Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall be easy to update and maintain with low budget availability. 
+    \newline \textbf{Rationale}: A project that is easy to maintain will last a long time.
+    \newline \textbf{Fit Criterion}: Internal surveys should indicate that majority of developers working on the product feel that the product is easy to maintain.
+\end{enumerate}
 
 \subsection{Operational and Environmental Requirements}
+\subsubsection{Expected Physical Environment}
+N/A
+
+\subsubsection{Requirements for Interfacing with Adjacent Systems}
+\begin{enumerate}[nfr]
+    \item The product shall interface with external databases and servers to fetch data.
+    \newline \textbf{Rationale}: The product will not be able to provide up-to-date data if the data is not fetched from a database or a server on every load.
+    \newline \textbf{Fit Criterion}: Users shall see up-to-date information at least 99\% of times whenever they open the product.
+\end{enumerate}
+
+\subsubsection{Productization Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall be deployed to a web server and be accessible to the users via a secure URL.
+    \newline \textbf{Rationale}: It is important for the product to be deployed on a server so that users can access it quickly and on the device of their choice.
+    \newline \textbf{Fit Criterion}: A sample group of users shall be able to verify that they can access the product using the URL. A security firm shall certify that the URL is secure.
+\end{enumerate}
+
+\subsubsection{Release Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall be updated weekly to patch any bugs.
+    \newline \textbf{Rationale}: To keep the users away from seeing faulty data or face unexpected errors, it is important to update the product frequently to patch any bugs.
+    \newline \textbf{Fit Criterion}: The product shall be updated weekly for at least 95\% of weeks when there is a known bug.
+    \item The product shall be updated monthly to add/improve features.
+    \newline \textbf{Rationale}: To ensure that users don't get bored of the existing functionality, the product shall be updated frequently to add new features.
+    \newline \textbf{Fit Criterion}: The product shall be updated monthly with new features for at least 60\% of months.
+\end{enumerate}
 
 \subsection{Maintainability and Support Requirements}
+\subsubsection{Maintenance Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall be able to update frequently for bug fixes.
+    \newline \textbf{Rationale}: Frequent updates and patches will help the product achieve more trust and credibility from users in the long term.
+    \newline \textbf{Fit Criterion}: An internal survey shall indicate that at least 80\% of developers feel that the product is easily updatable.
+\end{enumerate}
+
+\subsubsection{Supportability Requirements}
+N/A
+
+\subsubsection{Adaptability Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall run on mobile and desktop web browsers.
+    \newline \textbf{Rationale}: Users that only have one type of device or the other should not be left out.
+    \newline \textbf{Fit Criterion}: The product shall adapt to the user's screen size 95\% of times.
+\end{enumerate}
 
 \subsection{Security Requirements}
+\subsubsection{Access Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall be accessible to all users worldwide.
+    \newline \textbf{Rationale}: To gain a wider range of users, it is important for the product to be accessible worldwide.
+    \newline \textbf{Fit Criterion}: Users from around the world shall be able to access the product at least 99\% of times.
+    \item Only the developers shall have access to logs related to bug and crash reports.
+    \newline \textbf{Rationale}: The user should be able to focus on viewing cryptocurrency prices and should not have to worry about bugs.
+    \newline \textbf{Fit Criterion}: A security firm shall certify that only the developers have access to bug and crash reports.
+\end{enumerate}
+
+\subsubsection{Integrity Requirements}
+\begin{enumerate}[nfr]
+    \item Users shall not be able to alter data in the databases.
+    \newline \textbf{Rationale}: It can be potentially risky if users are given write access to the data stored in the databases.
+    \newline \textbf{Fit Criterion}: A security firm shall certify that users are unable to alter data in the databases.
+\end{enumerate}
+
+\subsubsection{Privacy Requirements}
+\begin{enumerate}[nfr]
+    \item The product shall not collect any data from the users.
+    \newline \textbf{Rationale}: Users shall not have to worry about their personal data being collected. 
+    \newline \textbf{Fit Criterion}: A security firm shall certify that no hidden trackers are present to collect personal data.
+\end{enumerate}
+
+\subsubsection{Audit Requirements}
+N/A
+
+\subsubsection{Immunity Requirements}
+N/A
 
 \subsection{Cultural Requirements}
+\subsubsection{Cultural Requirements}
+N/A
+\subsubsection{Political Requirements}
+N/A
 
 \subsection{Legal Requirements}
+\subsubsection{Compliance Requirements}
+\begin{enumerate}[nfr]
+\item The product shall comply with all government policies related to cryptocurrencies.
+\newline \textbf{Rationale}: The developers may face fines if the product doesn't comply with government laws and policies.
+\newline \textbf{Fit Criterion}: A legal team shall certify that the product complies with the appropriate laws and policies.
+\end{enumerate}
+
+\subsubsection{Standards Requirements}
+N/A
 
 \subsection{Health and Safety Requirements}
+N/A
 
-This section is not in the original Volere template, but health and safety are
-issues that should be considered for every engineering project.
 
 \section{Project Issues}
 
 \subsection{Open Issues}
+Modifying the user interface such that it runs more efficiently and cleanly. The newer version of the project would be using NextJS instead of React so as to have server-side rendered pages. 
+
 
 \subsection{Off-the-Shelf Solutions}
+There are few other available products like TradingView, Yahoo Finance, CoinMarketCap etc that are complicated and more geared towards professionals/experienced traders. Whereas our product is more simple and focused on students and entry-level investors.  
 
 \subsection{New Problems}
+\begin{itemize}
+    \item Translating some old code and structure to fit in with the NextJS framework.
+    \item Implementing some additional features such as graphs, comparing cryptocurrencies etc to the UI. 
+\end{itemize}
 
 \subsection{Tasks}
+The tasks for this project are set by the deliverable schedule in the course outline for Software Engineering 3XA3. These tasks include: 
+\begin{itemize}
+    \item The Problem Statement
+    \item Development Plan 
+    \item Requirements Document
+    \item Proof of Concept Demonstration
+    \item Test Plan
+    \item Design Documenbts
+    \item Revision 0 Demonstration 
+    \item Final Demonstration 
+    \item Test Report
+\end{itemize}
 
 \subsection{Migration to the New Product}
+\begin{itemize}
+    \item Converting the tech stack to NextJS
+    \item Adding new Graphs and other visual features to the UI
+    \item Feature to compare cryptocurrencies
+    \item Ability to filter cryptocurrencies
+    \item More modularity in the codebase
+\end{itemize}
 
 \subsection{Risks}
+\begin{itemize}
+    \item Delay in updating the prices of cryptocurrencies.
+    \item Not having enough data to have better accuracy on the graphs.
+    \item Completing the project within the given time frame (course deadline). This could risk the quality of deliverables and the final product. 
+\end{itemize}
 
 \subsection{Costs}
+Since the project is using all free-to-use technologies and services, there are no costs associated with the project unless we take into account the development time of the project by the developers. 
 
 \subsection{User Documentation and Training}
+The documentation of different modules and files would be provided by the developers which will include its operation, inputs/outputs and purpose of the function. The user of the final product would require no such special training or documentation to get started. The UI should be relatively easy for anyone to navigate without any confusion.
 
 \subsection{Waiting Room}
+N/A
 
 \subsection{Ideas for Solutions}
-
-\bibliographystyle{plainnat}
-
-\bibliography{SRS}
+\begin{itemize}
+    \item Using free online resources for getting started with the tech stack: NextJS, JavaScript
+    \item The user would be able to view the price chart of the cryptocurrencies to get a better understanding. 
+    \item Modular components of the project to add new features and to test the functions. 
+\end{itemize}
 
 \newpage
 
 \section{Appendix}
 
-This section has been added to the Volere template.  This is where you can place
-additional information.
+The project's updated Gantt chart is located \href{https://gitlab.cas.mcmaster.ca/webapp/webapp_l02_grp15/-/tree/main/ProjectSchedule}{here}.
 
 \subsection{Symbolic Parameters}
 
-The definition of the requirements will likely call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.
+\begin{table}[!h]
+    \begin{tabular}{lll} \toprule
+        \textbf{Symbol} & \textbf{Definition}\\ \midrule
+        \textit{c\_name} & The variable name of the desired cryptocurrency to be utilized. \\ 
+        \bottomrule
+    \end{tabular}
+    \caption{Description of Symbolic Parameters}
+    \label{tab:my_label}
+\end{table}
+
+\bibliographystyle{plain}
+\nocite{*}
+\bibliography{SRS}
 
 
 \end{document}
