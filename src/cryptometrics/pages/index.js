@@ -1,4 +1,8 @@
 import Head from "next/head";
+import Container from "../components/content/Container";
+import Main from "../components/content/Main";
+import SearchInput from "../components/inputs/SearchInput";
+import BoldGradientHeading from "../components/titles/BoldGradientHeading";
 
 export default function Home() {
   return (
@@ -8,9 +12,14 @@ export default function Home() {
         <meta name="description" content="CryptoMetrics" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="text-4xl font-extrabold text-center mt-5">
-        CryptoMetrics
-      </div>
+      <Main>
+        <Container>
+          <div className="flex flex-row justify-between">
+            <BoldGradientHeading>CryptoMetrics</BoldGradientHeading>
+            <SearchInput />
+          </div>
+        </Container>
+      </Main>
     </div>
   );
 }
