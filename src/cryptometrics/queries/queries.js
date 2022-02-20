@@ -13,6 +13,7 @@ export function useCryptoTimeSeriesData(name, days = 7, interval = "daily") {
     },
     {
       refetchOnWindowFocus: false,
+      staleTime: 5 * 60000, // 5 minutes,
     }
   );
 }
@@ -35,6 +36,7 @@ export function useCryptoList(
     },
     {
       refetchOnWindowFocus: false,
+      staleTime: 5 * 60000, // 5 minutes,
     }
   );
 }
