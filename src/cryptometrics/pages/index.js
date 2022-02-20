@@ -9,9 +9,11 @@ import { useCryptoList } from "../queries";
 import numeral from "numeral";
 import Wrapper from "../components/content/Wrapper";
 import Sidebar from "../components/sidebar/Sidebar";
+import { Tabs, Tab } from "../components/tabs/Tab";
+import { CollectionIcon, TableIcon } from "@heroicons/react/outline";
 
 export default function Home() {
-  const listOfCoins = useCryptoList("usd", 5, false);
+  const listOfCoins = useCryptoList("usd", 21, false);
   const filteredCoins = listOfCoins.data?.map((coin) => {
     return (
       <CryptoChartCard
@@ -20,7 +22,7 @@ export default function Home() {
         currencyName={coin.name}
         symbol={coin.symbol.toUpperCase()}
         icon={coin.image}
-        info={"$" + numeral(coin.current_price).format("0,0.[00]")}
+        info={"$" + numeral(coin.current_price).format("0,0.[0000000]")}
         detail={
           numeral(coin.price_change_percentage_24h).format("+0.0[00]") + "%"
         }
@@ -56,9 +58,26 @@ export default function Home() {
               <SearchInput />
             </div>
 
-            <div className="flex flex-wrap gap-x-10 gap-y-10 mt-10">
-              {!listOfCoins.isLoading && filteredCoins}
-            </div>
+            {/* Main Content */}
+            <Tabs>
+              <Tab
+                id="card-view"
+                content={<CollectionIcon className="w-6 h-6 dark:text-white" />}
+              >
+                <div className="flex flex-wrap gap-x-10 gap-y-10 mt-3">
+                  {!listOfCoins.isLoading && filteredCoins}
+                </div>
+              </Tab>
+              <Tab
+                id="list-view"
+                content={<TableIcon className="w-6 h-6 dark:text-white" />}
+              >
+                {/* TODO: Add Table Component Here */}
+                <div className="flex flex-wrap gap-x-10 gap-y-10 mt-3">
+                  <h1 className="dark:text-white">TABLE</h1>
+                </div>
+              </Tab>
+            </Tabs>
           </Container>
         </Main>
       </Wrapper>
