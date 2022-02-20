@@ -12,7 +12,7 @@ function Sidebar() {
         <Image
           className=""
           src="/crypto_logo.png"
-          width="230%"
+          width="190%"
           height="100%"
           objectFit="contain"
           alt="CryptoMetrics-logo-large"

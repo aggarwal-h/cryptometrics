@@ -1,4 +1,4 @@
-export const cryptoChartOptions = (dark = false) => {
+export const cryptoChartOptions = (colors = [], dark = false) => {
   return {
     chart: {
       toolbar: {
@@ -61,7 +61,40 @@ export const cryptoChartOptions = (dark = false) => {
     tooltip: {
       enabled: false,
     },
+    colors: colors,
   };
 };
 
-export const cryptocurrencies = ["bitcoin"];
+export const cryptocurrencies = [
+  {
+    id: "bitcoin",
+    symbol: "btc",
+    name: "Bitcoin",
+  },
+  {
+    id: "ethereum",
+    symbol: "eth",
+    name: "Ethereum",
+  },
+  {
+    id: "tether",
+    symbol: "usdt",
+    name: "Tether",
+  },
+  { id: "binancecoin", symbol: "bnb", name: "BNB" },
+  {
+    id: "usd-coin",
+    symbol: "usdc",
+    name: "USD Coin",
+  },
+  {
+    id: "ripple",
+    symbol: "xrp",
+    name: "XRP",
+  },
+  {
+    id: "cardano",
+    symbol: "ada",
+    name: "Cardano",
+  },
+];

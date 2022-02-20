@@ -5,13 +5,12 @@ import SearchInput from "../components/inputs/SearchInput";
 import BoldGradientHeading from "../components/titles/BoldGradientHeading";
 import CryptoChartCard from "../components/cards/CryptoChartCard";
 import { cryptoChartOptions } from "../constants";
-import { useCryptoList, useCryptoTimeSeriesData } from "../queries";
+import { useCryptoList } from "../queries";
 import numeral from "numeral";
 import Wrapper from "../components/content/Wrapper";
 import Sidebar from "../components/sidebar/Sidebar";
 
 export default function Home() {
-  const bitcoin = useCryptoTimeSeriesData("bitcoin", 7);
   const listOfCoins = useCryptoList("usd", 5, false);
   const filteredCoins = listOfCoins.data?.map((coin) => {
     return (
@@ -30,13 +29,10 @@ export default function Home() {
             ? "text-green-500"
             : "text-red-500"
         }
-        options={cryptoChartOptions(true)}
-        series={[
-          {
-            name: "bitcoin",
-            data: bitcoin.data?.prices || [],
-          },
-        ]}
+        options={cryptoChartOptions(
+          coin.price_change_percentage_24h > 0 ? ["#3DBAA2"] : ["#FF7A68"],
+          true
+        )}
         type="area"
       />
     );
@@ -60,7 +56,7 @@ export default function Home() {
               <SearchInput />
             </div>
 
-            <div className="flex flex-row flex-wrap mb-16 p-2">
+            <div className="flex flex-wrap gap-x-10 gap-y-10 mt-10">
               {!listOfCoins.isLoading && filteredCoins}
             </div>
           </Container>
