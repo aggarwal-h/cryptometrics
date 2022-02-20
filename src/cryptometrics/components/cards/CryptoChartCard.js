@@ -22,7 +22,7 @@ function CryptoChartCard({
   const cryptoQuery = useCryptoTimeSeriesData(currencyId, 1, "hourly");
   return (
     <Link href={`/coins/${currencyId}`} passHref>
-      <a className="w-full xl:w-[31%] hover:scale-[102%] cursor-pointer">
+      <a className="w-full xl:w-[30.6%] hover:scale-[102%] cursor-pointer">
         <div className="rounded-3xl shadow-[0_8px_25px_rgba(0,0,0,7%)] dark:bg-dark-700">
           <div className="relative h-60">
             <div className="absolute top-0 right-0 left-0 bottom-0 z-10 rounded-3xl overflow-hidden">
