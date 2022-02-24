@@ -47,7 +47,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Wrapper>
-        <Sidebar />
+        <Sidebar active="home" />
         <Main>
           <Container>
             {/* Header */}
