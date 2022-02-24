@@ -70,6 +70,14 @@ function CompareChart() {
         name: "Solana",
         smooth: true,
         symbol: "none",
+        lineStyle: {
+          width: 3,
+          shadowOffsetY: 1,
+          color: "#3590F3",
+          shadowColor: "#1F51FF",
+          shadowOffsetX: 1,
+          shadowBlur: 10,
+        },
       },
       {
         type: "line",
@@ -77,6 +85,14 @@ function CompareChart() {
         name: "Avalanche",
         smooth: true,
         symbol: "none",
+        lineStyle: {
+          width: 3,
+          shadowOffsetY: 0,
+          color: "#06D6A0",
+          shadowColor: "#39FF14",
+          shadowOffsetX: 1,
+          shadowBlur: 10,
+        },
       },
     ],
   };
