@@ -4,6 +4,7 @@ import Main from "../components/content/Main";
 import BoldGradientHeading from "../components/titles/BoldGradientHeading";
 import Wrapper from "../components/content/Wrapper";
 import Sidebar from "../components/sidebar/Sidebar";
+import CompareChart from "../components/charts/CompareChart";
 
 export default function Compare() {
   return (
@@ -18,10 +19,11 @@ export default function Compare() {
         <Main>
           <Container>
             {/* Header */}
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between mb-4">
               {/* Main Project Title */}
               <BoldGradientHeading>Compare</BoldGradientHeading>
             </div>
+            <CompareChart />
           </Container>
         </Main>
       </Wrapper>
