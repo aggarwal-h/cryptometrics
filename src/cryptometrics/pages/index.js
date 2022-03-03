@@ -12,39 +12,15 @@ import Sidebar from "../components/sidebar/Sidebar";
 import { Tabs, Tab } from "../components/tabs/Tab";
 import { CollectionIcon, TableIcon } from "@heroicons/react/outline";
 import { useState } from "react";
+import Coin from "../components/coin/Coin";
 
 export default function Home() {
   const [searchText, setSearchText] = useState("");
   const listOfCoins = useCryptoList("usd", 21, false);
-  const filteredCoins = listOfCoins.data
-    ?.filter((coin) => {
-      return coin.name.toLowerCase().includes(searchText.toLowerCase());
-    })
-    .map((coin) => {
-      return (
-        <CryptoChartCard
-          key={coin.symbol}
-          currencyId={coin.id}
-          currencyName={coin.name}
-          symbol={coin.symbol.toUpperCase()}
-          icon={coin.image}
-          info={"$" + numeral(coin.current_price).format("0,0.[0000000]")}
-          detail={
-            numeral(coin.price_change_percentage_24h).format("+0.0[00]") + "%"
-          }
-          detailColor={
-            coin.price_change_percentage_24h > 0
-              ? "text-green-500"
-              : "text-red-500"
-          }
-          options={cryptoChartOptions(
-            coin.price_change_percentage_24h > 0 ? ["#3DBAA2"] : ["#FF7A68"],
-            true
-          )}
-          type="area"
-        />
-      );
-    });
+  const filteredCoins = listOfCoins.data?.filter((coin) => {
+    return coin.name.toLowerCase().includes(searchText.toLowerCase());
+  });
+
   return (
     <div>
       <Head>
@@ -71,17 +47,64 @@ export default function Home() {
                 content={<CollectionIcon className="w-6 h-6 dark:text-white" />}
               >
                 <div className="flex flex-wrap gap-x-10 gap-y-10 mt-3">
-                  {!listOfCoins.isLoading && filteredCoins}
+                  {!listOfCoins.isLoading &&
+                    filteredCoins.map((coin) => {
+                      return (
+                        <CryptoChartCard
+                          key={coin.symbol}
+                          currencyId={coin.id}
+                          currencyName={coin.name}
+                          symbol={coin.symbol.toUpperCase()}
+                          icon={coin.image}
+                          info={
+                            "$" +
+                            numeral(coin.current_price).format("0,0.[0000000]")
+                          }
+                          detail={
+                            numeral(coin.price_change_percentage_24h).format(
+                              "+0.0[00]"
+                            ) + "%"
+                          }
+                          detailColor={
+                            coin.price_change_percentage_24h > 0
+                              ? "text-green-500"
+                              : "text-red-500"
+                          }
+                          options={cryptoChartOptions(
+                            coin.price_change_percentage_24h > 0
+                              ? ["#3DBAA2"]
+                              : ["#FF7A68"],
+                            true
+                          )}
+                          type="area"
+                        />
+                      );
+                    })}
                 </div>
               </Tab>
               <Tab
                 id="list-view"
                 content={<TableIcon className="w-6 h-6 dark:text-white" />}
               >
-                {/* TODO: Add Table Component Here */}
-                <div className="flex flex-wrap gap-x-10 gap-y-10 mt-3">
-                  <h1 className="dark:text-white">TABLE</h1>
-                </div>
+                {!listOfCoins.isLoading &&
+                  filteredCoins.map((coin) => {
+                    return (
+                      <Coin
+                        key={coin.id}
+                        name={coin.name}
+                        image={coin.image}
+                        symbol={coin.symbol}
+                        marketcap={coin.market_cap}
+                        price={numeral(coin.current_price).format(
+                          "0,0.[0000000]"
+                        )}
+                        priceChange={coin.price_change_percentage_24h}
+                        volume={numeral(coin.total_volume).format(
+                          "0,0.[0000000]"
+                        )}
+                      />
+                    );
+                  })}
               </Tab>
             </Tabs>
           </Container>
