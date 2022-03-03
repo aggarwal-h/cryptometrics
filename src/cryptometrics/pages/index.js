@@ -11,34 +11,40 @@ import Wrapper from "../components/content/Wrapper";
 import Sidebar from "../components/sidebar/Sidebar";
 import { Tabs, Tab } from "../components/tabs/Tab";
 import { CollectionIcon, TableIcon } from "@heroicons/react/outline";
+import { useState } from "react";
 
 export default function Home() {
+  const [searchText, setSearchText] = useState("");
   const listOfCoins = useCryptoList("usd", 21, false);
-  const filteredCoins = listOfCoins.data?.map((coin) => {
-    return (
-      <CryptoChartCard
-        key={coin.symbol}
-        currencyId={coin.id}
-        currencyName={coin.name}
-        symbol={coin.symbol.toUpperCase()}
-        icon={coin.image}
-        info={"$" + numeral(coin.current_price).format("0,0.[0000000]")}
-        detail={
-          numeral(coin.price_change_percentage_24h).format("+0.0[00]") + "%"
-        }
-        detailColor={
-          coin.price_change_percentage_24h > 0
-            ? "text-green-500"
-            : "text-red-500"
-        }
-        options={cryptoChartOptions(
-          coin.price_change_percentage_24h > 0 ? ["#3DBAA2"] : ["#FF7A68"],
-          true
-        )}
-        type="area"
-      />
-    );
-  });
+  const filteredCoins = listOfCoins.data
+    ?.filter((coin) => {
+      return coin.name.toLowerCase().includes(searchText.toLowerCase());
+    })
+    .map((coin) => {
+      return (
+        <CryptoChartCard
+          key={coin.symbol}
+          currencyId={coin.id}
+          currencyName={coin.name}
+          symbol={coin.symbol.toUpperCase()}
+          icon={coin.image}
+          info={"$" + numeral(coin.current_price).format("0,0.[0000000]")}
+          detail={
+            numeral(coin.price_change_percentage_24h).format("+0.0[00]") + "%"
+          }
+          detailColor={
+            coin.price_change_percentage_24h > 0
+              ? "text-green-500"
+              : "text-red-500"
+          }
+          options={cryptoChartOptions(
+            coin.price_change_percentage_24h > 0 ? ["#3DBAA2"] : ["#FF7A68"],
+            true
+          )}
+          type="area"
+        />
+      );
+    });
   return (
     <div>
       <Head>
@@ -55,7 +61,7 @@ export default function Home() {
               {/* Main Project Title */}
               <BoldGradientHeading>Home</BoldGradientHeading>
               {/* Search Field */}
-              <SearchInput />
+              <SearchInput onChange={(e) => setSearchText(e?.target.value)} />
             </div>
 
             {/* Main Content */}
