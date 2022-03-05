@@ -1,4 +1,8 @@
-export const cryptoChartOptions = (colors = [], dark = false) => {
+export const cryptoChartOptions = (
+  colors = [],
+  dark = false,
+  animationsEnabled = false
+) => {
   return {
     chart: {
       toolbar: {
@@ -6,6 +10,9 @@ export const cryptoChartOptions = (colors = [], dark = false) => {
       },
       sparkline: {
         enabled: true,
+      },
+      animations: {
+        enabled: animationsEnabled,
       },
     },
     dataLabels: {
