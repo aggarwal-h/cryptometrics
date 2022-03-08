@@ -9,9 +9,9 @@ export function Filter({
 }) {
   return (
     <div className="flex flex-wrap justify-start items-center mx-1 mt-2">
-      <div className="py-5 pl-5 pr-1 font-sans font-normal bg-neutral-100 rounded-l-lg dark:text-neutral-900 inline-flex h-10 justify-center items-center whitespace-nowrap">
+      <div className="py-5 pl-5 pr-1 font-sans bg-dark-600 rounded-l-lg dark:text-white inline-flex h-10 justify-center items-center whitespace-nowrap font-normal">
         <span>{subject}&nbsp;</span>
-        <span className="font-light dark:text-neutral-700">
+        <span className="font-light dark:text-neutral-300">
           {condition}&nbsp;
         </span>
         <span>{value}</span>
@@ -20,7 +20,7 @@ export function Filter({
       {/* Button */}
       <button
         onClick={onButtonClick}
-        className="mr-2 p-2 bg-neutral-100 hover:dark:bg-neutral-200 rounded-r-lg justify-center items-center h-10 w-10 inline-flex font-thin"
+        className="mr-2 p-2 bg-dark-600 hover:dark:bg-dark-800 rounded-r-lg justify-center items-center h-10 w-10 inline-flex font-thin text-white"
       >
         <span>{buttonIcon}</span>
       </button>
@@ -31,7 +31,7 @@ export function Filter({
 export function FilterButton({ icon, onClick }) {
   return (
     <button
-      className="mx-1 mt-2 font-sans font-normal bg-neutral-100 rounded-lg dark:text-neutral-800 dark:hover:text-indigo-600 inline-flex h-10 w-10 justify-center items-center whitespace-nowrap"
+      className="mx-1 mt-2 font-sans font-normal bg-dark-600 rounded-lg dark:text-neutral-200 dark:hover:text-indigo-600 inline-flex h-10 w-10 justify-center items-center whitespace-nowrap"
       onClick={onClick}
     >
       {icon}
