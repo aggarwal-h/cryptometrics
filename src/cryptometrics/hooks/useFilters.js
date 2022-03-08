@@ -36,8 +36,8 @@ export default function useFilters(initialArray) {
     setFilters(
       filters.filter(({ subject, condition, value }) => {
         return (
-          subject !== filter.subject &&
-          condition !== filter.condition &&
+          subject !== filter.subject ||
+          condition !== filter.condition ||
           value !== filter.value
         );
       })

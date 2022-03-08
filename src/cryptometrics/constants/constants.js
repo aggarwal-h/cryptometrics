@@ -98,3 +98,38 @@ export const cryptocurrencies = [
     name: "Cardano",
   },
 ];
+
+export const filterOptions = {
+  price: {
+    id: "price",
+    name: "Price",
+    options: {
+      equals: {
+        id: "equals",
+        name: "is",
+      },
+      less_than: {
+        id: "less_than",
+        name: "is less than",
+      },
+      greater_than: {
+        id: "greater_than",
+        name: "is greater than",
+      },
+    },
+  },
+  name: {
+    id: "name",
+    name: "Name",
+    options: {
+      equals: {
+        id: "equals",
+        name: "is",
+      },
+      less_than: {
+        id: "contains",
+        name: "contains",
+      },
+    },
+  },
+};
