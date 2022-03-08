@@ -10,10 +10,20 @@ import numeral from "numeral";
 import Wrapper from "../components/content/Wrapper";
 import Sidebar from "../components/sidebar/Sidebar";
 import { Tabs, Tab } from "../components/tabs/Tab";
-import { CollectionIcon, TableIcon } from "@heroicons/react/outline";
+import {
+  CollectionIcon,
+  PlusIcon,
+  TableIcon,
+  XIcon,
+} from "@heroicons/react/outline";
 import { useState } from "react";
+import useFilters from "../hooks/useFilters";
+import { Filter, FilterButton, Filters } from "../components/filters/Filter";
+import { FilterDropdown } from "../components/dropdown/FilterDropdown";
 
 export default function Home() {
+  const [filters, addFilter, removeFilter] = useFilters([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const listOfCoins = useCryptoList("usd", 21, false);
   const filteredCoins = listOfCoins.data
@@ -62,6 +72,38 @@ export default function Home() {
               <BoldGradientHeading>Home</BoldGradientHeading>
               {/* Search Field */}
               <SearchInput onChange={(e) => setSearchText(e?.target.value)} />
+            </div>
+            <div className="mb-2">
+              <Filters>
+                {filters.map((filter, idx) => {
+                  return (
+                    <Filter
+                      key={"filter_" + idx}
+                      subject={filter.subject}
+                      condition={filter.condition}
+                      value={filter.value}
+                      buttonIcon={<XIcon className="w-5 h-5" />}
+                      onButtonClick={() => removeFilter(filter)}
+                    />
+                  );
+                })}
+                <div className="relative">
+                  <FilterButton
+                    icon={<PlusIcon className="w-6 h-6" />}
+                    onClick={() =>
+                      setDropdownOpen(!dropdownOpen) && addFilter({})
+                    }
+                  />
+
+                  {dropdownOpen && (
+                    <FilterDropdown
+                      open={dropdownOpen}
+                      setOpen={setDropdownOpen}
+                      addFilter={addFilter}
+                    />
+                  )}
+                </div>
+              </Filters>
             </div>
 
             {/* Main Content */}
