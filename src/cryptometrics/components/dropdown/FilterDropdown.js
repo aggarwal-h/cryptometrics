@@ -93,7 +93,7 @@ export function SecondaryFilterDropdown({
   return (
     <div
       className={classNames(
-        "dark:bg-dark-600 w-72 max-h-72 rounded-xl mt-2 transition-all duration-100 px-5 py-2 overflow-y-scroll",
+        "dark:bg-dark-600 w-72 max-h-72 rounded-xl mt-2 transition-all duration-100 px-5 py-2 overflow-y-scroll shadow-lg shadow-dark-600",
         {
           block: open,
           hidden: !open,
