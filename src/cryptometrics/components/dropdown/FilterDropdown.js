@@ -3,9 +3,9 @@ import classNames from "classnames";
 import React, { useState, useEffect } from "react";
 import Button from "../button/Button";
 import { RadioInputForm } from "../radio/RadioForm";
-import { filterOptions } from "../../constants";
+import { CSSTransition } from "react-transition-group";
 
-export function FilterDropdown({ open, setOpen, addFilter }) {
+export function FilterDropdown({ filterOptions, setOpen, addFilter }) {
   const [selectedFilter, setSelectedFilter] = useState(null);
 
   const [radioValue, setRadioValue] = useState("is");
@@ -19,7 +19,7 @@ export function FilterDropdown({ open, setOpen, addFilter }) {
         ].name
       );
     }
-  }, [selectedFilter]);
+  }, [filterOptions, selectedFilter]);
 
   const onRadioChange = ({ target: { value } }) => {
     setRadioValue(value);
@@ -46,7 +46,7 @@ export function FilterDropdown({ open, setOpen, addFilter }) {
     <div className="absolute flex flex-row z-50">
       <div
         className={classNames(
-          "dark:bg-dark-600 w-48 h-max max-h-72 rounded-xl mt-2 transition-all duration-100 p-1 overflow-y-scroll shadow-lg shadow-dark-600"
+          "dark:bg-dark-600 w-56 h-max max-h-72 rounded-xl mt-2 transition-all duration-100 p-1 overflow-y-scroll shadow-lg shadow-dark-600"
         )}
       >
         {Object.keys(filterOptions).map((key) => {
@@ -62,20 +62,29 @@ export function FilterDropdown({ open, setOpen, addFilter }) {
           );
         })}
       </div>
-      {selectedFilter && (
-        <span className="ml-3">
-          <SecondaryFilterDropdown
-            open={true}
-            onSelectedFilterChange={onSelectedFilterChange}
-            radioOptions={filterOptions[selectedFilter]?.options}
-            radioValue={radioValue}
-            onRadioChange={onRadioChange}
-            inputValue={inputValue}
-            onInputChange={onInputChange}
-            onFilterAdd={onFilterAdd}
-          />
-        </span>
-      )}
+      <CSSTransition
+        in={selectedFilter}
+        classNames="secondary-dropdown"
+        timeout={300}
+        unmountOnExit
+      >
+        {selectedFilter ? (
+          <span className="ml-3">
+            <SecondaryFilterDropdown
+              open={true}
+              onSelectedFilterChange={onSelectedFilterChange}
+              radioOptions={filterOptions[selectedFilter]?.options}
+              radioValue={radioValue}
+              onRadioChange={onRadioChange}
+              inputValue={inputValue}
+              onInputChange={onInputChange}
+              onFilterAdd={onFilterAdd}
+            />
+          </span>
+        ) : (
+          <div></div>
+        )}
+      </CSSTransition>
     </div>
   );
 }

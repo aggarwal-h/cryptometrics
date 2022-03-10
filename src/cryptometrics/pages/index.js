@@ -20,6 +20,7 @@ import { useState } from "react";
 import useFilters from "../hooks/useFilters";
 import { Filter, FilterButton, Filters } from "../components/filters/Filter";
 import { FilterDropdown } from "../components/dropdown/FilterDropdown";
+import { filterOptions } from "../constants";
 
 export default function Home() {
   const [filters, addFilter, removeFilter] = useFilters([]);
@@ -97,9 +98,9 @@ export default function Home() {
 
                   {dropdownOpen && (
                     <FilterDropdown
-                      open={dropdownOpen}
                       setOpen={setDropdownOpen}
                       addFilter={addFilter}
+                      filterOptions={filterOptions}
                     />
                   )}
                 </div>
