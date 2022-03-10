@@ -132,4 +132,22 @@ export const filterOptions = {
       },
     },
   },
+  price_change_percentage: {
+    id: "price_change_percentage",
+    name: "Price Change in %",
+    options: {
+      equals: {
+        id: "equals",
+        name: "is",
+      },
+      less_than: {
+        id: "less_than",
+        name: "is less than",
+      },
+      greater_than: {
+        id: "greater_than",
+        name: "is greater than",
+      },
+    },
+  },
 };
