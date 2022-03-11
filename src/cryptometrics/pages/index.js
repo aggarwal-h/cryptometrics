@@ -91,6 +91,37 @@ export default function Home() {
                 content={<TableIcon className="w-6 h-6 dark:text-white" />}
               >
                 <Table>
+                  <TableRow className="h-14 items-center sticky top-0 z-50">
+                    <TableCell className="w-6 h-10"></TableCell>
+                    <TableCell className="w-24 h-10">
+                      <p className="font-medium text-base text-center">Name</p>
+                    </TableCell>
+                    <TableCell className="w-24 h-10">
+                      <p className="font-medium text-base text-center">Price</p>
+                    </TableCell>
+                    <TableCell className="w-[10%] h-10">
+                      <p className="font-medium text-base text-center">
+                        Market Cap
+                      </p>
+                    </TableCell>
+                    <TableCell className="w-40 h-10">
+                      <p className="font-medium text-base text-center">
+                        24h change in %
+                      </p>
+                    </TableCell>
+                    <TableCell className="w-40 h-10">
+                      <p className="font-medium text-base text-center">
+                        24h change in $
+                      </p>
+                    </TableCell>
+                    <TableCell className="h-10">
+                      <div className="w-52">
+                        <p className="font-medium text-base text-center">
+                          Chart
+                        </p>
+                      </div>
+                    </TableCell>
+                  </TableRow>
                   {!listOfCoins.isLoading &&
                     filteredCoins.map((coin, index) => {
                       return (
@@ -119,8 +150,7 @@ export default function Home() {
                                 </p>
                               </TableCell>
                               <TableCell className="w-24">
-                                <p className="font-medium text-base">Price</p>
-                                <p className="font-light text-sm text-blue-500 mt-1">
+                                <p className="font-light text-base text-blue-500 mt-1">
                                   $
                                   {numeral(coin.current_price).format(
                                     "0,0.[0000000]"
@@ -128,10 +158,7 @@ export default function Home() {
                                 </p>
                               </TableCell>
                               <TableCell className="w-[10%]">
-                                <p className="font-medium text-base">
-                                  Market Cap
-                                </p>
-                                <p className="font-light text-sm text-pink-400 mt-1">
+                                <p className="font-light text-base text-pink-400 mt-1">
                                   $
                                   {numeral(coin.market_cap).format(
                                     "0,0.[000]a"
@@ -139,12 +166,9 @@ export default function Home() {
                                 </p>
                               </TableCell>
                               <TableCell className="w-40">
-                                <p className="font-medium text-base">
-                                  24h change in %
-                                </p>
                                 <p
                                   className={classNames(
-                                    "font-light text-sm mt-1",
+                                    "font-light text-base mt-1",
                                     {
                                       "text-red-400":
                                         coin.price_change_percentage_24h < 0,
@@ -160,12 +184,9 @@ export default function Home() {
                                 </p>
                               </TableCell>
                               <TableCell className="w-40">
-                                <p className="font-medium text-base">
-                                  24h change in $
-                                </p>
                                 <p
                                   className={classNames(
-                                    "font-light text-sm mt-1",
+                                    "font-light text-base mt-1",
                                     {
                                       "text-red-400": coin.price_change_24h < 0,
                                       "text-green-400":
