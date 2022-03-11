@@ -134,7 +134,7 @@ export default function Home() {
                 content={<TableIcon className="w-6 h-6 dark:text-white" />}
               >
                 <Table>
-                  <TableRow className="h-14 items-center sticky top-0 z-50">
+                  <TableRow className="h-14 items-center sticky top-0 z-40">
                     <TableCell className="w-6 h-10"></TableCell>
                     <TableCell className="w-24 h-10">
                       <p className="font-medium text-base text-center">Name</p>
