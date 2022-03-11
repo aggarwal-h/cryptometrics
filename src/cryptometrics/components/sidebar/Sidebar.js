@@ -4,9 +4,9 @@ import Link from "next/link";
 import classNames from "classnames";
 import { ChartBarIcon, GlobeIcon } from "@heroicons/react/outline";
 
-function Sidebar() {
+function Sidebar({ active }) {
   return (
-    <div className="w-64 dark:text-white">
+    <div className="w-64 min-w-[16rem] dark:text-white">
       {/* Sidebar Head */}
       <span className="flex justify-center items-center mt-5" id="crypto-logo">
         <Image
@@ -27,13 +27,13 @@ function Sidebar() {
             title="Home"
             icon={<GlobeIcon className="w-6 h-6" />}
             to="/"
-            active={true}
+            active={active === "home"}
           />
           <SidebarItem
             title="Compare"
             icon={<ChartBarIcon className="w-6 h-6" />}
-            to="/map"
-            active={false}
+            to="/compare"
+            active={active === "compare"}
           />
         </nav>
       </div>

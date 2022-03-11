@@ -11,3 +11,145 @@
     @apply bg-dark-800;
   }
 }
+
+#nprogress .bar {
+  background: rgb(37 99 235) !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: rgb(37 99 235) !important;
+  border-left-color: rgb(37 99 235) !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px rgb(37 99 235), 0 0 5px rgb(37 99 235) !important;
+}
+
+.secondary-dropdown-enter {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+.secondary-dropdown-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.secondary-dropdown-exit {
+  opacity: 1;
+}
+.secondary-dropdown-exit-active {
+  opacity: 0;
+  /* transform: scale(0.9); */
+  transform: translateX(-50px);
+  transition: opacity 300ms, transform 300ms;
+}
+.coin-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 64px;
+  color: white;
+}
+.coin-search {
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.coin-text {
+  margin-bottom: 32px;
+  text-align: center;
+}
+.coin-refresh {
+  /* padding-left: 8px; */
+  width: 100px;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  background: linear-gradient(to right, #50c9c3, #96deda);
+  margin-bottom: 20px;
+}
+
+.coin-input {
+  padding-left: 16px;
+  width: 300px;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  background-image: linear-gradient(to right, #f2709c, #ff9472);
+}
+
+.coin-input::placeholder {
+  color: #e2e2e2;
+}
+.coin-container {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+}
+
+.coin-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80px;
+  color: white;
+  width: 1500px;
+}
+
+.coin {
+  display: flex;
+  align-items: center;
+  padding-right: 24px;
+  min-width: 300px;
+}
+
+.coin .coin-name {
+  width: 250px;
+}
+
+.coin img {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
+.coin-symbol {
+  text-transform: uppercase;
+}
+
+.coin-data {
+  display: flex;
+  text-align: right;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.coin-price {
+  width: 110px;
+}
+
+.coin-volume {
+  width: 155px;
+}
+
+.coin-marketcap {
+  width: 230px;
+}
+
+.coin-percent {
+  width: 100px;
+}
+
+.red {
+  color: #f00606;
+}
+
+.green {
+  color: #11d811;
+}
