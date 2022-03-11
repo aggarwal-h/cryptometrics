@@ -134,6 +134,7 @@ export default function Home() {
                 content={<TableIcon className="w-6 h-6 dark:text-white" />}
               >
                 <Table>
+                  {/* Table Header */}
                   <TableRow className="h-14 items-center sticky top-0 z-40">
                     <TableCell className="w-6 h-10"></TableCell>
                     <TableCell className="w-24 h-10">
@@ -165,6 +166,8 @@ export default function Home() {
                       </div>
                     </TableCell>
                   </TableRow>
+
+                  {/* Table Content */}
                   {!listOfCoins.isLoading &&
                     filteredCoins.map((coin, index) => {
                       return (
