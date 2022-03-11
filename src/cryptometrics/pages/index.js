@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Head from "next/head";
 import Container from "../components/content/Container";
 import Main from "../components/content/Main";
@@ -11,8 +12,11 @@ import Wrapper from "../components/content/Wrapper";
 import Sidebar from "../components/sidebar/Sidebar";
 import { Tabs, Tab } from "../components/tabs/Tab";
 import { CollectionIcon, TableIcon } from "@heroicons/react/outline";
-import { useState } from "react";
-import Coin from "../components/coin/Coin";
+import { Table, TableCell, TableRow } from "../components/table/Table";
+import Image from "next/image";
+import CryptoRowLineChart from "../components/charts/CryptoRowLineChart";
+import classNames from "classnames";
+import Link from "next/link";
 
 export default function Home() {
   const [searchText, setSearchText] = useState("");
@@ -86,25 +90,133 @@ export default function Home() {
                 id="list-view"
                 content={<TableIcon className="w-6 h-6 dark:text-white" />}
               >
-                {!listOfCoins.isLoading &&
-                  filteredCoins.map((coin) => {
-                    return (
-                      <Coin
-                        key={coin.id}
-                        name={coin.name}
-                        image={coin.image}
-                        symbol={coin.symbol}
-                        marketcap={coin.market_cap}
-                        price={numeral(coin.current_price).format(
-                          "0,0.[0000000]"
-                        )}
-                        priceChange={coin.price_change_percentage_24h}
-                        volume={numeral(coin.total_volume).format(
-                          "0,0.[0000000]"
-                        )}
-                      />
-                    );
-                  })}
+                <Table>
+                  <TableRow className="h-14 items-center sticky top-0 z-50">
+                    <TableCell className="w-6 h-10"></TableCell>
+                    <TableCell className="w-24 h-10">
+                      <p className="font-medium text-base text-center">Name</p>
+                    </TableCell>
+                    <TableCell className="w-24 h-10">
+                      <p className="font-medium text-base text-center">Price</p>
+                    </TableCell>
+                    <TableCell className="w-[10%] h-10">
+                      <p className="font-medium text-base text-center">
+                        Market Cap
+                      </p>
+                    </TableCell>
+                    <TableCell className="w-40 h-10">
+                      <p className="font-medium text-base text-center">
+                        24h change in %
+                      </p>
+                    </TableCell>
+                    <TableCell className="w-40 h-10">
+                      <p className="font-medium text-base text-center">
+                        24h change in $
+                      </p>
+                    </TableCell>
+                    <TableCell className="h-10">
+                      <div className="w-52">
+                        <p className="font-medium text-base text-center">
+                          Chart
+                        </p>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                  {!listOfCoins.isLoading &&
+                    filteredCoins.map((coin, index) => {
+                      return (
+                        <Link
+                          key={"table_row_" + index}
+                          href={`/coins/${coin.id}`}
+                          passHref
+                        >
+                          <a>
+                            <TableRow>
+                              <TableCell className="w-6">
+                                <Image
+                                  src={coin.image}
+                                  width="32px"
+                                  height="32px"
+                                  alt={`${coin.id}_icon`}
+                                  layout="fixed"
+                                ></Image>
+                              </TableCell>
+                              <TableCell className="w-24">
+                                <p className="font-medium text-base text-center">
+                                  {coin.name}
+                                </p>
+                                <p className="font-light text-gray-300 text-sm mt-1">
+                                  {coin.symbol.toUpperCase()}
+                                </p>
+                              </TableCell>
+                              <TableCell className="w-24">
+                                <p className="font-light text-base text-blue-500 mt-1">
+                                  $
+                                  {numeral(coin.current_price).format(
+                                    "0,0.[0000000]"
+                                  )}
+                                </p>
+                              </TableCell>
+                              <TableCell className="w-[10%]">
+                                <p className="font-light text-base text-pink-400 mt-1">
+                                  $
+                                  {numeral(coin.market_cap).format(
+                                    "0,0.[000]a"
+                                  )}
+                                </p>
+                              </TableCell>
+                              <TableCell className="w-40">
+                                <p
+                                  className={classNames(
+                                    "font-light text-base mt-1",
+                                    {
+                                      "text-red-400":
+                                        coin.price_change_percentage_24h < 0,
+                                      "text-green-400":
+                                        coin.price_change_percentage_24h >= 0,
+                                    }
+                                  )}
+                                >
+                                  {numeral(
+                                    coin.price_change_percentage_24h
+                                  ).format("+0.0[00]")}
+                                  %
+                                </p>
+                              </TableCell>
+                              <TableCell className="w-40">
+                                <p
+                                  className={classNames(
+                                    "font-light text-base mt-1",
+                                    {
+                                      "text-red-400": coin.price_change_24h < 0,
+                                      "text-green-400":
+                                        coin.price_change_24h >= 0,
+                                    }
+                                  )}
+                                >
+                                  {numeral(coin.price_change_24h).format(
+                                    "$0,0.[0000]"
+                                  )}
+                                </p>
+                              </TableCell>
+                              <TableCell>
+                                <div className="h-[50px] w-52">
+                                  <CryptoRowLineChart
+                                    currencyId={coin.id}
+                                    color={
+                                      coin.price_change_24h >= 0
+                                        ? "#10B981"
+                                        : "#EF4444"
+                                    }
+                                  />
+                                </div>
+                              </TableCell>
+                            </TableRow>
+                          </a>
+                        </Link>
+                      );
+                    })}
+                </Table>
               </Tab>
             </Tabs>
           </Container>
