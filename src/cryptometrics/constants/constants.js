@@ -1,4 +1,8 @@
-export const cryptoChartOptions = (colors = [], dark = false) => {
+export const cryptoChartOptions = (
+  colors = [],
+  dark = false,
+  animationsEnabled = false
+) => {
   return {
     chart: {
       toolbar: {
@@ -6,6 +10,9 @@ export const cryptoChartOptions = (colors = [], dark = false) => {
       },
       sparkline: {
         enabled: true,
+      },
+      animations: {
+        enabled: animationsEnabled,
       },
     },
     dataLabels: {
@@ -62,6 +69,77 @@ export const cryptoChartOptions = (colors = [], dark = false) => {
       enabled: false,
     },
     colors: colors,
+  };
+};
+
+export const cryptoLineChartOptions = (seriesData = [], color = "#3590F3") => {
+  return {
+    grid: {
+      bottom: 10,
+      right: 10,
+      top: 10,
+      left: 10,
+    },
+    xAxis: {
+      show: false,
+      type: "time",
+      silent: false,
+      splitLine: {
+        show: false,
+      },
+      splitArea: {
+        show: false,
+      },
+    },
+    yAxis: {
+      show: false,
+      type: "value",
+      splitArea: {
+        show: false,
+      },
+      splitLine: {
+        show: false,
+      },
+      min: "dataMin",
+      max: "dataMax",
+    },
+    series: [
+      {
+        type: "line",
+        data: seriesData,
+        name: "Solana",
+        smooth: true,
+        symbol: "none",
+        lineStyle: {
+          width: 3,
+          shadowOffsetY: -1,
+          color: color,
+          shadowColor: color,
+          shadowOffsetX: 0,
+          shadowBlur: 5,
+          cap: "round",
+          opacity: 1,
+        },
+        animation: false,
+      },
+      {
+        type: "scatter",
+        data: seriesData.slice(-1),
+        name: "ABC",
+        smooth: true,
+        symbol: "circle",
+        symbolSize: 20,
+        itemStyle: {
+          shadowOffsetY: 0,
+          color: color,
+          shadowColor: color,
+          shadowOffsetX: 0,
+          shadowBlur: 15,
+          opacity: 0.1,
+        },
+        animation: false,
+      },
+    ],
   };
 };
 
