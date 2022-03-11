@@ -11,7 +11,16 @@ import numeral from "numeral";
 import Wrapper from "../components/content/Wrapper";
 import Sidebar from "../components/sidebar/Sidebar";
 import { Tabs, Tab } from "../components/tabs/Tab";
-import { CollectionIcon, TableIcon } from "@heroicons/react/outline";
+import {
+  CollectionIcon,
+  PlusIcon,
+  TableIcon,
+  XIcon,
+} from "@heroicons/react/outline";
+import useFilters from "../hooks/useFilters";
+import { Filter, FilterButton, Filters } from "../components/filters/Filter";
+import { FilterDropdown } from "../components/dropdown/FilterDropdown";
+import { filterOptions } from "../constants";
 import { Table, TableCell, TableRow } from "../components/table/Table";
 import Image from "next/image";
 import CryptoRowLineChart from "../components/charts/CryptoRowLineChart";
@@ -19,6 +28,8 @@ import classNames from "classnames";
 import Link from "next/link";
 
 export default function Home() {
+  const [filters, addFilter, removeFilter] = useFilters([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const listOfCoins = useCryptoList("usd", 21, false);
   const filteredCoins = listOfCoins.data?.filter((coin) => {
@@ -42,6 +53,38 @@ export default function Home() {
               <BoldGradientHeading>Home</BoldGradientHeading>
               {/* Search Field */}
               <SearchInput onChange={(e) => setSearchText(e?.target.value)} />
+            </div>
+            <div className="mb-2">
+              <Filters>
+                {filters.map((filter, idx) => {
+                  return (
+                    <Filter
+                      key={"filter_" + idx}
+                      subject={filter.subject}
+                      condition={filter.condition}
+                      value={filter.value}
+                      buttonIcon={<XIcon className="w-5 h-5" />}
+                      onButtonClick={() => removeFilter(filter)}
+                    />
+                  );
+                })}
+                <div className="relative">
+                  <FilterButton
+                    icon={<PlusIcon className="w-6 h-6" />}
+                    onClick={() =>
+                      setDropdownOpen(!dropdownOpen) && addFilter({})
+                    }
+                  />
+
+                  {dropdownOpen && (
+                    <FilterDropdown
+                      setOpen={setDropdownOpen}
+                      addFilter={addFilter}
+                      filterOptions={filterOptions}
+                    />
+                  )}
+                </div>
+              </Filters>
             </div>
 
             {/* Main Content */}
@@ -91,7 +134,7 @@ export default function Home() {
                 content={<TableIcon className="w-6 h-6 dark:text-white" />}
               >
                 <Table>
-                  <TableRow className="h-14 items-center sticky top-0 z-50">
+                  <TableRow className="h-14 items-center sticky top-0 z-40">
                     <TableCell className="w-6 h-10"></TableCell>
                     <TableCell className="w-24 h-10">
                       <p className="font-medium text-base text-center">Name</p>
