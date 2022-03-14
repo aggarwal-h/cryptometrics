@@ -1,11 +1,8 @@
 import classNames from "classnames";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export function Tabs({ children }) {
   const [tab, setTab] = useState("card-view");
-  useEffect(() => {
-    console.log(tab);
-  }, [tab]);
 
   return (
     <div>
