@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import Head from "next/head";
 import Container from "../components/content/Container";
 import Main from "../components/content/Main";
@@ -17,7 +17,7 @@ import {
   TableIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import useFilters from "../hooks/useFilters";
+import { useFilters, useOnClickOutside } from "../hooks";
 import { Filter, FilterButton, Filters } from "../components/filters/Filter";
 import { FilterDropdown } from "../components/dropdown/FilterDropdown";
 import { filterOptions } from "../constants";
@@ -29,7 +29,10 @@ import Link from "next/link";
 
 export default function Home() {
   const [filters, addFilter, removeFilter] = useFilters([]);
+  const filterDropdownRef = useRef(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const callbackDropdownClose = useCallback(() => setDropdownOpen(false), []);
+  useOnClickOutside(filterDropdownRef, callbackDropdownClose);
   const [searchText, setSearchText] = useState("");
   const listOfCoins = useCryptoList("usd", 21, false);
 
@@ -93,9 +96,9 @@ export default function Home() {
                       setDropdownOpen(!dropdownOpen) && addFilter({})
                     }
                   />
-
                   {dropdownOpen && (
                     <FilterDropdown
+                      dropdownRef={filterDropdownRef}
                       setOpen={setDropdownOpen}
                       addFilter={addFilter}
                       filterOptions={Object.keys(filterOptions)

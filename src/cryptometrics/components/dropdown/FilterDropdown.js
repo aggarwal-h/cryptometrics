@@ -5,9 +5,13 @@ import Button from "../button/Button";
 import { RadioInputForm } from "../radio/RadioForm";
 import { CSSTransition } from "react-transition-group";
 
-export function FilterDropdown({ filterOptions, setOpen, addFilter }) {
+export function FilterDropdown({
+  filterOptions,
+  setOpen,
+  addFilter,
+  dropdownRef,
+}) {
   const [selectedFilter, setSelectedFilter] = useState(null);
-
   const [radioValue, setRadioValue] = useState("is");
   const [inputValue, setInputValue] = useState("");
 
@@ -39,7 +43,7 @@ export function FilterDropdown({ filterOptions, setOpen, addFilter }) {
   };
 
   return (
-    <div className="absolute flex flex-row z-50">
+    <div className="absolute flex flex-row z-50" ref={dropdownRef}>
       <div
         className={classNames(
           "dark:bg-dark-600 w-56 h-max max-h-72 rounded-xl mt-2 transition-all duration-100 p-1 overflow-y-scroll shadow-lg shadow-dark-600"
