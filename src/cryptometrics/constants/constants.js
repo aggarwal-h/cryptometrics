@@ -1,3 +1,11 @@
+import {
+  less_than_number,
+  greater_than_number,
+  equals_string,
+  equals_integer,
+  contains_string,
+} from "../utils";
+
 export const cryptoChartOptions = (
   colors = [],
   dark = false,
@@ -178,53 +186,89 @@ export const cryptocurrencies = [
 ];
 
 export const filterOptions = {
-  price: {
-    id: "price",
+  current_price: {
+    id: "current_price",
     name: "Price",
+    input_type: "number",
+    symbol_left: "$",
     options: {
       equals: {
         id: "equals",
-        name: "is",
+        name: "is (approximately)",
+        function: equals_integer,
       },
       less_than: {
         id: "less_than",
         name: "is less than",
+        function: less_than_number,
       },
       greater_than: {
         id: "greater_than",
         name: "is greater than",
+        function: greater_than_number,
       },
     },
   },
   name: {
     id: "name",
     name: "Name",
+    input_type: "text",
     options: {
       equals: {
         id: "equals",
         name: "is",
+        function: equals_string,
       },
       less_than: {
         id: "contains",
         name: "contains",
+        function: contains_string,
       },
     },
   },
-  price_change_percentage: {
-    id: "price_change_percentage",
+  price_change_percentage_24h: {
+    id: "price_change_percentage_24h",
     name: "Price Change in %",
+    symbol_right: "%",
+    input_type: "number",
     options: {
       equals: {
         id: "equals",
-        name: "is",
+        name: "is (approximately)",
+        function: equals_integer,
       },
       less_than: {
         id: "less_than",
         name: "is less than",
+        function: less_than_number,
       },
       greater_than: {
         id: "greater_than",
         name: "is greater than",
+        function: greater_than_number,
+      },
+    },
+  },
+  price_change_24h: {
+    id: "price_change_24h",
+    name: "Price Change in $",
+    input_type: "number",
+    symbol_left: "$",
+    options: {
+      equals: {
+        id: "equals",
+        name: "is (approximately)",
+        function: equals_integer,
+      },
+      less_than: {
+        id: "less_than",
+        name: "is less than",
+        function: less_than_number,
+      },
+      greater_than: {
+        id: "greater_than",
+        name: "is greater than",
+        function: greater_than_number,
       },
     },
   },
