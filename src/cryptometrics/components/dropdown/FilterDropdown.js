@@ -13,11 +13,7 @@ export function FilterDropdown({ filterOptions, setOpen, addFilter }) {
 
   useEffect(() => {
     if (selectedFilter) {
-      setRadioValue(
-        filterOptions[selectedFilter].options[
-          Object.keys(filterOptions[selectedFilter].options)[0]
-        ].name
-      );
+      setRadioValue(Object.keys(filterOptions[selectedFilter].options)[0]);
     }
   }, [filterOptions, selectedFilter]);
 
@@ -35,7 +31,7 @@ export function FilterDropdown({ filterOptions, setOpen, addFilter }) {
 
   const onFilterAdd = () => {
     addFilter({
-      subject: filterOptions[selectedFilter].name,
+      subject: selectedFilter,
       condition: radioValue,
       value: inputValue,
     });
@@ -49,18 +45,22 @@ export function FilterDropdown({ filterOptions, setOpen, addFilter }) {
           "dark:bg-dark-600 w-56 h-max max-h-72 rounded-xl mt-2 transition-all duration-100 p-1 overflow-y-scroll shadow-lg shadow-dark-600"
         )}
       >
-        {Object.keys(filterOptions).map((key) => {
-          return (
-            <FilterDropdownItem
-              key={"primary_option_" + key}
-              selected={selectedFilter === key}
-              id={key}
-              onClick={onSelectedFilterChange}
-            >
-              {filterOptions[key].name}
-            </FilterDropdownItem>
-          );
-        })}
+        {Object.keys(filterOptions).length > 0 ? (
+          Object.keys(filterOptions).map((key) => {
+            return (
+              <FilterDropdownItem
+                key={"primary_option_" + key}
+                selected={selectedFilter === key}
+                id={key}
+                onClick={onSelectedFilterChange}
+              >
+                {filterOptions[key].name}
+              </FilterDropdownItem>
+            );
+          })
+        ) : (
+          <FilterDropdownItem disabled>No options available</FilterDropdownItem>
+        )}
       </div>
       <CSSTransition
         in={selectedFilter}
@@ -79,6 +79,9 @@ export function FilterDropdown({ filterOptions, setOpen, addFilter }) {
               inputValue={inputValue}
               onInputChange={onInputChange}
               onFilterAdd={onFilterAdd}
+              inputLeftSymbol={filterOptions[selectedFilter]?.symbol_left}
+              inputRightSymbol={filterOptions[selectedFilter]?.symbol_right}
+              inputType={filterOptions[selectedFilter]?.input_type}
             />
           </span>
         ) : (
@@ -98,6 +101,9 @@ export function SecondaryFilterDropdown({
   inputValue,
   onInputChange,
   onFilterAdd,
+  inputLeftSymbol,
+  inputRightSymbol,
+  inputType,
 }) {
   return (
     <div
@@ -115,6 +121,10 @@ export function SecondaryFilterDropdown({
         onRadioChange={onRadioChange}
         inputValue={inputValue}
         onInputChange={onInputChange}
+        inputLeftSymbol={inputLeftSymbol}
+        inputRightSymbol={inputRightSymbol}
+        inputType={inputType}
+        onSubmit={onFilterAdd}
       />
       <div className="flex flex-row space-x-2 mb-2">
         <Button
@@ -126,6 +136,7 @@ export function SecondaryFilterDropdown({
         <Button
           className="bg-indigo-600 text-white font-semibold w-full"
           onClick={onFilterAdd}
+          type="submit"
         >
           Filter
         </Button>
@@ -135,17 +146,24 @@ export function SecondaryFilterDropdown({
 }
 
 // selected: boolean
-function FilterDropdownItem({ children, selected, onClick, id }) {
+function FilterDropdownItem({
+  children,
+  selected,
+  onClick,
+  id,
+  disabled = false,
+}) {
   return (
     <div
       className={classNames(
-        "py-3 px-4 rounded-xl dark:text-neutral-100 hover:bg-dark-800 border-1 transition-all duration-100 cursor-pointer",
+        "py-3 px-4 rounded-xl dark:text-neutral-100 border-1 transition-all duration-100 cursor-pointer",
         {
           "border-transparent": !selected,
           "bg-dark-800  border-indigo-600 font-semibold": selected,
+          "hover:bg-dark-800": !disabled,
         }
       )}
-      onClick={() => onClick(id)}
+      onClick={disabled || !onClick ? undefined : () => onClick(id)}
     >
       <div className="flex flex-row items-center">
         {children}

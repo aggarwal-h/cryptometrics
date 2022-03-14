@@ -32,9 +32,22 @@ export default function Home() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
   const listOfCoins = useCryptoList("usd", 21, false);
-  const filteredCoins = listOfCoins.data?.filter((coin) => {
+
+  // Filter coins based on search
+  let filteredCoins = listOfCoins.data?.filter((coin) => {
     return coin.name.toLowerCase().includes(searchText.toLowerCase());
   });
+
+  // Apply filters
+  for (let i = 0; i < filters.length; i++) {
+    const { subject, condition, value } = filters[i];
+    filteredCoins = filteredCoins.filter((coin) => {
+      return filterOptions[subject]?.options[condition]?.function(
+        coin[subject],
+        value
+      );
+    });
+  }
 
   return (
     <div>
@@ -60,9 +73,14 @@ export default function Home() {
                   return (
                     <Filter
                       key={"filter_" + idx}
-                      subject={filter.subject}
-                      condition={filter.condition}
+                      subject={filterOptions[filter.subject]?.name}
+                      condition={
+                        filterOptions[filter.subject]?.options[filter.condition]
+                          ?.name
+                      }
                       value={filter.value}
+                      symbolLeft={filterOptions[filter.subject]?.symbol_left}
+                      symbolRight={filterOptions[filter.subject]?.symbol_right}
                       buttonIcon={<XIcon className="w-5 h-5" />}
                       onButtonClick={() => removeFilter(filter)}
                     />
@@ -80,7 +98,17 @@ export default function Home() {
                     <FilterDropdown
                       setOpen={setDropdownOpen}
                       addFilter={addFilter}
-                      filterOptions={filterOptions}
+                      filterOptions={Object.keys(filterOptions)
+                        .filter(
+                          (option) =>
+                            filters.filter(
+                              (filter) => filter.subject === option
+                            ).length === 0
+                        )
+                        .reduce((obj, key) => {
+                          obj[key] = filterOptions[key];
+                          return obj;
+                        }, {})}
                     />
                   )}
                 </div>
