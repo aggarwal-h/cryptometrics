@@ -4,6 +4,8 @@ export function Filter({
   subject,
   condition,
   value,
+  symbolLeft,
+  symbolRight,
   buttonIcon,
   onButtonClick,
 }) {
@@ -14,7 +16,11 @@ export function Filter({
         <span className="font-light dark:text-neutral-300">
           {condition}&nbsp;
         </span>
-        <span>{value}</span>
+        <span>
+          {symbolLeft}
+          {value}
+          {symbolRight}
+        </span>
       </div>
 
       {/* Button */}
