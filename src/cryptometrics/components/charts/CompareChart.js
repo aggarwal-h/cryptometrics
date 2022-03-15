@@ -72,7 +72,7 @@ function CompareChart() {
       {
         type: "line",
         data: cryptoQuery.data?.prices,
-        name: "Solana",
+        name: firstCrypto,
         smooth: true,
         symbol: "none",
         lineStyle: {
@@ -87,7 +87,7 @@ function CompareChart() {
       {
         type: "line",
         data: cryptoQuery2.data?.prices,
-        name: "Avalanche",
+        name: secondCrypto,
         smooth: true,
         symbol: "none",
         lineStyle: {
