@@ -11,7 +11,7 @@ function getCoin(list, id) {
   return null;
 }
 
-function Dropdown({ list, value, setValue }) {
+function Dropdown({ list, value, setValue, disabled }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function Dropdown({ list, value, setValue }) {
         onClick={() => setOpen(!open)}
       >
         <div className="flex flex-row items-center space-x-2">
-          <p>{getCoin(list, value).name}</p>
+          <p>{getCoin(list, value)?.name}</p>
           <ChevronDownIcon className="h-5 w-5" />
         </div>
       </button>
@@ -41,6 +41,7 @@ function Dropdown({ list, value, setValue }) {
                   onClick={() => setValue(coin.id)}
                   key={index}
                   selected={coin.id === value}
+                  disabled={disabled.includes(coin.id)}
                 >
                   {coin.name}
                 </DropdownItem>
@@ -53,14 +54,16 @@ function Dropdown({ list, value, setValue }) {
   );
 }
 
-function DropdownItem({ children, onClick, selected }) {
+function DropdownItem({ children, onClick, selected, disabled }) {
   return (
     <div
       className={classNames("py-2 px-4 rounded-xl mx-2", {
+        "opacity-75 dark:text-gray-500": disabled,
         "bg-white dark:text-black": selected,
-        "hover:bg-dark-600 dark:text-white": !selected,
+        "hover:bg-dark-600 dark:text-white cursor-pointer":
+          !disabled && !selected,
       })}
-      onClick={!selected && onClick}
+      onClick={selected || disabled ? undefined : onClick}
     >
       {children}
     </div>

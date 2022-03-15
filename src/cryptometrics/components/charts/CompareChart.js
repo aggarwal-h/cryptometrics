@@ -131,12 +131,14 @@ function CompareChart() {
             list={listOfCoins.isLoading ? [] : listOfCoins.data}
             value={firstCrypto}
             setValue={setFirstCrypto}
+            disabled={[secondCrypto]}
           />
           <ChevronDoubleRightIcon className="w-5 h-5 dark:text-gray-300" />
           <Dropdown
             list={listOfCoins.isLoading ? [] : listOfCoins.data}
             value={secondCrypto}
             setValue={setSecondCrypto}
+            disabled={[firstCrypto]}
           />
         </div>
       </div>
