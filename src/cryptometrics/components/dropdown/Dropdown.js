@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import classNames from "classnames";
 import { ChevronDownIcon } from "@heroicons/react/outline";
+import { useOnClickOutside } from "../../hooks";
 
 function getCoin(list, id) {
   for (let i = 0; i < list.length; i++) {
@@ -13,13 +14,16 @@ function getCoin(list, id) {
 
 function Dropdown({ list, value, setValue, disabled }) {
   const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const callbackDropdownClose = useCallback(() => setOpen(false), []);
+  useOnClickOutside(ref, callbackDropdownClose);
 
   useEffect(() => {
     setOpen(false);
   }, [value]);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={ref}>
       <button
         className={classNames(" px-3 py-2 rounded-md font-light", {
           "dark:bg-white dark:text-gray-800": false,
