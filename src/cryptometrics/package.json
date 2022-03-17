@@ -34,6 +34,7 @@
     "jsdoc": "^3.6.10",
     "parcel": "^2.3.2",
     "postcss": "^8.4.6",
+    "postcss-modules": "^4.3.1",
     "tailwindcss": "^3.0.23"
   }
 }
