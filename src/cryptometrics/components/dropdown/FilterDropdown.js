@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from "@heroicons/react/outline";
 import classNames from "classnames";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Button from "../button/Button";
 import { RadioInputForm } from "../radio/RadioForm";
 import { CSSTransition } from "react-transition-group";
@@ -14,6 +14,7 @@ export function FilterDropdown({
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [radioValue, setRadioValue] = useState("is");
   const [inputValue, setInputValue] = useState("");
+  const secondaryDropdownRef = useRef(null);
 
   useEffect(() => {
     if (selectedFilter) {
@@ -67,13 +68,14 @@ export function FilterDropdown({
         )}
       </div>
       <CSSTransition
-        in={selectedFilter}
+        in={selectedFilter !== null}
         classNames="secondary-dropdown"
         timeout={300}
         unmountOnExit
+        nodeRef={secondaryDropdownRef}
       >
         {selectedFilter ? (
-          <span className="ml-3">
+          <span className="ml-3" ref={secondaryDropdownRef}>
             <SecondaryFilterDropdown
               open={true}
               onSelectedFilterChange={onSelectedFilterChange}
@@ -89,7 +91,7 @@ export function FilterDropdown({
             />
           </span>
         ) : (
-          <div></div>
+          <div ref={secondaryDropdownRef}></div>
         )}
       </CSSTransition>
     </div>
@@ -141,6 +143,7 @@ export function SecondaryFilterDropdown({
           className="bg-indigo-600 text-white font-semibold w-full"
           onClick={onFilterAdd}
           type="submit"
+          disabled={inputValue === ""}
         >
           Filter
         </Button>

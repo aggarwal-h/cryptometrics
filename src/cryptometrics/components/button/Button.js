@@ -13,11 +13,13 @@ import classNames from "classnames";
  *   </Button>
  * )
  */
-function Button({ children, className, onClick, type }) {
+function Button({ children, className, onClick, type, disabled }) {
   return (
     <button
-      className={classNames("py-2 px-5 rounded-xl", className)}
-      onClick={onClick}
+      className={classNames("py-2 px-5 rounded-xl", className, {
+        "brightness-50 cursor-default": disabled,
+      })}
+      onClick={disabled ? undefined : onClick}
       type={type ? type : "button"}
     >
       {children}
@@ -38,6 +40,18 @@ Button.propTypes = {
    * The function to run when button is pressed
    */
   onClick: PropTypes.func,
+  /**
+   * The type of button
+   */
+  type: PropTypes.string,
+  /**
+   * Whether the button is disabled
+   */
+  disabled: PropTypes.bool,
+};
+
+Button.defaultProps = {
+  type: "button",
 };
 
 export default Button;
