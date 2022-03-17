@@ -21,7 +21,12 @@ import { useFilters, useOnClickOutside } from "../hooks";
 import { Filter, FilterButton, Filters } from "../components/filters/Filter";
 import { FilterDropdown } from "../components/dropdown/FilterDropdown";
 import { filterOptions } from "../constants";
-import { Table, TableCell, TableRow } from "../components/table/Table";
+import {
+  Table,
+  TableCell,
+  TableHeader,
+  TableRow,
+} from "../components/table/Table";
 import Image from "next/image";
 import CryptoRowLineChart from "../components/charts/CryptoRowLineChart";
 import classNames from "classnames";
@@ -166,8 +171,8 @@ export default function Home() {
               >
                 <Table>
                   {/* Table Header */}
-                  <TableRow className="h-14 items-center sticky top-0 z-40">
-                    <TableCell className="w-6 h-10"></TableCell>
+                  <TableHeader className="h-14 items-center sticky top-0 z-40">
+                    <TableCell className="w-6 h-10 text-center">Icon</TableCell>
                     <TableCell className="w-24 h-10">
                       <p className="font-medium text-base text-center">Name</p>
                     </TableCell>
@@ -196,7 +201,7 @@ export default function Home() {
                         </p>
                       </div>
                     </TableCell>
-                  </TableRow>
+                  </TableHeader>
 
                   {/* Table Content */}
                   {!listOfCoins.isLoading &&
