@@ -10,7 +10,7 @@ import { useCryptoList } from "../queries";
 import numeral from "numeral";
 import Wrapper from "../components/content/Wrapper";
 import Sidebar from "../components/sidebar/Sidebar";
-import { Tabs, Tab } from "../components/tabs/Tab";
+import { Tabs, Tab } from "../components/tabs";
 import {
   CollectionIcon,
   PlusIcon,
@@ -18,19 +18,15 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { useFilters, useOnClickOutside } from "../hooks";
-import { Filter, FilterButton, Filters } from "../components/filters/Filter";
-import { FilterDropdown } from "../components/dropdown/FilterDropdown";
+import { Filter, Filters } from "../components/filters";
+import FilterDropdown from "../components/dropdown/FilterDropdown";
 import { filterOptions } from "../constants";
-import {
-  Table,
-  TableCell,
-  TableHeader,
-  TableRow,
-} from "../components/table/Table";
+import { Table, TableCell, TableHeader, TableRow } from "../components/table";
 import Image from "next/image";
 import CryptoRowLineChart from "../components/charts/CryptoRowLineChart";
 import classNames from "classnames";
 import Link from "next/link";
+import { FilterButton } from "../components/button";
 
 export default function Home() {
   const [filters, addFilter, removeFilter] = useFilters([]);

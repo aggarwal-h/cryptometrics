@@ -1,8 +1,8 @@
-import classNames from "classnames";
 import React from "react";
 import Input from "../inputs/Input";
+import Radio from "./Radio";
 
-export function RadioInputForm({
+function RadioInputForm({
   inputLeftSymbol,
   inputRightSymbol,
   inputType,
@@ -46,24 +46,4 @@ export function RadioInputForm({
   );
 }
 
-export function Radio({ selected, radioValue, radioLabel, onChange }) {
-  return (
-    <label className="inline-flex items-center w-full">
-      <input
-        type="radio"
-        className="form-radio h-4 w-4 accent-indigo-600 hover:accent-indigo-700"
-        value={radioValue}
-        checked={selected === radioValue}
-        onChange={onChange}
-      />{" "}
-      <span
-        className={classNames("font-poppins ml-2 text-base", {
-          "dark:text-white font-extralight": selected !== radioValue,
-          "dark:text-indigo-500": selected === radioValue,
-        })}
-      >
-        {radioLabel}
-      </span>
-    </label>
-  );
-}
+export default RadioInputForm;

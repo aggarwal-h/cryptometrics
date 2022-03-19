@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import classNames from "classnames";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { useOnClickOutside } from "../../hooks";
+import DropdownItem from "./DropdownItem";
 
 function getCoin(list, id) {
   for (let i = 0; i < list.length; i++) {
@@ -54,22 +55,6 @@ function Dropdown({ list, value, setValue, disabled }) {
           </div>
         </div>
       )}
-    </div>
-  );
-}
-
-function DropdownItem({ children, onClick, selected, disabled }) {
-  return (
-    <div
-      className={classNames("py-2 px-4 rounded-xl mx-2", {
-        "opacity-75 dark:text-gray-500": disabled,
-        "bg-white dark:text-black": selected,
-        "hover:bg-dark-600 dark:text-white cursor-pointer":
-          !disabled && !selected,
-      })}
-      onClick={selected || disabled ? undefined : onClick}
-    >
-      {children}
     </div>
   );
 }
