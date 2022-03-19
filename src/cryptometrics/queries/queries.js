@@ -18,6 +18,23 @@ export function useCryptoTimeSeriesData(name, days = 7, interval = "daily") {
   );
 }
 
+export function useCryptoTimeSeriesRangeData(name, from, to) {
+  return useQuery(
+    `${name}_from_${from}_to_${to}`,
+    () => {
+      return axios
+        .get(
+          `https://api.coingecko.com/api/v3/coins/${name}/market_chart/range?vs_currency=usd&from=${from}&to=${to}`
+        )
+        .then((res) => res.data);
+    },
+    {
+      refetchOnWindowFocus: false,
+      staleTime: 5 * 60000, // 5 minutes,
+    }
+  );
+}
+
 export function useCryptoList(
   currency = "usd",
   numberOfCurrencies = 20,

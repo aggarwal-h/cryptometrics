@@ -2,27 +2,37 @@
 
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{mdframed}
+\usepackage{array}
+\usepackage{tikz}
+\newcommand*\emptycirc[1][1ex]{\tikz\draw[thick] (0,0) circle (#1);} 
+\newcommand*\halfcirc[1][1ex]{%
+  \begin{tikzpicture}
+  \draw[fill] (0,0)-- (90:#1) arc (90:270:#1) -- cycle ;
+  \draw[thick] (0,0) circle (#1);
+  \end{tikzpicture}}
+\newcommand*\fullcirc[1][1ex]{\tikz\fill (0,0) circle (#1);} 
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
     citecolor=black,
     filecolor=black,
-    linkcolor=red,
+    linkcolor=blue,
     urlcolor=blue
 }
 \usepackage[round]{natbib}
 
-\title{SE 3XA3: Test Plan\\Title of Project}
+\title{SE 3XA3: Test Plan\\CryptoMetrics}
 
-\author{Team \#, Team Name
-		\\ Student 1 name and macid
-		\\ Student 2 name and macid
-		\\ Student 3 name and macid
+\author{Team 15
+		\\ Saif Fadhel, fadhels
+		\\ Vanshaj Verma, vermav2
+		\\ Himanshu Aggarwal, aggarwah
 }
 
 \date{\today}
 
-\input{../Comments}
+% \input{../Comments}
 
 \begin{document}
 
@@ -38,8 +48,8 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Mar 10, 2022 & 1.0 & Creation of the test plan document \\
+Mar 11, 2022 & 1.1 & Update and finalize the test plan \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -48,16 +58,18 @@ Date 2 & 1.1 & Notes\\
 
 \pagenumbering{arabic}
 
-This document ...
-
 \section{General Information}
 
 \subsection{Purpose}
 
+The purpose of this document is to outline the development team's test plan for the proposed project, CryptoMetrics as per the verification and validation section of the software development cycle. The details pertaining to the test plan includes the automated testing approach, the tools that will be used to conduct tests, and the schedule prioritizing the tests that must take precedence over others.
+
 \subsection{Scope}
 
+The scope of testing includes the tests that will be conducted to verify that the functional and non-functional requirements have been met, the tests prescribed for the Proof of Concept, and the overall Unit-Testing Plan. Since the application being developed is primarily a web application that was created using NextJS, testing will be mostly focused on the ensuring that the features and functionalities respond appropriately to the user's interactions.
+
 \subsection{Acronyms, Abbreviations, and Symbols}
-	
+
 \begin{table}[hbp]
 \caption{\textbf{Table of Abbreviations}} \label{Table}
 
@@ -65,8 +77,14 @@ This document ...
 \toprule
 \textbf{Abbreviation} & \textbf{Definition} \\
 \midrule
-Abbreviation1 & Definition1\\
-Abbreviation2 & Definition2\\
+        TA & Teaching Assistant who is a client of the project. \\ 
+        UI & User Interface. \\
+        API & Application Programming Interface \\
+        JS & JavaScript. The language used to create the project. \\
+        URL & Uniform Resource Locator. \\
+        FR & Functional Requirements. \\
+        NFR & Non-functional Requirements. \\
+        HTTP & Hypertext Transfer Protocol\\
 \bottomrule
 \end{tabularx}
 
@@ -79,173 +97,510 @@ Abbreviation2 & Definition2\\
 \toprule
 \textbf{Term} & \textbf{Definition}\\
 \midrule
-Term1 & Definition1\\
-Term2 & Definition2\\
+        CryptoMiner & The name of the project in development. \\ 
+        Cryptocurrency & Digital currency secured by cryptography that uses a \\ & decentralized system to record transactions. \\ 
+        Browser & Software application utilized to access the World Wide Web. \\ 
+        React & JavaScript library that was used to create the reference project. \\
+        NextJS/Next.js & The specific React framework that will be utilized to develop and organize the web application. \\ 
+        Bug & Fault in the code that produces an incorrect/unexpected result. \\
+        Database & Organized collection of data. \\
 \bottomrule
 \end{tabularx}
 
 \end{table}	
 
+\newpage
 \subsection{Overview of Document}
+This document will summarize the testing plan for the web-based application CryptoMetrics. It will go over the various testing techniques which will be utilized, for example, manual testing, end-to-end testing and unit testing. This document will also highlight the tests made for the functional and non-functional requirements of the system and would also cover the tests for the PoC. 
 
 \section{Plan}
 	
 \subsection{Software Description}
+The software will act as a resource to our targeted audience for looking up more information about their favourite cryptocurrencies. It is a web application where the user can access data on cryptocurrencies regarding its pricing, charts, its performance over a span of time and visuals. The implementation will be done in NextJS. 
 
 \subsection{Test Team}
+The test team consists of the existing developers: Himanshu Aggarwal, Saif Fadhel, Vanshaj Verma.
 
 \subsection{Automated Testing Approach}
+The \texttt{cypress} library will be used to automate most of the frontend tests for this project. The approach is to do mostly automated integration and end-to-end testing to verify if the features are working as expected. The \texttt{cypress} library allows us to mimic "clicks" on a webpage and observe the resulting behavior and changes in the webpage. Using this, we can effectively automate most situations which would otherwise require manual testing.
+
+Apart from this, \texttt{Jest} will be used to do unit testing for some utility methods.
 
 \subsection{Testing Tools}
+Majority of integration and end-to-end testing will be done either manually or using the \texttt{cypress} library. Unit testing will be done using \texttt{Jest}.
 
 \subsection{Testing Schedule}
 		
-See Gantt Chart at the following url ...
+See the Gantt Chart \href{https://gitlab.cas.mcmaster.ca/webapp/webapp_l02_grp15/-/tree/main/ProjectSchedule}{here}.
 
 \section{System Test Description}
-	
+
 \subsection{Tests for Functional Requirements}
 
-\subsubsection{Area of Testing1}
+\subsubsection{Home Page}
 		
-\paragraph{Title for Test}
+\paragraph{Front End Testing}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{FT-HP-1}
 
-Type: Functional, Dynamic, Manual, Static etc.
+\textbf{Type:} Functional, Dynamic, Automated
 					
-Initial State: 
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
 					
-Input: 
+\textbf{Input/Condition:} The user clicks on the 'Table' icon.
 					
-Output: 
+\textbf{Output/Result:} The system shall display every cryptocurrency’s relevant information in a table-like manner.
 					
-How test will be performed: 
+\textbf{How test will be performed:} This test will be performed using the \texttt{cypress} library to verify if the Table component gets rendered to the DOM.
 					
-\item{test-id2\\}
+\item{FT-HP-2}
 
-Type: Functional, Dynamic, Manual, Static etc.
+\textbf{Type:} Functional, Dynamic, Automated
 					
-Initial State: 
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
 					
-Input: 
+\textbf{Input/Condition:} The user uses the Search input to a valid name of a cryptocurrency.
 					
-Output: 
+\textbf{Output/Result:} The cryptocurrencies being displayed shall be filtered based on user's input.
 					
-How test will be performed: 
+\textbf{How test will be performed:} This test will be performed using the \texttt{cypress} library to verify if typing a cryptocurrency name filters the cryptocurrencies being displayed.
+
+\item{FT-HP-3}
+
+\textbf{Type:} Functional, Dynamic, Automated
+					
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
+					
+\textbf{Input/Condition:} The user uses the Search input to an invalid name of a cryptocurrency.
+					
+\textbf{Output/Result:} The application shall display a message to indicate that the search query did not find any results.
+					
+\textbf{How test will be performed:} This test will be performed using the \texttt{cypress} library to verify if the message is shown.
+
+\item{FT-HP-4}
+
+\textbf{Type:} Functional, Dynamic, Automated
+					
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
+					
+\textbf{Input/Condition:} The user uses filter options to add a filter.
+					
+\textbf{Output/Result:} The cryptocurrencies being displayed shall be updated based on the selected filters.
+					
+\textbf{How test will be performed:} This test will be performed using the \texttt{cypress} library to verify if adding a filter changes the data accordingly.
+
+\item{FT-HP-5}
+
+\textbf{Type:} Functional, Dynamic, Automated
+					
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
+					
+\textbf{Input/Condition:} The user removes a filter.
+					
+\textbf{Output/Result:} The cryptocurrencies being displayed shall be updated based on the new filters.
+					
+\textbf{How test will be performed:} This test will be performed using the \texttt{cypress} library to verify if removing a filter updates the data accordingly.
+
+\item{FT-HP-6}
+
+\textbf{Type:} Functional, Dynamic, Manual
+					
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
+					
+\textbf{Input/Condition:} The user uses custom sorting buttons to sort the currencies in order of how they shall appear in the list.
+					
+\textbf{Output/Result:} The cryptocurrencies being displayed shall keep the selected order and maintain the order on page refreshes.
+					
+\textbf{How test will be performed:} This test will be performed manually to see if the displayed charts can be rearranged in a custom order.
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{Details Page}
+		
+\paragraph{Front End Testing}
 
-...
+\begin{enumerate}
+
+\item{FT-DP-1}
+
+\textbf{Type:} Functional, Dynamic, Automated
+					
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
+					
+\textbf{Input/Condition:} The user opens the detail page for a cryptocurrency.
+					
+\textbf{Output/Result:} The cryptocurrency's hourly, weekly, monthly and yearly historical pricing shall be displayed using a chart.
+					
+\textbf{How test will be performed:} This test will be performed using the \texttt{cypress} library to verify if a chart is present along with options to change the time range of the data.
+
+\end{enumerate}
+
+\subsubsection{Compare Page}
+		
+\paragraph{Front End Testing}
+
+\begin{enumerate}
+\item{FT-CP-1}
+
+\textbf{Type:} Functional, Dynamic, Automated
+					
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
+					
+\textbf{Input/Condition:} The user navigates to the compare page.
+					
+\textbf{Output/Result:} A chart shall be displayed along with options to select different cryptocurrencies for comparison.
+					
+\textbf{How test will be performed:} This test will be performed using the \texttt{cypress} library to verify if a chart is present along with options to select different cryptocurrencies.
+
+\item{FT-CP-2}
+
+\textbf{Type:} Functional, Dynamic, Automated
+					
+\textbf{Initial State:} The server for the NextJS app is started and the compare page is opened in the web app.
+					
+\textbf{Input/Condition:} The user selects the first cryptocurrency for comparison.
+					
+\textbf{Output/Result:} After the first cryptocurrency is selected, the user shall not be able to select the same cryptocurrency a second time. 
+					
+\textbf{How test will be performed:} The \texttt{cypress} library will be used to verify that the option to add the same cryptocurrency is removed.
+
+\end{enumerate}
+
+\subsubsection{Fetching Data}
+		
+\paragraph{Front End Testing}
+
+\begin{enumerate}
+
+\item{FT-FD-1}
+
+\textbf{Type:} Functional, Dynamic, Manual
+                    
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
+                    
+\textbf{Input/Condition:} The data is fetched using HTTP protocol.
+                    
+\textbf{Output/Result:} The data fetched should be cached for 1 minute and refreshed after 1 minute.
+                    
+\textbf{How test will be performed:} This test will be performed manually to see if the data displayed refreshes on page change after 1 minute.
+
+
+\item{FT-FD-2}
+
+\textbf{Type:} Functional, Dynamic, Manual
+                    
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
+                    
+\textbf{Input/Condition:} The API call to fetch data results in an error.
+                    
+\textbf{Output/Result:} An error dialog/toast shall be displayed to alert the user of the error.
+                    
+\textbf{How test will be performed:} This test will be performed by manually creating API endpoints that result in an error to see if the error message is shown.
+
+\item{FT-FD-3}
+
+\textbf{Type:} Functional, Dynamic, Manual
+                    
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
+                    
+\textbf{Input/Condition:} The API call to fetch data results in an error.
+                    
+\textbf{Output/Result:} The system shall wait 10 seconds and retry the API call.
+                    
+\textbf{How test will be performed:} This test will be performed by manually creating API endpoints that result in an error to see if the call is made again after 10 seconds.
+
+\item{FT-FD-4}
+
+\textbf{Type:} Functional, Dynamic, Manual
+                    
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
+                    
+\textbf{Input/Condition:} The API call to fetch data takes longer than 10 seconds.
+                    
+\textbf{Output/Result:} The system shall cancel the request and treat this as an error.
+                    
+\textbf{How test will be performed:} This test will be performed by manually creating API endpoints that result in a long turnaround times to see if the API call is timed-out.
+
+\end{enumerate}
+
+\subsubsection{User Interface}
+		
+\paragraph{Front End Testing}
+
+\begin{enumerate}
+\item{FT-UI-1}
+
+\textbf{Type:} Functional, Dynamic, Automated
+                    
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
+                    
+\textbf{Input/Condition:} The user wants to change the theme of the web app and clicks a theme toggle in the sidebar.
+                    
+\textbf{Output/Result:} The system shall change the theme of all the elements being displayed and remember these preferences for page refreshes.
+                    
+\textbf{How test will be performed:} The \texttt{cypress} library will be used to verify that toggling the theme option changes the theme from dark to light and vice versa.
+
+\item{FT-UI-2}
+
+\textbf{Type:} Functional, Dynamic, Automated
+                    
+\textbf{Initial State:} The server for the NextJS app is started.
+                    
+\textbf{Input/Condition:} The user opens the web page or navigates to another page.
+                    
+\textbf{Output/Result:} The system shall display skeleton placeholders while waiting for an API response for the data.
+                    
+\textbf{How test will be performed:} The \texttt{cypress} library will be used to verify that skeleton placeholders are being displayed while API is being loaded.
+
+\item{FT-UI-3}
+
+\textbf{Type:} Functional, Dynamic, Manual
+                    
+\textbf{Initial State:} The server for the NextJS app is started.
+                    
+\textbf{Input/Condition:} The user adds a filter or changes other options.
+                    
+\textbf{Output/Result:} The system shall automatically save the changes to local storage and load them automatically upon starting the product in the future.
+                    
+\textbf{How test will be performed:} Manual testing will be used to observe if preferences are loaded back on page refreshes.
+\end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\subsubsection{Area of Testing1}
-		
-\paragraph{Title for Test}
+\subsubsection{Look and Feel}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+% NFR-3
+\item{NFT-LF-1}
 
-Type: 
-					
-Initial State: 
-					
-Input/Condition: 
-					
-Output/Result: 
-					
-How test will be performed: 
-					
-\item{test-id2\\}
+\textbf{Type:} Structural, Dynamic, Manual
 
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+\textbf{Initial State:} The server for the NextJS app is started.
+    
+\textbf{Input/Condition:} Users are asked to launch the web page.
 
+\textbf{Output/Result:} At least 80\% of users shall agree that the product feels professional, trustworthy, and informative.
+
+\textbf{How test will be performed:} A test group of people (that are representative of the target audience) will be shown the application for the first time and asked whether they feel the application is professional, trustworthy, and informative. If more than 80\% of people agree, it should be considered a success.
+					
+					
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{Usability and Humanity}
 
-...
+\begin{enumerate}
+
+% NFR-5
+\item{NFT-UH-1}
+
+\textbf{Type:} Structural, Dynamic, Manual
+
+\textbf{Initial State:} The server for the NextJS app is started and the web page should be launched.
+    
+\textbf{Input/Condition:} Users are asked to navigate between different pages and use the functionality.
+
+\textbf{Output/Result:} At least 80\% of users shall be able to navigate through the different pages without any training.
+
+\textbf{How test will be performed:} A test group of people with a basic understanding of the English language and not prior training or experience with cryptocurrencies will be asked to navigate through the different pages and components. If more than 80\% of people are able to perform the tasks, it should be considered a success.
+
+% NFR-9
+\item{NFT-UH-2}
+
+\textbf{Type:} Structural, Dynamic, Manual
+
+\textbf{Initial State:} The server for the NextJS app is started and the web page should be launched.
+    
+\textbf{Input/Condition:} Users are asked the meaning of the icons they see on the web page.
+
+\textbf{Output/Result:} 95\% of users shall be able to understand what the icons represent.
+
+\textbf{How test will be performed:} A diverse group of people will be shown the web page and asked the meaning of the various icons on the page. If more than 95\% of people are able to correctly explain what the icons represent, it should be considered a success.
+
+% NFR-10
+\item{NFT-UH-3}
+
+\textbf{Type:} Structural, Dynamic, Manual
+
+\textbf{Initial State:} The server for the NextJS app is started.
+    
+\textbf{Input/Condition:} Testers will be asked to open the web page on different devices with varying screen sizes.
+
+\textbf{Output/Result:} The web page shall automatically adjust to the size of the screen.
+
+\textbf{How test will be performed:} A team of testers will be asked to open the web page on different devices with varying screen sizes (desktop, tablet and mobile devices). If the web page adjusts to the size of the screen at least 95\% of the times, it should be considered a success.
+					
+\end{enumerate}
+
+\subsubsection{Performance}
+
+\begin{enumerate}
+
+% NFR-11
+\item{NFT-P-1}
+
+\textbf{Type:} Structural, Dynamic, Manual
+
+\textbf{Initial State:} The server for the NextJS app is started.
+    
+\textbf{Input/Condition:} Testers are asked to launch the web page on different types of devices.
+
+\textbf{Output/Result:} The product shall initialize and setup in less than 10 seconds.
+
+\textbf{How test will be performed:} A team of testers will be asked to launch the web page on devices varying from mobile to desktop, and from slow to fast. Regardless of the device, if the web page opens up in less than 10 seconds, it should be considered a success.
+				
+% NFR-12
+\item{NFT-P-2}
+
+\textbf{Type:} Structural, Dynamic, Manual
+
+\textbf{Initial State:} The server for the NextJS app is started and the web page is launched.
+    
+\textbf{Input/Condition:} Testers are asked to navigate to different pages and observe the time.
+
+\textbf{Output/Result:} The product shall navigate to different pages within 1 second for 95\% of times, and within 5 seconds for the rest of the times.
+
+\textbf{How test will be performed:} A team of testers will be asked to navigate to different pages of the application on devices varying from mobile to desktop, and from slow to fast. Regardless of the device, if the web page successfully navigates to other pages in less than 1 second for 95\% of times and in less than 5 seconds for the rest of the times, then it should be considered a success.
+\end{enumerate}
+
 
 \subsection{Traceability Between Test Cases and Requirements}
 
+\begin{table}[!ht]
+    \centering
+     
+    \begin{tabular}{|l|l|l|}
+    \hline
+        Test Case ID & Requirement ID \\ \hline
+        FT-HP-1 & FR-1 \\ \hline
+        FT-HP-2 & FR-2 \\ \hline
+        FT-HP-3 & FR-2 \\ \hline
+        FT-HP-4 & FR-5 \\ \hline
+        FT-HP-5 & FR-5 \\ \hline
+        FT-HP-6 & FR-6 \\ \hline
+        FT-DP-1 & FR-3 \\ \hline
+        FT-CP-1 & FR-4 \\ \hline
+        FT-CP-2 & FR-4 \\ \hline
+        FT-FD-1 & FR-7 \\ \hline
+        FT-FD-2 & FR-8 \\ \hline
+        FT-FD-3 & FR-9 \\ \hline
+        FT-FD-4 & FR-11 \\ \hline
+        FT-UI-1 & FR-12 \\ \hline
+        FT-UI-2 & FR-10 \\ \hline
+        FT-UI-3 & FR-13 \\ \hline
+        NFT-LF-11 & NFR-3 \\ \hline
+        NFT-UH-1 & NFR-6 \\ \hline
+        NFT-UI-2 & NFR-9 \\ \hline
+        NFT-UI-3 & NFR-10 \\ \hline
+        NFT-P-1 & NFR-11 \\ \hline
+        NFT-P-2 & NFR-12 \\ \hline
+    \end{tabular}
+    \label{Table}
+    \caption{\textbf{Traceability Matrix}}
+\end{table}
+
 \section{Tests for Proof of Concept}
 
-\subsection{Area of Testing1}
+\subsection{Table/Card View Testing}
 		
-\paragraph{Title for Test}
+\paragraph{Table and Card View Tests}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{POC-TCV-1}
 
-Type: Functional, Dynamic, Manual, Static etc.
+\textbf{Type:} Functional, Dynamic, Manual
 					
-Initial State: 
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
 					
-Input: 
+\textbf{Input/Condition:} The user clicks on the 'Table' icon and then on the time tag to toggle between 24h, last week, and last month, last year.
 					
-Output: 
+\textbf{Output/Result:} The system shall display every cryptocurrency’s relevant information in a table-like manner based on the interval specified in the time tag. 
 					
-How test will be performed: 
-					
-\item{test-id2\\}
+\textbf{How test will be performed:} This test will be performed manually by running the API calls separately to verify that the information matches what is displayed in the table-view card appropriately.
 
-Type: Functional, Dynamic, Manual, Static etc.
+\item{POC-TCV-2}
+
+\textbf{Type:} Functional, Dynamic, Manual
 					
-Initial State: 
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
 					
-Input: 
+\textbf{Input/Condition:} The user clicks on the 'Card' icon and then on the time tag to toggle between 24h, last week, and last month, last year.
 					
-Output: 
+\textbf{Output/Result:} The system shall display every cryptocurrency’s relevant information in a card-like manner based on the interval specified in the time tag. 
 					
-How test will be performed: 
+\textbf{How test will be performed:} This test will be performed manually by running the API calls separately to verify that the information matches what is displayed in the table-view card appropriately.
 
 \end{enumerate}
+\newpage	
+\subsection{Search Feature Testing}
+\begin{enumerate}
+\item{POC-TCV-1}
 
-\subsection{Area of Testing2}
 
-...
-
+\textbf{Type:} Functional, Dynamic, Manual
+					
+\textbf{Initial State:} The server for the NextJS app is started and the web page is opened.
+					
+\textbf{Input/Condition:} The user clicks on the search bar and starts typing their expected search term.
+					
+\textbf{Output/Result:} The system shall filter the cards according to the search term entered in the search box and only the cards with matching names would be displayed on the screen.
+					
+\textbf{How test will be performed:} The tests will be performed using the cypress library by comparing the data output of the search filter and comparing it to the expected results. 
+\end{enumerate}
 	
 \section{Comparison to Existing Implementation}	
-				
-\section{Unit Testing Plan}
-		
-\subsection{Unit testing of internal functions}
-		
-\subsection{Unit testing of output files}		
 
-\bibliographystyle{plainnat}
-
-\bibliography{SRS}
-
+There have been several changes and new additions separating CryptoMetrics, our project, from Cryptodash, the existing implementation. The existing application primarily displayed a list of cryptocurrencies in tabular form, whereas CryptoMetrics allows users to view this list in both a card view and a table view containing even more columns of information and a mini graph displaying cryptocurrency price changes in the past user specified time. CryptoMetrics also added a product page which allows users to get a detailed view of every cryptocurrency listed in the web app, which was not a part of the existing implementation. Furthermore, the project also adds a page dedicated to comparing cryptocurrencies with one another to indicate changes in projected price increases and decreases to better advise users so they make informed investment decisions. The original implementation did not include any testing within the project's files. Our implementation will be verified rigorously through the use of a test report.
 \newpage
+\section{Unit Testing Plan}
+This project will use the Jest library to do unit testing.	
+\subsection{Unit testing of internal functions}
+Unit testing will be done on internal utility methods that return a specific output value. These methods will be given specific input values for normal, edge, and boundary cases and the actual and expected outputs will be compared for validation. Unit testing for this application does not require stubs, drivers or coverage metrics. 
+		
+\subsection{Unit testing of output files}	The application will not be generating any output files. Therefore, there will be no unit testing of output files.
 
 \section{Appendix}
-
-This is where you can place additional information.
 
 \subsection{Symbolic Parameters}
 
 The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
 Their values are defined in this section for easy maintenance.
+N/A
 
-\subsection{Usability Survey Questions?}
+\newpage
 
-This is a section that would be appropriate for some teams.
+\subsection{Usability Survey Questions}
+
+\label{sec:survey}
+The following survey will be filled out by members of the survey group.
+
+\begin{mdframed}[linewidth=1pt]
+\begin{center}
+{\bf \large CryptoMetrics Survey}\\[\baselineskip]
+\end{center}
+
+\noindent Please fill out the survey after using the application.\\
+
+\noindent {\bf Time spent using software:}\\
+
+\noindent Provide a rating on a scale from 1 to 5 (where 1 represents a poor review and 5 represents a strong review) in each of these questions by filling in the number of circles corresponding to your desired rating. \\[\baselineskip]
+
+\noindent \begin{tabularx}{\textwidth}{@{}p{7cm}X@{}}
+{\bf How easy is the website to use?} & \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \\
+& {1 \ \ \ \ \ \ 2 \ \ \ \ \ 3 \ \ \ \ \  4 \ \ \ \ \ \  5}\\[\baselineskip]\\
+{\bf How appealing is the app visually?} & \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \\
+& {1 \ \ \ \ \ \ 2 \ \ \ \ \ 3 \ \ \ \ \  4 \ \ \ \ \ \  5}\\[\baselineskip]\\
+{\bf How intuitive is the website?} & \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \\
+& {1 \ \ \ \ \ \ 2 \ \ \ \ \ 3 \ \ \ \ \  4 \ \ \ \ \ \  5}\\[\baselineskip]\\
+{\bf How responsive is the website?} & \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \\
+& {1 \ \ \ \ \ \ 2 \ \ \ \ \ 3 \ \ \ \ \  4 \ \ \ \ \ \  5}\\[\baselineskip]\\
+{\bf How trustworthy does the website look?} & \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \ \ \ \ \ \emptycirc \\
+& {1 \ \ \ \ \ \ 2 \ \ \ \ \ 3 \ \ \ \ \  4 \ \ \ \ \ \  5}\\[\baselineskip]\\
+\end{tabularx}
+\end{mdframed}
+
 
 \end{document}
