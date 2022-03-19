@@ -18,7 +18,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { useFilters, useOnClickOutside } from "../hooks";
-import { Filter, FilterButton, Filters } from "../components/filters/Filter";
+import { Filter, Filters } from "../components/filters";
 import { FilterDropdown } from "../components/dropdown/FilterDropdown";
 import { filterOptions } from "../constants";
 import {
@@ -31,6 +31,7 @@ import Image from "next/image";
 import CryptoRowLineChart from "../components/charts/CryptoRowLineChart";
 import classNames from "classnames";
 import Link from "next/link";
+import { FilterButton } from "../components/button";
 
 export default function Home() {
   const [filters, addFilter, removeFilter] = useFilters([]);
