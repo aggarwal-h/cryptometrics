@@ -12,10 +12,11 @@
     colorlinks,
     citecolor=black,
     filecolor=black,
-    linkcolor=red,
+    linkcolor=blue,
     urlcolor=blue
 }
 \usepackage[round]{natbib}
+% \usepackage[normalem]{ulem}
 
 \newcounter{acnum}
 \newcommand{\actheacnum}{AC\theacnum}
@@ -29,17 +30,15 @@
 \newcommand{\mthemnum}{M\themnum}
 \newcommand{\mref}[1]{M\ref{#1}}
 
-\title{SE 3XA3: Software Requirements Specification\\Title of Project}
+\title{SE 3XA3: Software Requirements Specification\\CryptoMetrics}
 
-\author{Team \#, Team Name
-		\\ Student 1 name and macid
-		\\ Student 2 name and macid
-		\\ Student 3 name and macid
+\author{Team 15
+		\\ Saif Fadhel, fadhels
+		\\ Vanshaj Verma, vermav2
+		\\ Himanshu Aggarwal, aggarwah
 }
 
-\date{\today}
-
-\input{../../Comments}
+\date{March 18, 2022}
 
 \begin{document}
 
@@ -49,14 +48,16 @@
 \tableofcontents
 \listoftables
 \listoffigures
-
-\begin{table}[bp]
+\newpage
+\begin{table}[h!]
 \caption{\bf Revision History}
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Mar. 14, 2022 & 1.0 & Creation of MG Doc\\
+Mar. 15, 2022 & 1.1 & Add Introduction\\
+Mar. 17, 2022 & 1.1 & Complete Majority of sections\\
+Mar. 18, 2022 & 1.1 & All sections complete\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -67,43 +68,42 @@ Date 2 & 1.1 & Notes\\
 
 \section{Introduction}
 
-Decomposing a system into modules is a commonly accepted approach to developing
-software.  A module is a work assignment for a programmer or programming
-team~\citep{ParnasEtAl1984}.  We advocate a decomposition
-based on the principle of information hiding~\citep{Parnas1972a}.  This
-principle supports design for change, because the ``secrets'' that each module
-hides represent likely future changes.  Design for change is valuable in SC,
-where modifications are frequent, especially during initial development as the
-solution space is explored.  
+\subsection{Overview}
 
-Our design follows the rules layed out by \citet{ParnasEtAl1984}, as follows:
-\begin{itemize}
-\item System details that are likely to change independently should be the
-  secrets of separate modules.
-\item Each data structure is used in only one module.
-\item Any other program that requires information stored in a module's data
-  structures must obtain it by calling access programs belonging to that module.
-\end{itemize}
+CryptoMetrics is a re-implementation of an open-source project called Cryptodash which analyzes historical trends related to various cryptocurrencies in order to help users make educated investment decisions.
 
-After completing the first stage of the design, the Software Requirements
-Specification (SRS), the Module Guide (MG) is developed~\citep{ParnasEtAl1984}. The MG
-specifies the modular structure of the system and is intended to allow both
-designers and maintainers to easily identify the parts of the software.  The
-potential readers of this document are as follows:
+\subsection{Context}
+
+The context of this document is that it will build upon what the Software Requirements Specification Document started which is that in addition to identifying the functional and non-functional requirements proposed by the SRS, the Design document will elaborate on how these requirements can be achieved. Once completed, this document will be sent to different groups to get them familiar with the design of the project. These groups can be identified as follows:
 
 \begin{itemize}
-\item New project members: This document can be a guide for a new project member
+\item \textbf{New project members:} This document can be a guide for a new project member
   to easily understand the overall structure and quickly find the
   relevant modules they are searching for.
-\item Maintainers: The hierarchical structure of the module guide improves the
+\item \textbf{Maintainers:} The hierarchical structure of the module guide improves the
   maintainers' understanding when they need to make changes to the system. It is
   important for a maintainer to update the relevant sections of the document
   after changes have been made.
-\item Designers: Once the module guide has been written, it can be used to
+\item \textbf{Designers:} Once the module guide has been written, it can be used to
   check for consistency, feasibility and flexibility. Designers can verify the
   system in various ways, such as consistency among modules, feasibility of the
   decomposition, and flexibility of the design.
 \end{itemize}
+
+This document will assist in the creation of the Module Interface Specification (MIS) which is a detailed outline for all of the modules the are a part of CryptoMetrics. This includes all their state/environment variables, exported access programs, and their access program semantics. 
+
+\subsection{Design Principles}
+
+The design principles that are used by the system includes:  
+
+\begin{itemize}
+\item \textbf{Separation of Concerns:} Involves separating an application into distinct sections, so each section addresses a separate concern. Each module has its own assigned role that is distinct from every other module which is why it follows this design principle. 
+\item \textbf{Low Coupling:} Coupling determines how closely related modules are to one another. Low Coupling is ideal since it allows for more modular code design. The implementation of modules follows low coupling since each of the modules are independent of one another by performing functionality required for a specific task only within a module assigned to that task and no other modules. 
+\item \textbf{High Cohesion:} Cohesion determines how closely related elements inside a module are with one another. High cohesion is desirable since it allows the modules to be more easily understandable to anyone unfamiliar with the implementation. The implementation of modules follows this design principle of high cohesion since each component module contains methods and data closely related to one another.
+\item \textbf{Encapsulation:} Is a principle in object-oriented programming which refers to the packaging of closely related data and functions into classes or objects. It is followed since each component module can be viewed as an object of closely related data that can be reused as many times as needed.
+\end{itemize}
+
+\subsection{Document Structure}
 
 The rest of the document is organized as follows. Section
 \ref{SecChange} lists the anticipated and unlikely changes of the software
@@ -116,44 +116,23 @@ the completeness of the design against the requirements provided in the SRS. The
 other shows the relation between anticipated changes and the modules. Section
 \ref{SecUse} describes the use relation between modules.
 
-\section{Anticipated and Unlikely Changes} \label{SecChange}
 
-This section lists possible changes to the system. According to the likeliness
-of the change, the possible changes are classified into two
-categories. Anticipated changes are listed in Section \ref{SecAchange}, and
-unlikely changes are listed in Section \ref{SecUchange}.
+\section{Anticipated and Unlikely Changes} \label{SecChange}
 
 \subsection{Anticipated Changes} \label{SecAchange}
 
-Anticipated changes are the source of the information that is to be hidden
-inside the modules. Ideally, changing one of the anticipated changes will only
-require changing the one module that hides the associated decision. The approach
-adapted here is called design for
-change.
-
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
-  hardware on which the software is running.
-\item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-  initial input data.
-\item ...
+\item[\refstepcounter{acnum} \actheacnum \label{acMulti}:] The user able to compare multiple cryptocurrency's graphs stacked together.
+\item[\refstepcounter{acnum} \actheacnum \label{acCoin}:] Clicking on the cryptocurrency card to get more information about the coin. 
+\item[\refstepcounter{acnum} \actheacnum \label{acError}:] Web application giving a pop up to the user when is unable to pull data through the API.
 \end{description}
 
 \subsection{Unlikely Changes} \label{SecUchange}
 
-The module design should be as general as possible. However, a general system is
-more complex. Sometimes this complexity is not necessary. Fixing some design
-decisions at the system architecture stage can simplify the software design. If
-these decision should later need to be changed, then many parts of the design
-will potentially need to be modified. Hence, it is not intended that these
-decisions will be changed.
-
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
-  (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucInput}:] There will always be
-  a source of input data external to the software.
-\item ...
+\item[\refstepcounter{ucnum} \uctheucnum :] The web application able to run on different screen sizes with different aspect ratios.
+\item[\refstepcounter{ucnum} \uctheucnum :] User able to shift and move cryptocurrency and its associated pricing information around the web application. 
+\item[\refstepcounter{ucnum} \uctheucnum :] User able to have their preferences saved and loaded back up upon launching the web application.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -163,12 +142,6 @@ in a hierarchy decomposed by secrets in Table \ref{TblMH}. The modules listed
 below, which are leaves in the hierarchy tree, are the modules that will
 actually be implemented.
 
-\begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
-\end{description}
-
-
 \begin{table}[h!]
 \centering
 \begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
@@ -176,22 +149,47 @@ actually be implemented.
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-{Hardware-Hiding Module} & ~ \\
+{Hardware-Hiding Module} & N/A\\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
+\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} 
+& Button Module (\mref{mButtonModule})\\
+& ToggleButton Module (\mref{mToggleButtonModule})\\
+& FilterButton Module (\mref{mFilterButtonModule})\\
+& CryptoChartCard Module (\mref{mCryptoChartCardModule})\\
+& CompareChart Module (\mref{mCompareChartModule})\\
+& CryptoRowLineChart Module (\mref{mCryptoRowLineChartModule})\\
+& Container Module (\mref{mContainerModule})\\
+& Main Module (\mref{mMainModule})\\
+& Wrapper Module (\mref{mWrapperModule})\\
+& Dropdown Module (\mref{mDropdownModule})\\
+& DropdownItem Module (\mref{mDropdownItemModule})\\
+& FilterDropdown Module (\mref{mFilterDropdownModule})\\
+& SecondaryFilterDropdown Module (\mref{mSecondaryFilterDropdownModule}) \\
+& Filter Module (\mref{mFilterModule})\\
+& Filters Module (\mref{mFiltersModule})\\
+& Input Module (\mref{mInputModule})\\
+& SearchInput Module (\mref{mSearchInputModule})\\
+& RadioInputForm Module (\mref{mRadioInputFormModule})\\
+& Radio Module (\mref{mRadioModule})\\
+& PlaceholderSkeleton Module (\mref{mPlaceholderSkeletonModule})\\
+& Sidebar Module (\mref{mSidebarModule})\\
+& SidebarItem Module (\mref{mSidebarItemModule})\\
+& Table Module (\mref{mTableModule})\\
+& TableRow Module (\mref{mTableRowModule})\\
+& TableHeader Module (\mref{mTableHeaderModule})\\
+& TableCell Module (\mref{mTableCellModule})\\
+& Tab Module (\mref{mTabModule})\\
+& Tabs Module (\mref{mTabsModule})\\
+& BoldGradientHeading Module (\mref{mBoldGradientHeadingModule})\\
+& Home Module (\mref{mHomeModule})\\
+& Compare Module(\mref{mCompareModule})\\
+& Hooks Module(\mref{mHooksModule})\\
+& Queries Module(\mref{mQueriesModule})\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
+\multirow{3}{0.3\textwidth}{Software Decision Module}\\
+& N/A\\
 \bottomrule
 
 \end{tabular}
@@ -199,31 +197,35 @@ actually be implemented.
 \label{TblMH}
 \end{table}
 
+\newpage
+
 \section{Connection Between Requirements and Design} \label{SecConnection}
 
 The design of the system is intended to satisfy the requirements developed in
 the SRS. In this stage, the system is decomposed into modules. The connection
 between requirements and modules is listed in Table \ref{TblRT}.
 
+The system's requirements essentially require that the system allow users to view all cryptocurrency price data within a given time frame in multiple views, and enable the ability to compare them with one another. Each of the modules have met all of the requirements specified. Table Module along with its assistants TableHeader Module, TableRow Module, and TableCell Module all work together to provide a tabular view of all of the cryptocurrencies in the home page of the web application. ToggleButton Module and CompareChart Module are responsible for displaying historical data and allowing users to compare between two different cryptocurrencies price data. 
+
 \section{Module Decomposition} \label{SecMD}
 
-Modules are decomposed according to the principle of ``information hiding''
-proposed by \citet{ParnasEtAl1984}. The \emph{Secrets} field in a module
-decomposition is a brief statement of the design decision hidden by the
-module. The \emph{Services} field specifies \emph{what} the module will do
-without documenting \emph{how} to do it. For each module, a suggestion for the
-implementing software is given under the \emph{Implemented By} title. If the
-entry is \emph{OS}, this means that the module is provided by the operating
-system or by standard programming language libraries.  Also indicate if the
-module will be implemented specifically for the software.
+% Modules are decomposed according to the principle of ``information hiding''
+% proposed by \citet{ParnasEtAl1984}. The \emph{Secrets} field in a module
+% decomposition is a brief statement of the design decision hidden by the
+% module. The \emph{Services} field specifies \emph{what} the module will do
+% without documenting \emph{how} to do it. For each module, a suggestion for the
+% implementing software is given under the \emph{Implemented By} title. If the
+% entry is \emph{OS}, this means that the module is provided by the operating
+% system or by standard programming language libraries.  Also indicate if the
+% module will be implemented specifically for the software.
 
-Only the leaf modules in the
-hierarchy have to be implemented. If a dash (\emph{--}) is shown, this means
-that the module is not a leaf and will not have to be implemented. Whether or
-not this module is implemented depends on the programming language
-selected.
+% Only the leaf modules in the
+% hierarchy have to be implemented. If a dash (\emph{--}) is shown, this means
+% that the module is not a leaf and will not have to be implemented. Whether or
+% not this module is implemented depends on the programming language
+% selected.
 
-\subsection{Hardware Hiding Modules (\mref{mHH})}
+\subsection{Hardware Hiding Module}
 
 \begin{description}
 \item[Secrets:]The data structure and algorithm used to implement the virtual
@@ -243,35 +245,253 @@ selected.
   documents. This module serves as a communication layer between the
   hardware-hiding module and the software decision module. The programs in this
   module will need to change if there are changes in the SRS.
-\item[Implemented By:] --
+\item[Implemented By:] ReactJS
 \end{description}
 
-\subsubsection{Input Format Module (\mref{mInput})}
 
+
+% \begin{description}
+% \item[Secrets:]The format and structure of the input data.
+% \item[Services:]Converts the input data into the data structure used by the
+%   input parameters module.
+% \item[Implemented By:] ReactJS
+% \end{description}
+
+\subsubsection{Button Module \label{mButtonModule}}
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
-\item[Implemented By:] [Your Program Name Here]
+\item[Secrets:]Button styles and features.
+\item[Services:]Adds a styled HTML button to the page with \texttt{onClick} events.
+\item[Implemented By:] ReactJS
 \end{description}
 
-\subsubsection{Etc.}
+\subsubsection{ToggleButton Module \label{mToggleButtonModule}}
+\begin{description}
+\item[Secrets:]Toggle Button styles and features.
+\item[Services:]Wraps the Button component such that it can be toggled on/off by clicking on it.
+\item[Implemented By:] ReactJS
+\end{description}
 
+\subsubsection{FilterButton Module \label{mFilterButtonModule}}
+\begin{description}
+\item[Secrets:]Filter Button styles.
+\item[Services:]Wraps the Button component such that it can be used to open the FiltersDropdown component.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{CryptoChartCard Module \label{mCryptoChartCardModule}}
+\begin{description}
+\item[Secrets:]The format and styling of crypto charts.
+\item[Services:]Renders card with cryptocurrency information and an embedded chart.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{CompareChart Module \label{mCompareChartModule}}
+\begin{description}
+\item[Secrets:]Data and logic for displaying multiple charts.
+\item[Services:]Renders multiple charts for comparison and displays options to configure specific settings for the charts.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{CryptoRowLineChart Module \label{mCryptoRowLineChartModule}}
+\begin{description}
+\item[Secrets:]The format and styling of crypto charts.
+\item[Services:]Renders a chart inline with the other components
+\item[Implemented By:] ReactJS.
+\end{description}
+
+\subsubsection{Container Module \label{mContainerModule}}
+\begin{description}
+\item[Secrets:]Properties for enclosing other components.
+\item[Services:]Wraps a set of components with certain properties.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Main Module \label{mMainModule}}
+\begin{description}
+\item[Secrets:]Properties for main portion of the page.
+\item[Services:]Wraps the main portion of the page with certain properties (this portion excludes the sidebar)
+\item[Implemented By:] ReactJS
+\end{description}
+
+
+\subsubsection{Wrapper Module \label{mWrapperModule}}
+\begin{description}
+\item[Secrets:]Properties for wrapping components.
+\item[Services:]Wraps the entire page and provides them with certain properties.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Dropdown Module \label{mDropdownModule}}
+\begin{description}
+\item[Secrets:]Properties for displaying a list of options.
+\item[Services:]Renders a dropdown with a list of options.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{DropdownItem Module \label{mDropdownItemModule}}
+\begin{description}
+\item[Secrets:]Styles for displaying a dropdown item.
+\item[Services:]Renders an item inside a dropdown.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{FilterDropdown Module \label{mFilterDropdownModule}}
+\begin{description}
+\item[Secrets:]Properties for displaying a set of filters.
+\item[Services:]Renders a multi-level dropdown with a list of filters.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{SecondaryFilterDropdown Module \label{mSecondaryFilterDropdownModule}}
+\begin{description}
+\item[Secrets:]Advanced properties for selecting a set of filters.
+\item[Services:]Renders a secondary-level dropdown view with advanced options for a filter.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Filter Module \label{mFilterModule}}
+\begin{description}
+\item[Secrets:]Filter data and properties.
+\item[Services:]Renders a tag with filter data and a button to remove the filter.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Filters Module \label{mFiltersModule}}
+\begin{description}
+\item[Secrets:]Properties for encapsulating multiple Filter Modules.
+\item[Services:]Takes as input several Filter components and renders them in a horizontal fashion.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Input Module \label{mInputModule}}
+\begin{description}
+\item[Secrets:]Styles and properties for input fields.
+\item[Services:]Renders an HTML input field and provides advanced customization.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{SearchInput Module \label{mSearchInputModule}}
+\begin{description}
+\item[Secrets:]Styles and properties for search input field.
+\item[Services:]Wraps the Input component to add a search icon.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{RadioInputForm Module \label{mRadioInputFormModule}}
+\begin{description}
+\item[Secrets:]Form properties.
+\item[Services:]Renders a form with radio elements, each with an input field. 
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Radio Module \label{mRadioModule}}
+\begin{description}
+\item[Secrets:]Properties and styles for radio.
+\item[Services:]Renders radio elements. 
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{PlaceholderSkeleton Module \label{mPlaceholderSkeletonModule}}
+\begin{description}
+\item[Secrets:]Styles for skeleton.
+\item[Services:]Renders a skeleton component when data is loading.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Sidebar Module \label{mSidebarModule}}
+\begin{description}
+\item[Secrets:]Sidebar options and properties.
+\item[Services:]Renders a sidebar to the page with navigation links to other pages.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{SidebarItem Module \label{mSidebarItemModule}}
+\begin{description}
+\item[Secrets:]Styles for the sidebar item.
+\item[Services:]Renders a sidebar item with an icon.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Table Module \label{mTableModule}}
+\begin{description}
+\item[Secrets:]Properties for enclosing multiple table rows.
+\item[Services:]Wraps a set of table rows together with specific properties.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{TableRow Module \label{mTableRowModule}}
+\begin{description}
+\item[Secrets:]Properties for enclosing multiple table cells.
+\item[Services:]Wraps a set of table cells together with specific properties.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{TableHeader Module \label{mTableHeaderModule}}
+\begin{description}
+\item[Secrets:]Properties for enclosing multiple table cells for the header.
+\item[Services:]Wraps a set of table cells together with specific properties for the header.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{TableCell Module \label{mTableCellModule}}
+\begin{description}
+\item[Secrets:]Styles and properties of a table cell.
+\item[Services:]Renders a table cell with specific properties.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Tab Module \label{mTabModule}}
+\begin{description}
+\item[Secrets:]Styles and properties.
+\item[Services:]Acts as a button to trigger switching components.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Tabs Module \label{mTabsModule}}
+\begin{description}
+\item[Secrets:]Data and logic for switching components.
+\item[Services:]Wraps multiple Tab components and conditionally renders different components.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{BoldGradientHeading Module \label{mBoldGradientHeadingModule}}
+\begin{description}
+\item[Secrets:]Styles for the heading.
+\item[Services:]Renders a gradient header.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Home Module \label{mHomeModule}}
+\begin{description}
+\item[Secrets:]Data and logic to control flow between different components.
+\item[Services:]Renders the home page with all components.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Compare Module \label{mCompareModule}}
+\begin{description}
+\item[Secrets:]Properties for handling different components.
+\item[Services:]Renders the compare page with the required components.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Hooks Module \label{mHooksModule}}
+\begin{description}
+\item[Secrets:]Logic and data.
+\item[Services:]Help to hook-into state and lifecycle methods of different components.
+\item[Implemented By:] ReactJS
+\end{description}
+
+\subsubsection{Queries Module \label{mQueriesModule}}
+\begin{description}
+\item[Secrets:]APIs and their properties.
+\item[Services:]Provides Hooks to fetch data from APIs. 
+\item[Implemented By:] ReactJS
+\end{description}
 
 \subsection{Software Decision Module}
 
-\begin{description}
-\item[Secrets:] The design decision based on mathematical theorems, physical
-  facts, or programming considerations. The secrets of this module are
-  \emph{not} described in the SRS.
-\item[Services:] Includes data structure and algorithms used in the system that
-  do not provide direct interaction with the user. 
-  % Changes in these modules are more likely to be motivated by a desire to
-  % improve performance than by externally imposed changes.
-\item[Implemented By:] --
-\end{description}
-
-\subsubsection{Etc.}
+N/A
 
 \section{Traceability Matrix} \label{SecTM}
 
@@ -286,17 +506,24 @@ requirements and between the modules and the anticipated changes.
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-R1 & \mref{mHH}, \mref{mInput}, \mref{mParams}, \mref{mControl}\\
-R2 & \mref{mInput}, \mref{mParams}\\
-R3 & \mref{mVerify}\\
-R4 & \mref{mOutput}, \mref{mControl}\\
-R5 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R6 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R7 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R8 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R9 & \mref{mVerifyOut}\\
-R10 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}\\
-R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
+FR-1 & \mref{mTableModule}, \mref{mTableHeaderModule}, \mref{mTableRowModule}, \mref{mTableCellModule}\\
+FR-2 & \mref{mSearchInputModule}, \mref{mInputModule}\\
+FR-3 & \mref{mCompareChartModule}, \mref{mToggleButtonModule}\\
+FR-4 & \mref{mCompareChartModule}, \mref{mDropdownModule}, \mref{mDropdownItemModule}\\
+FR-5 & \mref{mFilterButtonModule}, \mref{mFilterDropdownModule}, \mref{mSecondaryFilterDropdownModule} \mref{mFilterModule}, \mref{mFiltersModule}, \mref{mRadioInputFormModule}, \mref{mRadioModule}, \mref{mButtonModule}\\
+FR-6 & Pending\\
+FR-7 & \mref{mQueriesModule}\\
+FR-8 & \mref{mQueriesModule}\\
+FR-9 & \mref{mQueriesModule}\\
+FR-10 & \mref{mPlaceholderSkeletonModule}\\
+FR-11 & \mref{mQueriesModule}\\
+FR-12 & \mref{mSidebarModule}, \mref{mSidebarItemModule}\\
+FR-13 & Pending\\
+
+NFR-1 & \mref{mWrapperModule}, \mref{mContainerModule}, \mref{mMainModule}, \mref{mSidebarModule}, \mref{mSidebarItemModule}\\
+NFR-2 & \mref{mHomeModule}, \mref{mCompareModule}\\
+NFR-3 & \mref{mTabModule}, \mref{mTabsModule}\\
+NFR-4 & \mref{mBoldGradientHeadingModule}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
@@ -309,18 +536,9 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acHardware} & \mref{mHH}\\
-\acref{acInput} & \mref{mInput}\\
-\acref{acParams} & \mref{mParams}\\
-\acref{acVerify} & \mref{mVerify}\\
-\acref{acOutput} & \mref{mOutput}\\
-\acref{acVerifyOut} & \mref{mVerifyOut}\\
-\acref{acODEs} & \mref{mODEs}\\
-\acref{acEnergy} & \mref{mEnergy}\\
-\acref{acControl} & \mref{mControl}\\
-\acref{acSeqDS} & \mref{mSeqDS}\\
-\acref{acSolver} & \mref{mSolver}\\
-\acref{acPlot} & \mref{mPlot}\\
+\acref{acMulti} & \mref{mCompareModule}, \mref{mCompareChartModule}\\
+\acref{acCoin} & \mref{mHomeModule}\\
+\acref{acError} & \mref{mHomeModule}, \mref{mCompareModule}, \mref{mQueriesModule} \\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
@@ -342,7 +560,7 @@ because they use modules from the lower levels.
 
 \begin{figure}[H]
 \centering
-%\includegraphics[width=0.7\textwidth]{UsesHierarchy.png}
+\includegraphics[width=0.9\textwidth]{./images/usehier.png}
 \caption{Use hierarchy among modules}
 \label{FigUH}
 \end{figure}
