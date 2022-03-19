@@ -10,7 +10,7 @@ import { useCryptoList } from "../queries";
 import numeral from "numeral";
 import Wrapper from "../components/content/Wrapper";
 import Sidebar from "../components/sidebar/Sidebar";
-import { Tabs, Tab } from "../components/tabs/Tab";
+import { Tabs, Tab } from "../components/tabs";
 import {
   CollectionIcon,
   PlusIcon,
