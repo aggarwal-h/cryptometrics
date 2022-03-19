@@ -19,7 +19,7 @@ import {
 } from "@heroicons/react/outline";
 import { useFilters, useOnClickOutside } from "../hooks";
 import { Filter, Filters } from "../components/filters";
-import { FilterDropdown } from "../components/dropdown/FilterDropdown";
+import FilterDropdown from "../components/dropdown/FilterDropdown";
 import { filterOptions } from "../constants";
 import {
   Table,

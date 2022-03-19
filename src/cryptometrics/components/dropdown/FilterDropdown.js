@@ -1,9 +1,8 @@
-import { ArrowRightIcon } from "@heroicons/react/outline";
-import classNames from "classnames";
 import React, { useState, useEffect, useRef } from "react";
-import Button from "../button/Button";
-import RadioInputForm from "../radio/RadioForm";
 import { CSSTransition } from "react-transition-group";
+import FilterDropdownItem from "./FilterDropdownItem";
+import SecondaryFilterDropdown from "./SecondaryFilterDropdown";
+import classNames from "classnames";
 
 export function FilterDropdown({
   filterOptions,
@@ -98,88 +97,4 @@ export function FilterDropdown({
   );
 }
 
-export function SecondaryFilterDropdown({
-  open,
-  onSelectedFilterChange,
-  radioOptions,
-  radioValue,
-  onRadioChange,
-  inputValue,
-  onInputChange,
-  onFilterAdd,
-  inputLeftSymbol,
-  inputRightSymbol,
-  inputType,
-}) {
-  return (
-    <div
-      className={classNames(
-        "dark:bg-dark-600 w-72 max-h-72 rounded-xl mt-2 transition-all duration-100 px-5 py-2 overflow-y-scroll shadow-lg shadow-dark-600",
-        {
-          block: open,
-          hidden: !open,
-        }
-      )}
-    >
-      <RadioInputForm
-        options={radioOptions}
-        radioValue={radioValue}
-        onRadioChange={onRadioChange}
-        inputValue={inputValue}
-        onInputChange={onInputChange}
-        inputLeftSymbol={inputLeftSymbol}
-        inputRightSymbol={inputRightSymbol}
-        inputType={inputType}
-        onSubmit={onFilterAdd}
-      />
-      <div className="flex flex-row space-x-2 mb-2">
-        <Button
-          className="bg-neutral-100 text-gray-700 font-semibold"
-          onClick={() => onSelectedFilterChange(null)}
-        >
-          Cancel
-        </Button>
-        <Button
-          className="bg-indigo-600 text-white font-semibold w-full"
-          onClick={onFilterAdd}
-          type="submit"
-          disabled={inputValue === ""}
-        >
-          Filter
-        </Button>
-      </div>
-    </div>
-  );
-}
-
-// selected: boolean
-function FilterDropdownItem({
-  children,
-  selected,
-  onClick,
-  id,
-  disabled = false,
-}) {
-  return (
-    <div
-      className={classNames(
-        "py-3 px-4 rounded-xl dark:text-neutral-100 border-1 transition-all duration-100 cursor-pointer",
-        {
-          "border-transparent": !selected,
-          "bg-dark-800  border-indigo-600 font-semibold": selected,
-          "hover:bg-dark-800": !disabled,
-        }
-      )}
-      onClick={disabled || !onClick ? undefined : () => onClick(id)}
-    >
-      <div className="flex flex-row items-center">
-        {children}
-        {selected && (
-          <span className="ml-auto">
-            <ArrowRightIcon className="w-4 h-4" />
-          </span>
-        )}
-      </div>
-    </div>
-  );
-}
+export default FilterDropdown;
