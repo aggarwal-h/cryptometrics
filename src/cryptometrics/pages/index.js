@@ -21,12 +21,7 @@ import { useFilters, useOnClickOutside } from "../hooks";
 import { Filter, Filters } from "../components/filters";
 import FilterDropdown from "../components/dropdown/FilterDropdown";
 import { filterOptions } from "../constants";
-import {
-  Table,
-  TableCell,
-  TableHeader,
-  TableRow,
-} from "../components/table/Table";
+import { Table, TableCell, TableHeader, TableRow } from "../components/table";
 import Image from "next/image";
 import CryptoRowLineChart from "../components/charts/CryptoRowLineChart";
 import classNames from "classnames";
