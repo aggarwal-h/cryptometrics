@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 /**
  * Format of each filter should be:
@@ -8,7 +8,7 @@ import React, { useState } from "react";
  *  value: ""
  * }
  */
-export default function useFilters(initialArray) {
+export function useFilters(initialArray) {
   const [filters, setFilters] = useState(initialArray);
 
   const checkIfFilterExists = (filter) => {

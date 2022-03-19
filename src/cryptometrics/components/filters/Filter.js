@@ -1,9 +1,12 @@
 import React from "react";
+import Button from "../button/Button";
 
-export function Filter({
+function Filter({
   subject,
   condition,
   value,
+  symbolLeft,
+  symbolRight,
   buttonIcon,
   onButtonClick,
 }) {
@@ -14,33 +17,22 @@ export function Filter({
         <span className="font-light dark:text-neutral-300">
           {condition}&nbsp;
         </span>
-        <span>{value}</span>
+        <span>
+          {symbolLeft}
+          {value}
+          {symbolRight}
+        </span>
       </div>
 
       {/* Button */}
-      <button
+      <Button
         onClick={onButtonClick}
-        className="mr-2 p-2 bg-dark-600 hover:dark:bg-dark-800 rounded-r-lg justify-center items-center h-10 w-10 inline-flex font-thin text-white"
+        className="mr-2 p-2 bg-dark-600 hover:dark:bg-dark-800 rounded-r-lg rounded-l-none justify-center items-center h-10 w-10 inline-flex font-thin text-white"
       >
         <span>{buttonIcon}</span>
-      </button>
+      </Button>
     </div>
   );
 }
 
-export function FilterButton({ icon, onClick }) {
-  return (
-    <button
-      className="mx-1 mt-2 font-sans font-normal bg-dark-600 rounded-lg dark:text-neutral-200 dark:hover:text-indigo-600 inline-flex h-10 w-10 justify-center items-center whitespace-nowrap"
-      onClick={onClick}
-    >
-      {icon}
-    </button>
-  );
-}
-
-export function Filters({ children }) {
-  return (
-    <div className="flex flex-wrap justify-start items-center">{children}</div>
-  );
-}
+export default Filter;

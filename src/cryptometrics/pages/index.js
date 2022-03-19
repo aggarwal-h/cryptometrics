@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import Head from "next/head";
 import Container from "../components/content/Container";
 import Main from "../components/content/Main";
@@ -10,31 +10,48 @@ import { useCryptoList } from "../queries";
 import numeral from "numeral";
 import Wrapper from "../components/content/Wrapper";
 import Sidebar from "../components/sidebar/Sidebar";
-import { Tabs, Tab } from "../components/tabs/Tab";
+import { Tabs, Tab } from "../components/tabs";
 import {
   CollectionIcon,
   PlusIcon,
   TableIcon,
   XIcon,
 } from "@heroicons/react/outline";
-import useFilters from "../hooks/useFilters";
-import { Filter, FilterButton, Filters } from "../components/filters/Filter";
-import { FilterDropdown } from "../components/dropdown/FilterDropdown";
+import { useFilters, useOnClickOutside } from "../hooks";
+import { Filter, Filters } from "../components/filters";
+import FilterDropdown from "../components/dropdown/FilterDropdown";
 import { filterOptions } from "../constants";
-import { Table, TableCell, TableRow } from "../components/table/Table";
+import { Table, TableCell, TableHeader, TableRow } from "../components/table";
 import Image from "next/image";
 import CryptoRowLineChart from "../components/charts/CryptoRowLineChart";
 import classNames from "classnames";
 import Link from "next/link";
+import { FilterButton } from "../components/button";
 
 export default function Home() {
   const [filters, addFilter, removeFilter] = useFilters([]);
+  const filterDropdownRef = useRef(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const callbackDropdownClose = useCallback(() => setDropdownOpen(false), []);
+  useOnClickOutside(filterDropdownRef, callbackDropdownClose);
   const [searchText, setSearchText] = useState("");
   const listOfCoins = useCryptoList("usd", 21, false);
-  const filteredCoins = listOfCoins.data?.filter((coin) => {
+
+  // Filter coins based on search
+  let filteredCoins = listOfCoins.data?.filter((coin) => {
     return coin.name.toLowerCase().includes(searchText.toLowerCase());
   });
+
+  // Apply filters
+  for (let i = 0; i < filters.length; i++) {
+    const { subject, condition, value } = filters[i];
+    filteredCoins = filteredCoins.filter((coin) => {
+      return filterOptions[subject]?.options[condition]?.function(
+        coin[subject],
+        value
+      );
+    });
+  }
 
   return (
     <div>
@@ -60,9 +77,14 @@ export default function Home() {
                   return (
                     <Filter
                       key={"filter_" + idx}
-                      subject={filter.subject}
-                      condition={filter.condition}
+                      subject={filterOptions[filter.subject]?.name}
+                      condition={
+                        filterOptions[filter.subject]?.options[filter.condition]
+                          ?.name
+                      }
                       value={filter.value}
+                      symbolLeft={filterOptions[filter.subject]?.symbol_left}
+                      symbolRight={filterOptions[filter.subject]?.symbol_right}
                       buttonIcon={<XIcon className="w-5 h-5" />}
                       onButtonClick={() => removeFilter(filter)}
                     />
@@ -75,12 +97,22 @@ export default function Home() {
                       setDropdownOpen(!dropdownOpen) && addFilter({})
                     }
                   />
-
                   {dropdownOpen && (
                     <FilterDropdown
+                      dropdownRef={filterDropdownRef}
                       setOpen={setDropdownOpen}
                       addFilter={addFilter}
-                      filterOptions={filterOptions}
+                      filterOptions={Object.keys(filterOptions)
+                        .filter(
+                          (option) =>
+                            filters.filter(
+                              (filter) => filter.subject === option
+                            ).length === 0
+                        )
+                        .reduce((obj, key) => {
+                          obj[key] = filterOptions[key];
+                          return obj;
+                        }, {})}
                     />
                   )}
                 </div>
@@ -135,8 +167,8 @@ export default function Home() {
               >
                 <Table>
                   {/* Table Header */}
-                  <TableRow className="h-14 items-center sticky top-0 z-40">
-                    <TableCell className="w-6 h-10"></TableCell>
+                  <TableHeader className="h-14 items-center sticky top-0 z-40">
+                    <TableCell className="w-6 h-10 text-center">Icon</TableCell>
                     <TableCell className="w-24 h-10">
                       <p className="font-medium text-base text-center">Name</p>
                     </TableCell>
@@ -165,7 +197,7 @@ export default function Home() {
                         </p>
                       </div>
                     </TableCell>
-                  </TableRow>
+                  </TableHeader>
 
                   {/* Table Content */}
                   {!listOfCoins.isLoading &&

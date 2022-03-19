@@ -5,9 +5,15 @@ import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import { useCryptoTimeSeriesData } from "../../queries";
+import PropTypes from "prop-types";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
+/**
+ * Card component with an embedded chart for Crypto
+ *
+ * @component
+ */
 function CryptoChartCard({
   currencyName,
   currencyId,
@@ -102,5 +108,44 @@ function CryptoChartCard({
     </Link>
   );
 }
+
+CryptoChartCard.propTypes = {
+  /**
+   * The name of the cryptocurrency
+   */
+  currencyName: PropTypes.string.isRequired,
+  /**
+   * The id of the cryptocurrency
+   */
+  currencyId: PropTypes.string.isRequired,
+  /**
+   * The symbol of the cryptocurrency
+   */
+  symbol: PropTypes.string.isRequired,
+  /**
+   * The icon for the cryptocurrency
+   */
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  /**
+   * Any specific info for the cryptocurrency
+   */
+  info: PropTypes.string.isRequired,
+  /**
+   * The specific detail for the cryptocurrency
+   */
+  detail: PropTypes.string.isRequired,
+  /**
+   * A color for the detail text
+   */
+  detailColor: PropTypes.string.isRequired,
+  /**
+   * The options for the embedded chart
+   */
+  options: PropTypes.object.isRequired,
+  /**
+   * The type of the chart
+   */
+  type: PropTypes.string.isRequired,
+};
 
 export default CryptoChartCard;

@@ -1,8 +1,10 @@
-import classNames from "classnames";
 import React, { useState, useRef } from "react";
 import ReactECharts from "echarts-for-react";
-import { useCryptoTimeSeriesRangeData } from "../../queries";
+import { useCryptoList, useCryptoTimeSeriesRangeData } from "../../queries";
 import moment from "moment";
+import { ToggleButton } from "../button";
+import Dropdown from "../dropdown/Dropdown";
+import { ChevronDoubleRightIcon } from "@heroicons/react/outline";
 
 const unixNow = () => {
   return moment().unix();
@@ -15,13 +17,16 @@ const unixSubtractId = (id) => {
 function CompareChart() {
   const [timerange, setTimerange] = useState("6month");
   const chartRef = useRef(null);
+  const listOfCoins = useCryptoList("usd", 21, false);
+  const [firstCrypto, setFirstCrypto] = useState("solana");
+  const [secondCrypto, setSecondCrypto] = useState("avalanche-2");
   const cryptoQuery = useCryptoTimeSeriesRangeData(
-    "solana",
+    firstCrypto,
     unixSubtractId(timerange),
     unixNow()
   );
   const cryptoQuery2 = useCryptoTimeSeriesRangeData(
-    "avalanche-2",
+    secondCrypto,
     unixSubtractId(timerange),
     unixNow()
   );
@@ -67,7 +72,7 @@ function CompareChart() {
       {
         type: "line",
         data: cryptoQuery.data?.prices,
-        name: "Solana",
+        name: firstCrypto,
         smooth: true,
         symbol: "none",
         lineStyle: {
@@ -82,7 +87,7 @@ function CompareChart() {
       {
         type: "line",
         data: cryptoQuery2.data?.prices,
-        name: "Avalanche",
+        name: secondCrypto,
         smooth: true,
         symbol: "none",
         lineStyle: {
@@ -118,6 +123,24 @@ function CompareChart() {
         <ToggleButton id="1year" active={timerange} setActive={setTimerange}>
           1Y
         </ToggleButton>
+
+        <div className="flex-1">{/* Space Fillter */}</div>
+
+        <div className="flex flex-row space-x-5 items-center">
+          <Dropdown
+            list={listOfCoins.isLoading ? [] : listOfCoins.data}
+            value={firstCrypto}
+            setValue={setFirstCrypto}
+            disabled={[secondCrypto]}
+          />
+          <ChevronDoubleRightIcon className="w-5 h-5 dark:text-gray-300" />
+          <Dropdown
+            list={listOfCoins.isLoading ? [] : listOfCoins.data}
+            value={secondCrypto}
+            setValue={setSecondCrypto}
+            disabled={[firstCrypto]}
+          />
+        </div>
       </div>
       <div className="h-[600px] mt-10">
         <ReactECharts
@@ -129,20 +152,6 @@ function CompareChart() {
         />
       </div>
     </div>
-  );
-}
-
-function ToggleButton({ children, setActive, active, id }) {
-  return (
-    <button
-      className={classNames(" px-3 py-2 rounded-md font-light", {
-        "dark:bg-white dark:text-gray-800": active === id,
-        "dark:bg-black dark:text-gray-400": active !== id,
-      })}
-      onClick={() => setActive(id)}
-    >
-      {children}
-    </button>
   );
 }
 
