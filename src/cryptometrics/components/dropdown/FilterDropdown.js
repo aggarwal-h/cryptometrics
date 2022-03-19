@@ -2,7 +2,7 @@ import { ArrowRightIcon } from "@heroicons/react/outline";
 import classNames from "classnames";
 import React, { useState, useEffect, useRef } from "react";
 import Button from "../button/Button";
-import { RadioInputForm } from "../radio/RadioForm";
+import RadioInputForm from "../radio/RadioForm";
 import { CSSTransition } from "react-transition-group";
 
 export function FilterDropdown({
