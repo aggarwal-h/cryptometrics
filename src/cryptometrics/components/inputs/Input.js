@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React from "react";
 
 function Input({
+  className,
   placeholder,
   type,
   onChange,
@@ -26,7 +27,8 @@ function Input({
             "pr-8": symbolRight,
             "pl-3": !symbolLeft,
             "pl-8": symbolLeft,
-          }
+          },
+          className
         )}
         placeholder={placeholder}
         type={type ? type : "text"}
