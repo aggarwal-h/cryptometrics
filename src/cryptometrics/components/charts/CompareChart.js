@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import ReactECharts from "echarts-for-react";
 import { useCryptoList, useCryptoTimeSeriesRangeData } from "../../queries";
 import moment from "moment";
-import { ToggleButton } from "../button/ToggleButton";
+import { ToggleButton } from "../button";
 import Dropdown from "../dropdown/Dropdown";
 import { ChevronDoubleRightIcon } from "@heroicons/react/outline";
 
@@ -19,7 +19,7 @@ function CompareChart() {
   const chartRef = useRef(null);
   const listOfCoins = useCryptoList("usd", 21, false);
   const [firstCrypto, setFirstCrypto] = useState("solana");
-  const [secondCrypto, setSecondCrypto] = useState("ethereum");
+  const [secondCrypto, setSecondCrypto] = useState("avalanche-2");
   const cryptoQuery = useCryptoTimeSeriesRangeData(
     firstCrypto,
     unixSubtractId(timerange),

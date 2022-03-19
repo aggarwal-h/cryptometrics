@@ -1,16 +1,23 @@
 import React from "react";
 import classNames from "classnames";
+import Button from "./Button";
 
-export function ToggleButton({ children, setActive, active, id }) {
+function ToggleButton({ children, setActive, active, id, className }) {
   return (
-    <button
-      className={classNames(" px-3 py-2 rounded-md font-light", {
-        "dark:bg-white dark:text-gray-800": active === id,
-        "dark:bg-black dark:text-gray-400": active !== id,
-      })}
+    <Button
+      className={classNames(
+        "px-3 py-2 rounded-md font-light",
+        {
+          "dark:bg-white dark:text-gray-800": active === id,
+          "dark:bg-black dark:text-gray-400": active !== id,
+        },
+        className
+      )}
       onClick={() => setActive(id)}
     >
       {children}
-    </button>
+    </Button>
   );
 }
+
+export default ToggleButton;
