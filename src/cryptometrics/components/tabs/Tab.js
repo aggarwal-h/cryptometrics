@@ -11,6 +11,7 @@ function Tab({ id, content, activeTab, onClick }) {
         }
       )}
       onClick={() => onClick(id)}
+      id={id}
     >
       {content}
     </button>
