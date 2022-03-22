@@ -10,7 +10,7 @@ function DropdownItem({ children, onClick, selected, disabled }) {
         "hover:bg-dark-600 dark:text-white cursor-pointer":
           !disabled && !selected,
       })}
-      onClick={selected || disabled ? undefined : onClick}
+      onMouseDown={selected || disabled ? undefined : onClick}
     >
       {children}
     </div>
