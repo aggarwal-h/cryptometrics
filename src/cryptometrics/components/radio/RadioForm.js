@@ -35,6 +35,7 @@ function RadioInputForm({
                     symbolLeft={inputLeftSymbol}
                     symbolRight={inputRightSymbol}
                     type={inputType}
+                    id="radio-form-input"
                   />
                 )}
               </div>

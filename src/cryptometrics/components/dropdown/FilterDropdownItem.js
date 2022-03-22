@@ -21,6 +21,7 @@ function FilterDropdownItem({
         }
       )}
       onClick={disabled || !onClick ? undefined : () => onClick(id)}
+      id={`${id}-option`}
     >
       <div className="flex flex-row items-center">
         {children}
