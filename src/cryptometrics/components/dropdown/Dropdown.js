@@ -3,15 +3,7 @@ import classNames from "classnames";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { useOnClickOutside } from "../../hooks";
 import DropdownItem from "./DropdownItem";
-
-function getCoin(list, id) {
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].id == id) {
-      return list[i];
-    }
-  }
-  return null;
-}
+import { getCoin } from "../../utils";
 
 function Dropdown({ list, value, setValue, disabled }) {
   const [open, setOpen] = useState(false);

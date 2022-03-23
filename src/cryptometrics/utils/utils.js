@@ -17,3 +17,12 @@ export function equals_string(a, b) {
 export function contains_string(a, b) {
   return a.toLowerCase().includes(b.toLowerCase());
 }
+
+export function getCoin(list, id) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].id == id) {
+      return list[i];
+    }
+  }
+  return null;
+}
