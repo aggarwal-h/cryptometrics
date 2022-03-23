@@ -26,10 +26,13 @@ function Dropdown({ list, value, setValue, disabled }) {
   return (
     <div className="relative" ref={ref}>
       <button
-        className={classNames(" px-3 py-2 rounded-md font-light", {
-          "dark:bg-white dark:text-gray-800": false,
-          "dark:bg-black dark:text-gray-400": true,
-        })}
+        className={classNames(
+          "px-3 py-2 rounded-md font-light border-1 border-transparent",
+          {
+            "dark:bg-black dark:text-gray-400": !open,
+            "dark:border-white dark:text-white": open,
+          }
+        )}
         onClick={() => setOpen(!open)}
       >
         <div className="flex flex-row items-center space-x-2">
