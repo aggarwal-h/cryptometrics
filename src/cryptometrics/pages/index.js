@@ -80,25 +80,30 @@ export default function Home() {
                   onFocus={() => setSuggestedSearchOpen(true)}
                   onBlur={() => setSuggestedSearchOpen(false)}
                 />
-                <div className="absolute h-fit max-h-72 min-w-[9rem] w-full bg-dark-800 top-12 left-0 rounded-xl z-50 overflow-y-scroll">
-                  <div className="my-2">
-                    {suggestedSearchOpen &&
-                      filteredCoins?.map((coin, index) => {
-                        return (
-                          <DropdownItem
-                            onClick={() => setSearchText(coin.name)}
-                            key={index}
-                          >
-                            <Highlighter
-                              searchWords={[searchText]}
-                              autoEscape={true}
-                              textToHighlight={coin.name}
-                            />
-                          </DropdownItem>
-                        );
-                      })}
+                {suggestedSearchOpen && (
+                  <div className="absolute h-fit max-h-72 min-w-[9rem] w-full bg-dark-500 top-12 left-0 rounded-xl z-50 overflow-y-scroll">
+                    <div className="my-2">
+                      {filteredCoins.length > 0 ? (
+                        filteredCoins?.map((coin, index) => {
+                          return (
+                            <DropdownItem
+                              onClick={() => setSearchText(coin.name)}
+                              key={index}
+                            >
+                              <Highlighter
+                                searchWords={[searchText]}
+                                autoEscape={true}
+                                textToHighlight={coin.name}
+                              />
+                            </DropdownItem>
+                          );
+                        })
+                      ) : (
+                        <DropdownItem disabled>No results</DropdownItem>
+                      )}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
             <div className="mb-2">
