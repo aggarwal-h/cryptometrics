@@ -27,11 +27,14 @@ import CryptoRowLineChart from "../components/charts/CryptoRowLineChart";
 import classNames from "classnames";
 import Link from "next/link";
 import { FilterButton } from "../components/button";
+import DropdownItem from "../components/dropdown/DropdownItem";
+import Highlighter from "react-highlight-words";
 
 export default function Home() {
   const [filters, addFilter, removeFilter] = useFilters([]);
   const filterDropdownRef = useRef(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [suggestedSearchOpen, setSuggestedSearchOpen] = useState(false);
   const callbackDropdownClose = useCallback(() => setDropdownOpen(false), []);
   useOnClickOutside(filterDropdownRef, callbackDropdownClose);
   const [searchText, setSearchText] = useState("");
@@ -45,12 +48,18 @@ export default function Home() {
   // Apply filters
   for (let i = 0; i < filters.length; i++) {
     const { subject, condition, value } = filters[i];
-    filteredCoins = filteredCoins.filter((coin) => {
-      return filterOptions[subject]?.options[condition]?.function(
-        coin[subject],
-        value
+    if (subject === "sort_by") {
+      filteredCoins = filteredCoins.sort(
+        filterOptions[subject]?.options[condition]?.function
       );
-    });
+    } else {
+      filteredCoins = filteredCoins.filter((coin) => {
+        return filterOptions[subject]?.options[condition]?.function(
+          coin[subject],
+          value
+        );
+      });
+    }
   }
 
   return (
@@ -68,8 +77,40 @@ export default function Home() {
             <div className="flex flex-row justify-between">
               {/* Main Project Title */}
               <BoldGradientHeading>Home</BoldGradientHeading>
-              {/* Search Field */}
-              <SearchInput onChange={(e) => setSearchText(e?.target.value)} />
+              <div className="relative">
+                {/* Search Field */}
+                <SearchInput
+                  onChange={(e) => setSearchText(e?.target.value)}
+                  initialValue={searchText}
+                  value={searchText}
+                  onFocus={() => setSuggestedSearchOpen(true)}
+                  onBlur={() => setSuggestedSearchOpen(false)}
+                />
+                {suggestedSearchOpen && (
+                  <div className="absolute h-fit max-h-72 min-w-[9rem] w-full bg-dark-500 top-12 left-0 rounded-xl z-50 overflow-y-scroll">
+                    <div className="my-2">
+                      {filteredCoins.length > 0 ? (
+                        filteredCoins?.map((coin, index) => {
+                          return (
+                            <DropdownItem
+                              onClick={() => setSearchText(coin.name)}
+                              key={index}
+                            >
+                              <Highlighter
+                                searchWords={[searchText]}
+                                autoEscape={true}
+                                textToHighlight={coin.name}
+                              />
+                            </DropdownItem>
+                          );
+                        })
+                      ) : (
+                        <DropdownItem disabled>No results</DropdownItem>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="mb-2">
               <Filters>

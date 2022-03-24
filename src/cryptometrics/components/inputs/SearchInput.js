@@ -2,7 +2,7 @@ import React from "react";
 import { SearchIcon } from "@heroicons/react/outline";
 import Input from "./Input";
 
-function SearchInput({ onChange }) {
+function SearchInput({ onChange, value, onFocus, onBlur, initialValue }) {
   return (
     <div className="relative">
       <Input
@@ -10,7 +10,11 @@ function SearchInput({ onChange }) {
         placeholder="Search"
         type="text"
         onChange={onChange}
+        initialValue={initialValue || undefined}
+        value={value || undefined}
         symbolRight={<SearchIcon className="w-6 h-6 dark:text-white" />}
+        onFocus={onFocus || undefined}
+        onBlur={onBlur || undefined}
       ></Input>
     </div>
   );

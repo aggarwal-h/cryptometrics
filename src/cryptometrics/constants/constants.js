@@ -4,6 +4,12 @@ import {
   equals_string,
   equals_integer,
   contains_string,
+  sort_by_name_ascending,
+  sort_by_name_descending,
+  sort_by_price_low_to_high,
+  sort_by_price_high_to_low,
+  sort_by_price_change_percentage_low_to_high,
+  sort_by_price_change_percentage_high_to_low,
 } from "../utils";
 
 export const cryptoChartOptions = (
@@ -186,9 +192,47 @@ export const cryptocurrencies = [
 ];
 
 export const filterOptions = {
+  sort_by: {
+    id: "sort_by",
+    name: "Sort by",
+    input_enabled: false,
+    options: {
+      name_ascending: {
+        id: "name_ascending",
+        name: "Name: Ascending Order",
+        function: sort_by_name_ascending,
+      },
+      name_descending: {
+        id: "name_descending",
+        name: "Name: Descending Order",
+        function: sort_by_name_descending,
+      },
+      price_low_to_high: {
+        id: "price_low_to_high",
+        name: "Price: Low to High",
+        function: sort_by_price_low_to_high,
+      },
+      price_high_to_low: {
+        id: "price_high_to_low",
+        name: "Price: High to Low",
+        function: sort_by_price_high_to_low,
+      },
+      price_change_percentage_low_to_high: {
+        id: "price_change_percentage_low_to_high",
+        name: "Price Change %: Low to High",
+        function: sort_by_price_change_percentage_low_to_high,
+      },
+      price_change_percentage_high_to_low: {
+        id: "price_change_percentage_high_to_low",
+        name: "Price Change %: High to Low",
+        function: sort_by_price_change_percentage_high_to_low,
+      },
+    },
+  },
   current_price: {
     id: "current_price",
     name: "Price",
+    input_enabled: true,
     input_type: "number",
     symbol_left: "$",
     options: {
@@ -212,6 +256,7 @@ export const filterOptions = {
   name: {
     id: "name",
     name: "Name",
+    input_enabled: true,
     input_type: "text",
     options: {
       equals: {
@@ -229,6 +274,7 @@ export const filterOptions = {
   price_change_percentage_24h: {
     id: "price_change_percentage_24h",
     name: "Price Change in %",
+    input_enabled: true,
     symbol_right: "%",
     input_type: "number",
     options: {
@@ -252,6 +298,7 @@ export const filterOptions = {
   price_change_24h: {
     id: "price_change_24h",
     name: "Price Change in $",
+    input_enabled: true,
     input_type: "number",
     symbol_left: "$",
     options: {

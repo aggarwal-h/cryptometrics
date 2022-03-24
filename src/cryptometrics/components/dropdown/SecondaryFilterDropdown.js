@@ -15,6 +15,7 @@ export function SecondaryFilterDropdown({
   inputLeftSymbol,
   inputRightSymbol,
   inputType,
+  inputEnabled = true,
 }) {
   return (
     <div
@@ -36,6 +37,7 @@ export function SecondaryFilterDropdown({
         inputRightSymbol={inputRightSymbol}
         inputType={inputType}
         onSubmit={onFilterAdd}
+        inputEnabled={inputEnabled}
       />
       <div className="flex flex-row space-x-2 mb-2">
         <Button
@@ -48,7 +50,7 @@ export function SecondaryFilterDropdown({
           className="bg-indigo-600 text-white font-semibold w-full"
           onClick={onFilterAdd}
           type="submit"
-          disabled={inputValue === ""}
+          disabled={inputEnabled && inputValue === ""}
         >
           Filter
         </Button>

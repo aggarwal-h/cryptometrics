@@ -10,6 +10,9 @@ function Input({
   symbolLeft,
   symbolRight,
   id,
+  value,
+  onFocus,
+  onBlur,
 }) {
   return (
     <span className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -36,6 +39,9 @@ function Input({
         onChange={onChange}
         defaultValue={initialValue || ""}
         id={id ? id : undefined}
+        value={value || undefined}
+        onFocus={onFocus || undefined}
+        onBlur={onBlur || undefined}
       ></input>
       {symbolRight && (
         <span className="absolute right-3 w-5 text-center items-center justify-center h-full z-10 py-3">

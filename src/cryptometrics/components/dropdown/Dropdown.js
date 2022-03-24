@@ -3,15 +3,7 @@ import classNames from "classnames";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { useOnClickOutside } from "../../hooks";
 import DropdownItem from "./DropdownItem";
-
-function getCoin(list, id) {
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].id == id) {
-      return list[i];
-    }
-  }
-  return null;
-}
+import { getCoin } from "../../utils";
 
 function Dropdown({ list, value, setValue, disabled }) {
   const [open, setOpen] = useState(false);
@@ -26,10 +18,13 @@ function Dropdown({ list, value, setValue, disabled }) {
   return (
     <div className="relative" ref={ref}>
       <button
-        className={classNames(" px-3 py-2 rounded-md font-light", {
-          "dark:bg-white dark:text-gray-800": false,
-          "dark:bg-black dark:text-gray-400": true,
-        })}
+        className={classNames(
+          "px-3 py-2 rounded-md font-light border-1 border-transparent",
+          {
+            "dark:bg-black dark:text-gray-400": !open,
+            "dark:border-white dark:text-white": open,
+          }
+        )}
         onClick={() => setOpen(!open)}
       >
         <div className="flex flex-row items-center space-x-2">
