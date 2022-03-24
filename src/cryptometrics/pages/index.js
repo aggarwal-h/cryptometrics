@@ -48,12 +48,18 @@ export default function Home() {
   // Apply filters
   for (let i = 0; i < filters.length; i++) {
     const { subject, condition, value } = filters[i];
-    filteredCoins = filteredCoins.filter((coin) => {
-      return filterOptions[subject]?.options[condition]?.function(
-        coin[subject],
-        value
+    if (subject === "sort_by") {
+      filteredCoins = filteredCoins.sort(
+        filterOptions[subject]?.options[condition]?.function
       );
-    });
+    } else {
+      filteredCoins = filteredCoins.filter((coin) => {
+        return filterOptions[subject]?.options[condition]?.function(
+          coin[subject],
+          value
+        );
+      });
+    }
   }
 
   return (
