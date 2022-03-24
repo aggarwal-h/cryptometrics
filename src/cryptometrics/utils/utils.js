@@ -26,3 +26,69 @@ export function getCoin(list, id) {
   }
   return null;
 }
+
+export function sort_by_price_low_to_high(a, b) {
+  if (Number(a.current_price) < Number(b.current_price)) {
+    return -1;
+  } else if (Number(a.current_price) > Number(b.current_price)) {
+    return 1;
+  }
+  return 0;
+}
+
+export function sort_by_price_high_to_low(a, b) {
+  if (Number(a.current_price) > Number(b.current_price)) {
+    return -1;
+  } else if (Number(a.current_price) < Number(b.current_price)) {
+    return 1;
+  }
+  return 0;
+}
+
+export function sort_by_name_ascending(a, b) {
+  if (String(a.name) < String(b.name)) {
+    return -1;
+  } else if (String(a.name) > String(b.name)) {
+    return 1;
+  }
+  return 0;
+}
+
+export function sort_by_name_descending(a, b) {
+  if (String(a.name) > String(b.name)) {
+    return -1;
+  } else if (String(a.name) < String(b.name)) {
+    return 1;
+  }
+  return 0;
+}
+
+export function sort_by_price_change_percentage_low_to_high(a, b) {
+  if (
+    Number(a.price_change_percentage_24h) <
+    Number(b.price_change_percentage_24h)
+  ) {
+    return -1;
+  } else if (
+    Number(a.price_change_percentage_24h) >
+    Number(b.price_change_percentage_24h)
+  ) {
+    return 1;
+  }
+  return 0;
+}
+
+export function sort_by_price_change_percentage_high_to_low(a, b) {
+  if (
+    Number(a.price_change_percentage_24h) >
+    Number(b.price_change_percentage_24h)
+  ) {
+    return -1;
+  } else if (
+    Number(a.price_change_percentage_24h) <
+    Number(b.price_change_percentage_24h)
+  ) {
+    return 1;
+  }
+  return 0;
+}
