@@ -62,12 +62,18 @@ function CryptoChartCard({
                   ></Image>
                 </div>
                 <div>
-                  <p className="text-3xl font-poppins font-bold text-gray-700 dark:text-gray-100">
+                  <p
+                    className="text-3xl font-poppins font-bold text-gray-700 dark:text-gray-100"
+                    id="currency-name"
+                  >
                     {currencyName || (
                       <PlaceholderSkeleton className="h-9 w-[60%]" />
                     )}
                   </p>
-                  <p className="text-lg font-poppins font-medium text-gray-700 dark:text-gray-100">
+                  <p
+                    className="text-lg font-poppins font-medium text-gray-700 dark:text-gray-100"
+                    id="currency-symbol"
+                  >
                     {symbol}
                   </p>
                 </div>
@@ -83,7 +89,10 @@ function CryptoChartCard({
               <div className="flex flex-col h-[9.5rem]">
                 <div className="mt-auto">
                   <div className="flex justify-end">
-                    <p className="text-4xl font-poppins font-bold text-black dark:text-white">
+                    <p
+                      className="text-4xl font-poppins font-bold text-black dark:text-white"
+                      id="currency-price"
+                    >
                       {info || (
                         <PlaceholderSkeleton className="h-9 w-[200px]" />
                       )}
@@ -95,6 +104,7 @@ function CryptoChartCard({
                         "text-lg font-poppins font-bold",
                         detailColor
                       )}
+                      id="currency-price-change-percentage"
                     >
                       {detail || <PlaceholderSkeleton className="h-4 w-20" />}
                     </p>

@@ -9,6 +9,7 @@ function Input({
   initialValue,
   symbolLeft,
   symbolRight,
+  id,
   value,
   onFocus,
   onBlur,
@@ -37,6 +38,7 @@ function Input({
         type={type ? type : "text"}
         onChange={onChange}
         defaultValue={initialValue || ""}
+        id={id ? id : undefined}
         value={value || undefined}
         onFocus={onFocus || undefined}
         onBlur={onBlur || undefined}
