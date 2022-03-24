@@ -289,6 +289,7 @@ export default function Home() {
                                           coin.price_change_24h >= 0,
                                       }
                                     )}
+                                    id="currency-price-change"
                                   >
                                     {numeral(coin.price_change_24h).format(
                                       "$0,0.[0000]"
