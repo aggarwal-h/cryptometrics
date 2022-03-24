@@ -87,6 +87,7 @@ export function FilterDropdown({
               inputLeftSymbol={filterOptions[selectedFilter]?.symbol_left}
               inputRightSymbol={filterOptions[selectedFilter]?.symbol_right}
               inputType={filterOptions[selectedFilter]?.input_type}
+              inputEnabled={filterOptions[selectedFilter]?.input_enabled}
             />
           </span>
         ) : (

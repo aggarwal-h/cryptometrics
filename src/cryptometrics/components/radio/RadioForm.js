@@ -12,6 +12,7 @@ function RadioInputForm({
   inputValue,
   onInputChange,
   onSubmit,
+  inputEnabled = true,
 }) {
   return (
     <form onSubmit={onSubmit}>
@@ -27,7 +28,7 @@ function RadioInputForm({
                 onChange={onRadioChange}
               />
               <div className="my-1">
-                {key === radioValue && (
+                {inputEnabled && key === radioValue && (
                   <Input
                     placeholder="Enter a value here..."
                     initialValue={inputValue}
