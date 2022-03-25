@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import Head from "next/head";
 import Container from "../components/content/Container";
 import Main from "../components/content/Main";
@@ -29,16 +29,36 @@ import Link from "next/link";
 import { FilterButton } from "../components/button";
 import DropdownItem from "../components/dropdown/DropdownItem";
 import Highlighter from "react-highlight-words";
+import Navbar from "../components/navbar/Navbar";
+import CryptoChartCardSkeleton from "../components/cards/skeletons/CryptoChartCardSkeleton";
 
 export default function Home() {
   const [filters, addFilter, removeFilter] = useFilters([]);
   const filterDropdownRef = useRef(null);
+  const [dark, setDark] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [suggestedSearchOpen, setSuggestedSearchOpen] = useState(false);
   const callbackDropdownClose = useCallback(() => setDropdownOpen(false), []);
   useOnClickOutside(filterDropdownRef, callbackDropdownClose);
   const [searchText, setSearchText] = useState("");
   const listOfCoins = useCryptoList("usd", 21, false);
+
+  useEffect(() => {
+    const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
+    if (mediaQueryList.matches) {
+      setDark(true);
+    } else {
+      setDark(false);
+    }
+    mediaQueryList.addEventListener("change", setDarkOnEvent);
+    return () => {
+      mediaQueryList.removeEventListener("change", setDarkOnEvent);
+    };
+  }, []);
+
+  const setDarkOnEvent = (event) => {
+    setDark(event.matches);
+  };
 
   // Filter coins based on search
   let filteredCoins = listOfCoins.data?.filter((coin) => {
@@ -49,11 +69,11 @@ export default function Home() {
   for (let i = 0; i < filters.length; i++) {
     const { subject, condition, value } = filters[i];
     if (subject === "sort_by") {
-      filteredCoins = filteredCoins.sort(
+      filteredCoins = filteredCoins?.sort(
         filterOptions[subject]?.options[condition]?.function
       );
     } else {
-      filteredCoins = filteredCoins.filter((coin) => {
+      filteredCoins = filteredCoins?.filter((coin) => {
         return filterOptions[subject]?.options[condition]?.function(
           coin[subject],
           value
@@ -69,12 +89,13 @@ export default function Home() {
         <meta name="description" content="CryptoMetrics" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar />
       <Wrapper>
         <Sidebar active="home" />
         <Main>
           <Container>
             {/* Header */}
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between mt-20 sm:mt-14 md:mt-4 lg:mt-0">
               {/* Main Project Title */}
               <BoldGradientHeading>Home</BoldGradientHeading>
               <div className="relative">
@@ -87,9 +108,9 @@ export default function Home() {
                   onBlur={() => setSuggestedSearchOpen(false)}
                 />
                 {suggestedSearchOpen && (
-                  <div className="absolute h-fit max-h-72 min-w-[9rem] w-full bg-dark-500 top-12 left-0 rounded-xl z-50 overflow-y-scroll">
+                  <div className="absolute h-fit max-h-72 min-w-[9rem] w-full bg-white shadow-xl dark:bg-dark-500 top-12 left-0 rounded-xl z-50 overflow-y-scroll">
                     <div className="my-2">
-                      {filteredCoins.length > 0 ? (
+                      {filteredCoins?.length > 0 ? (
                         filteredCoins?.map((coin, index) => {
                           return (
                             <DropdownItem
@@ -167,8 +188,12 @@ export default function Home() {
                 content={<CollectionIcon className="w-6 h-6 dark:text-white" />}
               >
                 <div className="flex flex-wrap gap-x-10 gap-y-10 mt-3">
-                  {!listOfCoins.isLoading && filteredCoins.length > 0 ? (
-                    filteredCoins.map((coin) => {
+                  {listOfCoins.isLoading ? (
+                    [...Array(21)].map((e, i) => (
+                      <CryptoChartCardSkeleton key={i} />
+                    ))
+                  ) : !listOfCoins.isLoading && filteredCoins?.length > 0 ? (
+                    filteredCoins?.map((coin) => {
                       return (
                         <CryptoChartCard
                           key={coin.symbol}
@@ -194,7 +219,7 @@ export default function Home() {
                             coin.price_change_percentage_24h > 0
                               ? ["#3DBAA2"]
                               : ["#FF7A68"],
-                            true
+                            dark
                           )}
                           type="area"
                         />
@@ -253,7 +278,7 @@ export default function Home() {
                     </TableHeader>
                     {/* Table Content */}
                     {!listOfCoins.isLoading &&
-                      filteredCoins.map((coin, index) => {
+                      filteredCoins?.map((coin, index) => {
                         return (
                           <Link
                             key={"table_row_" + index}
@@ -279,14 +304,14 @@ export default function Home() {
                                     {coin.name}
                                   </p>
                                   <p
-                                    className="font-light text-gray-300 text-sm mt-1"
+                                    className="font-light text-gray-800 dark:text-gray-300 text-sm mt-1"
                                     id="currency-symbol"
                                   >
                                     {coin.symbol.toUpperCase()}
                                   </p>
                                 </TableCell>
                                 <TableCell className="w-24">
-                                  <p className="font-light text-base text-blue-500 mt-1">
+                                  <p className="font-bold dark:font-light text-base text-blue-500 mt-1">
                                     $
                                     {numeral(coin.current_price).format(
                                       "0,0.[0000000]"
@@ -294,7 +319,7 @@ export default function Home() {
                                   </p>
                                 </TableCell>
                                 <TableCell className="w-[10%]">
-                                  <p className="font-light text-base text-pink-400 mt-1">
+                                  <p className="font-bold dark:font-light text-base text-pink-400 mt-1">
                                     $
                                     {numeral(coin.market_cap).format(
                                       "0,0.[000]a"
@@ -304,11 +329,11 @@ export default function Home() {
                                 <TableCell className="w-40">
                                   <p
                                     className={classNames(
-                                      "font-light text-base mt-1",
+                                      "font-bold dark:font-light text-base mt-1",
                                       {
-                                        "text-red-400":
+                                        "text-red-500 dark:text-red-400":
                                           coin.price_change_percentage_24h < 0,
-                                        "text-green-400":
+                                        "text-green-500 dark:text-green-400":
                                           coin.price_change_percentage_24h >= 0,
                                       }
                                     )}
@@ -322,11 +347,11 @@ export default function Home() {
                                 <TableCell className="w-40">
                                   <p
                                     className={classNames(
-                                      "font-light text-base mt-1",
+                                      "font-bold dark:font-lighttext-base mt-1",
                                       {
-                                        "text-red-400":
+                                        "text-red-500 dark:text-red-400":
                                           coin.price_change_24h < 0,
-                                        "text-green-400":
+                                        "text-green-500 dark:text-green-400":
                                           coin.price_change_24h >= 0,
                                       }
                                     )}
