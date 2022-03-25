@@ -10,14 +10,14 @@ function Navbar() {
   return (
     <nav
       className={classnames(
-        "fixed lg:hidden top-0 left-0 right-0 h-16 z-50 border-gray-200 py-2.5",
+        "sticky lg:hidden top-0 left-0 right-0 h-16 z-50 border-gray-200 py-2.5",
         {
           " bg-gray-50 dark:bg-dark-600": open,
           "rounded bg-white dark:bg-dark-900": !open,
         }
       )}
     >
-      <div className="container flex flex-wrap justify-between items-center mx-auto px-6">
+      <div className="container flex flex-wrap justify-between items-center mx-auto pl-1 pr-2">
         <Link href="/">
           <a>
             <Image
