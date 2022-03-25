@@ -5,7 +5,7 @@ import SidebarItem from "./SidebarItem";
 
 function Sidebar({ active }) {
   return (
-    <div className="w-64 min-w-[16rem] dark:text-white">
+    <div className="hidden lg:block w-64 min-w-[16rem] dark:text-white">
       {/* Sidebar Head */}
       <span className="flex justify-center items-center mt-5" id="crypto-logo">
         <Image

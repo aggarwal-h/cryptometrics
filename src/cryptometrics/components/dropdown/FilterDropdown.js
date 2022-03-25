@@ -43,10 +43,10 @@ export function FilterDropdown({
   };
 
   return (
-    <div className="absolute flex flex-row z-50" ref={dropdownRef}>
+    <div className="absolute flex flex-col sm:flex-row z-50" ref={dropdownRef}>
       <div
         className={classNames(
-          "dark:bg-dark-600 w-56 h-max max-h-72 rounded-xl mt-2 transition-all duration-100 p-1 overflow-y-scroll shadow-lg shadow-dark-600"
+          "bg-white dark:bg-dark-600 border-1 border-slate-600 sm:border-transparent w-56 h-max max-h-72 rounded-xl mt-2 transition-all duration-100 p-1 overflow-y-scroll shadow-xl dark:shadow-lg dark:shadow-dark-600"
         )}
       >
         {Object.keys(filterOptions).length > 0 ? (
@@ -74,7 +74,7 @@ export function FilterDropdown({
         nodeRef={secondaryDropdownRef}
       >
         {selectedFilter ? (
-          <span className="ml-3" ref={secondaryDropdownRef}>
+          <span className="mt-1 sm:ml-3 sm:mt-0" ref={secondaryDropdownRef}>
             <SecondaryFilterDropdown
               open={true}
               onSelectedFilterChange={onSelectedFilterChange}

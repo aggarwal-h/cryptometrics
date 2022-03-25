@@ -21,8 +21,10 @@ function ToggleButton({ children, setActive, active, id, className, tooltip }) {
         className={classNames(
           "px-3 py-2 rounded-md font-light",
           {
-            "dark:bg-white dark:text-gray-800": active === id,
-            "dark:bg-black dark:text-gray-400": active !== id,
+            "bg-dark-900 dark:bg-white text-gray-100 dark:text-gray-800":
+              active === id,
+            "bg-gray-100 dark:bg-black text-gray-800 dark:text-gray-400":
+              active !== id,
           },
           className
         )}
@@ -35,8 +37,10 @@ function ToggleButton({ children, setActive, active, id, className, tooltip }) {
           className={classNames(
             "tooltip absolute rounded-lg shadow-lg px-3 py-2 mt-11",
             {
-              "dark:bg-white dark:text-gray-800": active === id,
-              "dark:bg-black dark:text-gray-200": active !== id,
+              "bg-dark-900 dark:bg-white text-gray-100 dark:text-gray-800":
+                active === id,
+              "bg-white shadow-lg dark:bg-black text-gray-800 dark:text-gray-400":
+                active !== id,
             }
           )}
         >
