@@ -22,7 +22,7 @@ function Dropdown({ list, value, setValue, disabled }) {
           "px-3 py-2 rounded-md font-light border-1 border-transparent",
           {
             "bg-gray-100 text-gray-800 dark:bg-black dark:text-gray-400": !open,
-            "border-gray-300 bg-gray-100 text-black dark:border-white dark:text-white":
+            "border-gray-300 bg-gray-100 dark:bg-black text-black dark:border-white dark:text-white":
               open,
           }
         )}

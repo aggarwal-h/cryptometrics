@@ -150,58 +150,60 @@ function CompareChart() {
   };
 
   return (
-    <div className="dark:bg-dark-600 p-8 rounded-3xl">
-      <div className="flex flex-row flex-1 justify-start space-x-3">
-        <ToggleButton
-          id="1hour"
-          active={timerange}
-          setActive={setTimerange}
-          tooltip="1 Hour"
-        >
-          1H
-        </ToggleButton>
-        <ToggleButton
-          id="1day"
-          active={timerange}
-          setActive={setTimerange}
-          tooltip="1 Day"
-        >
-          1D
-        </ToggleButton>
-        <ToggleButton
-          id="1week"
-          active={timerange}
-          setActive={setTimerange}
-          tooltip="1 Week"
-        >
-          1W
-        </ToggleButton>
-        <ToggleButton
-          id="1month"
-          active={timerange}
-          setActive={setTimerange}
-          tooltip="1 Month"
-        >
-          1M
-        </ToggleButton>
-        <ToggleButton
-          id="6month"
-          active={timerange}
-          setActive={setTimerange}
-          tooltip="6 Months"
-        >
-          6M
-        </ToggleButton>
-        <ToggleButton
-          id="1year"
-          active={timerange}
-          setActive={setTimerange}
-          tooltip="1 Year"
-        >
-          1Y
-        </ToggleButton>
+    <div className="bg-white shadow-lg dark:bg-dark-600 p-8 rounded-3xl overflow-x-hidden">
+      <div className="flex flex-col justify-center xl:justify-between xl:flex-row items-center space-y-3 xl:space-y-0 xl:space-x-12">
+        <div className="flex flex-row space-x-3 sm:space-x-6 md:space-x-10 xl:space-x-2">
+          <ToggleButton
+            id="1hour"
+            active={timerange}
+            setActive={setTimerange}
+            tooltip="1 Hour"
+          >
+            1H
+          </ToggleButton>
+          <ToggleButton
+            id="1day"
+            active={timerange}
+            setActive={setTimerange}
+            tooltip="1 Day"
+          >
+            1D
+          </ToggleButton>
+          <ToggleButton
+            id="1week"
+            active={timerange}
+            setActive={setTimerange}
+            tooltip="1 Week"
+          >
+            1W
+          </ToggleButton>
+          <ToggleButton
+            id="1month"
+            active={timerange}
+            setActive={setTimerange}
+            tooltip="1 Month"
+          >
+            1M
+          </ToggleButton>
+          <ToggleButton
+            id="6month"
+            active={timerange}
+            setActive={setTimerange}
+            tooltip="6 Months"
+          >
+            6M
+          </ToggleButton>
+          <ToggleButton
+            id="1year"
+            active={timerange}
+            setActive={setTimerange}
+            tooltip="1 Year"
+          >
+            1Y
+          </ToggleButton>
+        </div>
 
-        <div className="flex flex-row flex-1 justify-center space-x-3">
+        <div className="flex flex-row space-x-2 sm:space-x-6 md:space-x-10 xl:space-x-2">
           <ToggleButton
             id="line"
             active={chartType}
@@ -236,7 +238,7 @@ function CompareChart() {
           </ToggleButton>
         </div>
 
-        <div className="flex flex-row flex-1 justify-end space-x-5 items-center">
+        <div className="flex flex-row space-x-3 sm:space-x-6 md:space-x-10 xl:space-x-3 items-center">
           <Dropdown
             list={listOfCoins.isLoading ? [] : listOfCoins.data}
             value={firstCrypto}

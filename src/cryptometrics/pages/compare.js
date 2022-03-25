@@ -21,7 +21,7 @@ export default function Compare() {
         <Main>
           <Container>
             {/* Header */}
-            <div className="flex flex-row justify-between mb-4">
+            <div className="flex flex-row justify-between mb-4 mt-20 sm:mt-14 md:mt-4 lg:mt-0">
               {/* Main Project Title */}
               <BoldGradientHeading>Compare</BoldGradientHeading>
             </div>
