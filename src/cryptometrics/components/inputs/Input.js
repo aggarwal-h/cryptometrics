@@ -13,6 +13,7 @@ function Input({
   value,
   onFocus,
   onBlur,
+  autoComplete,
 }) {
   return (
     <span className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -42,6 +43,7 @@ function Input({
         value={value || undefined}
         onFocus={onFocus || undefined}
         onBlur={onBlur || undefined}
+        autoComplete={autoComplete || "off"}
       ></input>
       {symbolRight && (
         <span className="absolute right-3 w-5 text-center items-center justify-center h-full z-10 py-3">
