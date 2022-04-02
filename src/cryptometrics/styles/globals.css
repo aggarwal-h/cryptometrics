@@ -48,6 +48,9 @@
       transform: translateX(100%);
     }
   }
+  #crypto-description > a {
+    @apply text-blue-500 hover:text-blue-600;
+  }
 }
 
 #nprogress .bar {
