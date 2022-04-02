@@ -31,12 +31,14 @@ const reorderCandlestickData = (data) => {
   return newData;
 };
 
-function CompareChart() {
+function CompareChart({ singleChart, selectionDisabled, selectedCurrency }) {
   const [timerange, setTimerange] = useState("6month");
   const [chartType, setChartType] = useState("line");
   const chartRef = useRef(null);
   const listOfCoins = useCryptoList("usd", 21, false);
-  const [firstCrypto, setFirstCrypto] = useState("solana");
+  const [firstCrypto, setFirstCrypto] = useState(
+    selectedCurrency ? selectedCurrency : "solana"
+  );
   const [secondCrypto, setSecondCrypto] = useState("avalanche-2");
   const cryptoQuery = useCryptoTimeSeriesRangeData(
     firstCrypto,
@@ -110,20 +112,20 @@ function CompareChart() {
         itemStyle:
           chartType === "candlestick"
             ? {
-                color: "rgba(85, 69, 255, 1)",
-                color0: "rgba(255, 114, 147, 1)",
-                borderColor: "rgba(85, 69, 255, 1)",
-                borderColor0: "rgba(255, 114, 147, 1)",
+                color0: "#DE5E57",
+                color: "#51A49A",
+                borderColor0: "#DE5E57",
+                borderColor: "#51A49A",
               }
             : undefined,
       },
-
       {
         type: chartType,
-        data:
-          chartType === "candlestick" && cryptoQuery2.data
-            ? reorderCandlestickData(cryptoQuery2.data)
-            : cryptoQuery2.data?.prices,
+        data: singleChart
+          ? null
+          : chartType === "candlestick" && cryptoQuery2.data
+          ? reorderCandlestickData(cryptoQuery2.data)
+          : cryptoQuery2.data?.prices,
         name: secondCrypto,
         smooth: true,
         symbol: chartType === "scatter" ? "circle" : "none",
@@ -139,10 +141,10 @@ function CompareChart() {
         itemStyle:
           chartType === "candlestick"
             ? {
-                color0: "#c23531",
-                color: "rgba(0, 235, 82, 1)",
-                borderColor0: "#c23531",
-                borderColor: "rgba(0, 235, 82, 1)",
+                color: "rgba(85, 69, 255, 1)",
+                color0: "#EE7147",
+                borderColor: "rgba(85, 69, 255, 1)",
+                borderColor0: "#EE7147",
               }
             : undefined,
       },
@@ -237,22 +239,23 @@ function CompareChart() {
             <FcCandleSticks size={"1.6em"} />
           </ToggleButton>
         </div>
-
-        <div className="flex flex-row space-x-3 sm:space-x-6 md:space-x-10 xl:space-x-3 items-center">
-          <Dropdown
-            list={listOfCoins.isLoading ? [] : listOfCoins.data}
-            value={firstCrypto}
-            setValue={setFirstCrypto}
-            disabled={[secondCrypto]}
-          />
-          <ChevronDoubleRightIcon className="w-5 h-5 dark:text-gray-300" />
-          <Dropdown
-            list={listOfCoins.isLoading ? [] : listOfCoins.data}
-            value={secondCrypto}
-            setValue={setSecondCrypto}
-            disabled={[firstCrypto]}
-          />
-        </div>
+        {!selectionDisabled && (
+          <div className="flex flex-row space-x-3 sm:space-x-6 md:space-x-10 xl:space-x-3 items-center">
+            <Dropdown
+              list={listOfCoins.isLoading ? [] : listOfCoins.data}
+              value={firstCrypto}
+              setValue={setFirstCrypto}
+              disabled={[secondCrypto]}
+            />
+            <ChevronDoubleRightIcon className="w-5 h-5 dark:text-gray-300" />
+            <Dropdown
+              list={listOfCoins.isLoading ? [] : listOfCoins.data}
+              value={secondCrypto}
+              setValue={setSecondCrypto}
+              disabled={[firstCrypto]}
+            />
+          </div>
+        )}
       </div>
       <div className="h-[600px] mt-10">
         <ReactECharts
