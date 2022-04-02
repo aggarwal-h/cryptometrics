@@ -3,6 +3,7 @@
 const TABLE_VIEW_BUTTON = "button#list-view";
 const FILTER_BUTTON = "#filter-button";
 const PRICE_OPTION = "#current_price-option";
+const SORTING_OPTION = "#sort_by-option";
 const NAME_OPTION = "#name-option";
 const PRICE_CHANGE_PERCENTAGE = "#price_change_percentage_24h-option";
 const PRICE_CHANGE = "#price_change_24h-option";
@@ -194,5 +195,25 @@ describe("removing a filter", () => {
     cy.get("div#filter_price_islessthan_100 button").click();
 
     cy.get("div#filter_price_islessthan_100").should("not.exist");
+  });
+});
+
+// FT-HP-6
+describe("sorting using filters", () => {
+  beforeEach(() => {
+    cy.visit("localhost:3000");
+  });
+  it("sort currencies by name in ascending order", () => {
+    cy.get(FILTER_BUTTON).should("be.visible");
+    cy.get(FILTER_BUTTON).click();
+    cy.get(SORTING_OPTION).click();
+    cy.get("span").contains("Name: Ascending Order").click();
+    cy.get("button").contains("Filter").click();
+
+    cy.get("p#currency-name").then(($items) => {
+      const actual = $items.map((index, html) => Cypress.$(html).text()).get();
+      const expected = [...actual].sort();
+      cy.wrap(actual).should("deep.equal", expected);
+    });
   });
 });
