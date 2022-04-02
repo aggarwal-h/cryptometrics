@@ -1,8 +1,10 @@
 import axios from "axios";
 import moment from "moment";
 import { useQuery } from "react-query";
+import toast from "react-hot-toast";
 
 export function useCryptoTimeSeriesData(name, days = 7, interval = "daily") {
+  const toastId = "timeseries-api";
   return useQuery(
     `${name}_${days}_days`,
     () => {
@@ -15,6 +17,14 @@ export function useCryptoTimeSeriesData(name, days = 7, interval = "daily") {
     {
       refetchOnWindowFocus: false,
       staleTime: 5 * 60000, // 5 minutes,
+      onSuccess: () => {
+        toast.dismiss(toastId);
+      },
+      onError: () => {
+        toast.error("There was an error fetching the data.", {
+          id: toastId,
+        });
+      },
     }
   );
 }
@@ -25,6 +35,7 @@ export function useCryptoTimeSeriesRangeData(
   to,
   candlestick = false
 ) {
+  const toastId = "timeseries-timerange-api";
   let url = `https://api.coingecko.com/api/v3/coins/${name}/market_chart/range?vs_currency=usd&from=${from}&to=${to}`;
   if (candlestick) {
     const validDays = [1, 7, 14, 30, 90, 180, 365];
@@ -46,6 +57,14 @@ export function useCryptoTimeSeriesRangeData(
     {
       refetchOnWindowFocus: false,
       staleTime: 5 * 60000, // 5 minutes,
+      onSuccess: () => {
+        toast.dismiss(toastId);
+      },
+      onError: () => {
+        toast.error("There was an error fetching the data.", {
+          id: toastId,
+        });
+      },
     }
   );
 }
@@ -55,6 +74,7 @@ export function useCryptoList(
   numberOfCurrencies = 20,
   sparkline = true
 ) {
+  const toastId = "list-api";
   return useQuery(
     `list_of_${numberOfCurrencies}_currencies_in_${currency}_${
       sparkline ? "with" : "without"
@@ -63,6 +83,31 @@ export function useCryptoList(
       return axios
         .get(
           `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=${numberOfCurrencies}&page=1&sparkline=${sparkline}`
+        )
+        .then((res) => res.data);
+    },
+    {
+      refetchOnWindowFocus: false,
+      staleTime: 5 * 60000, // 5 minutes
+      onSuccess: () => {
+        toast.dismiss(toastId);
+      },
+      onError: () => {
+        toast.error("There was an error fetching the data.", {
+          id: toastId,
+        });
+      },
+    }
+  );
+}
+
+export function useCryptoDetail(currencyId) {
+  return useQuery(
+    `${currencyId}-detail`,
+    () => {
+      return axios
+        .get(
+          `https://api.coingecko.com/api/v3/coins/${currencyId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`
         )
         .then((res) => res.data);
     },

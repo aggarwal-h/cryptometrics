@@ -21,8 +21,9 @@ function Dropdown({ list, value, setValue, disabled }) {
         className={classNames(
           "px-3 py-2 rounded-md font-light border-1 border-transparent",
           {
-            "dark:bg-black dark:text-gray-400": !open,
-            "dark:border-white dark:text-white": open,
+            "bg-gray-100 text-gray-800 dark:bg-black dark:text-gray-400": !open,
+            "border-gray-300 bg-gray-100 dark:bg-black text-black dark:border-white dark:text-white":
+              open,
           }
         )}
         onClick={() => setOpen(!open)}
@@ -33,7 +34,7 @@ function Dropdown({ list, value, setValue, disabled }) {
         </div>
       </button>
       {open && (
-        <div className="absolute h-fit max-h-52 min-w-[9rem] w-fit bg-dark-900 top-12 right-0 rounded-xl z-50 overflow-y-scroll">
+        <div className="absolute h-fit max-h-52 min-w-[9rem] w-fit bg-gray-100 dark:bg-dark-900 top-12 right-0 rounded-xl z-50 overflow-y-scroll">
           <div className="my-2">
             {list.map((coin, index) => {
               return (
