@@ -144,7 +144,7 @@ export default function DetailPage({ errorStatus, cryptocurrency }) {
                   ReactHtmlParser(
                     coinDetail.data?.description?.en.replaceAll(
                       "https://www.coingecko.com/en/coins/",
-                      "http://localhost:3000/coins/"
+                      "/coins/"
                     )
                   )
                 ) : (
