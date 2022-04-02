@@ -158,3 +158,41 @@ describe("filter on home page", () => {
     });
   });
 });
+
+// FT-UI-3
+describe("filters stay on reload", () => {
+  beforeEach(() => {
+    cy.visit("localhost:3000");
+  });
+  it("filter is visible even after reload", () => {
+    cy.get(FILTER_BUTTON).should("be.visible").click();
+    cy.get(PRICE_OPTION).click();
+    cy.get("span").contains("is less than").click();
+    cy.get("#radio-form-input").type(100);
+    cy.get("button").contains("Filter").click();
+    cy.get("div#filter_price_islessthan_100").should("be.visible");
+
+    cy.reload();
+
+    cy.get("div#filter_price_islessthan_100").should("be.visible");
+  });
+});
+
+// FT-HP-5
+describe("removing a filter", () => {
+  beforeEach(() => {
+    cy.visit("localhost:3000");
+  });
+  it("filter is not visible after removed", () => {
+    cy.get(FILTER_BUTTON).should("be.visible").click();
+    cy.get(PRICE_OPTION).click();
+    cy.get("span").contains("is less than").click();
+    cy.get("#radio-form-input").type(100);
+    cy.get("button").contains("Filter").click();
+    cy.get("div#filter_price_islessthan_100").should("be.visible");
+
+    cy.get("div#filter_price_islessthan_100 button").click();
+
+    cy.get("div#filter_price_islessthan_100").should("not.exist");
+  });
+});
