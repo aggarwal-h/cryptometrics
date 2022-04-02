@@ -33,9 +33,10 @@ import Navbar from "../components/navbar/Navbar";
 import CryptoChartCardSkeleton from "../components/cards/skeletons/CryptoChartCardSkeleton";
 import TableHeaderWrapper from "../components/table/TableHeaderWrapper";
 import TableBodyWrapper from "../components/table/TableBodyWrapper";
+import { parseCookies, setCookie } from "../utils";
 
-export default function Home() {
-  const [filters, addFilter, removeFilter] = useFilters([]);
+export default function Home({ initialFilters }) {
+  const [filters, addFilter, removeFilter] = useFilters(initialFilters || []);
   const filterDropdownRef = useRef(null);
   const [dark, setDark] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -57,6 +58,10 @@ export default function Home() {
       mediaQueryList.removeEventListener("change", setDarkOnEvent);
     };
   }, []);
+
+  useEffect(() => {
+    setCookie("filters", filters);
+  }, [filters]);
 
   const setDarkOnEvent = (event) => {
     setDark(event.matches);
@@ -401,3 +406,14 @@ export default function Home() {
     </div>
   );
 }
+
+Home.getInitialProps = async ({ req }) => {
+  const stringifiedFilters = parseCookies(req)?.filters;
+  let filters = [];
+  if (stringifiedFilters) {
+    filters = JSON.parse(stringifiedFilters);
+  }
+  return {
+    initialFilters: filters,
+  };
+};

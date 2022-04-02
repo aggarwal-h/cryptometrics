@@ -1,3 +1,6 @@
+import cookie from "cookie";
+import Cookies from "js-cookie";
+
 export function less_than_number(a, b) {
   return Number(a) < Number(b);
 }
@@ -91,4 +94,20 @@ export function sort_by_price_change_percentage_high_to_low(a, b) {
     return 1;
   }
   return 0;
+}
+
+export function parseCookies(req) {
+  return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
+}
+
+export function getCookie(name, defaultValue) {
+  const temp = Cookies.get(name);
+  if (temp === null || temp === undefined) {
+    return defaultValue;
+  }
+  return JSON.parse(temp);
+}
+
+export function setCookie(name, value) {
+  Cookies.set(name, JSON.stringify(value));
 }
