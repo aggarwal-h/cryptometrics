@@ -15,7 +15,7 @@ function Filter({
       className="flex flex-wrap justify-start items-center mx-1 mt-2"
       id={["filter", subject, condition, value]
         .join("_")
-        .replaceAll(" ", "")
+        .replace(/\s/g, "")
         .toLowerCase()}
     >
       <div className="py-5 pl-5 pr-1 font-sans bg-gray-100 dark:bg-dark-600 rounded-l-lg text-black dark:text-white inline-flex h-10 justify-center items-center whitespace-nowrap font-normal">
