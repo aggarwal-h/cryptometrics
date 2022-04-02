@@ -16,7 +16,7 @@ import PropTypes from "prop-types";
  */
 function ToggleButton({ children, setActive, active, id, className, tooltip }) {
   return (
-    <div className="has-tooltip flex flex-col items-center">
+    <div className="has-tooltip flex flex-col items-center relative">
       <Button
         className={classNames(
           "px-3 py-2 rounded-md font-light",
@@ -35,7 +35,7 @@ function ToggleButton({ children, setActive, active, id, className, tooltip }) {
       {tooltip && (
         <span
           className={classNames(
-            "tooltip absolute rounded-lg shadow-lg px-3 py-2 mt-11",
+            "tooltip absolute rounded-lg shadow-lg px-3 py-2 mt-11 w-max",
             {
               "bg-dark-900 dark:bg-white text-gray-100 dark:text-gray-800":
                 active === id,
