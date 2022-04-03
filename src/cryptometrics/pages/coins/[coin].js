@@ -106,9 +106,15 @@ export default function DetailPage({ errorStatus, cryptocurrency }) {
                   })}
                 >
                   {coinDetail.data?.market_data?.price_change_24h ? (
-                    numeral(
+                    coinDetail.data?.market_data?.price_change_24h
+                      ?.toString()
+                      .includes("e") ? (
                       coinDetail.data?.market_data?.price_change_24h
-                    ).format("$0,0.[0000]")
+                    ) : (
+                      numeral(
+                        coinDetail.data?.market_data?.price_change_24h
+                      ).format("$0,0.[0000]")
+                    )
                   ) : (
                     <PlaceholderSkeleton className="h-7 w-32" />
                   )}
@@ -140,11 +146,15 @@ export default function DetailPage({ errorStatus, cryptocurrency }) {
                 className="text-black dark:text-white px-4"
                 id="crypto-description"
               >
-                {coinDetail.data?.description?.en ? (
-                  ReactHtmlParser(
-                    coinDetail.data?.description?.en.replaceAll(
-                      "https://www.coingecko.com/en/coins/",
-                      "/coins/"
+                {coinDetail.data ? (
+                  coinDetail.data?.description?.en === "" ? (
+                    "No description available."
+                  ) : (
+                    ReactHtmlParser(
+                      coinDetail.data?.description?.en.replaceAll(
+                        "https://www.coingecko.com/en/coins/",
+                        "/coins/"
+                      )
                     )
                   )
                 ) : (

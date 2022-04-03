@@ -246,6 +246,7 @@ function CompareChart({ singleChart, selectionDisabled, selectedCurrency }) {
               value={firstCrypto}
               setValue={setFirstCrypto}
               disabled={[secondCrypto]}
+              buttonId="first-dropdown"
             />
             <ChevronDoubleRightIcon className="w-5 h-5 dark:text-gray-300" />
             <Dropdown
@@ -253,6 +254,7 @@ function CompareChart({ singleChart, selectionDisabled, selectedCurrency }) {
               value={secondCrypto}
               setValue={setSecondCrypto}
               disabled={[firstCrypto]}
+              buttonId="second-dropdown"
             />
           </div>
         )}

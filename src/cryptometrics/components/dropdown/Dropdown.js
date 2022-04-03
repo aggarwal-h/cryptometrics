@@ -5,7 +5,7 @@ import { useOnClickOutside } from "../../hooks";
 import DropdownItem from "./DropdownItem";
 import { getCoin } from "../../utils";
 
-function Dropdown({ list, value, setValue, disabled }) {
+function Dropdown({ list, value, setValue, disabled, buttonId }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const callbackDropdownClose = useCallback(() => setOpen(false), []);
@@ -27,6 +27,7 @@ function Dropdown({ list, value, setValue, disabled }) {
           }
         )}
         onClick={() => setOpen(!open)}
+        id={buttonId ? buttonId : undefined}
       >
         <div className="flex flex-row items-center space-x-2">
           <p>{getCoin(list, value)?.name}</p>
@@ -43,6 +44,7 @@ function Dropdown({ list, value, setValue, disabled }) {
                   key={index}
                   selected={coin.id === value}
                   disabled={disabled.includes(coin.id)}
+                  id={"dropdown_item_" + coin.id}
                 >
                   {coin.name}
                 </DropdownItem>

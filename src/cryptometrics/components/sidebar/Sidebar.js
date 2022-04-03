@@ -2,21 +2,25 @@ import React from "react";
 import Image from "next/image";
 import { ChartBarIcon, GlobeIcon } from "@heroicons/react/outline";
 import SidebarItem from "./SidebarItem";
+import Link from "next/link";
 
 function Sidebar({ active }) {
   return (
-    <div className="hidden lg:block w-64 min-w-[16rem] dark:text-white">
+    <div className="hidden lg:block w-64 min-w-[16rem] dark:text-white border-r-1 border-gray-200 dark:border-dark-600">
       {/* Sidebar Head */}
       <span className="flex justify-center items-center mt-5" id="crypto-logo">
-        <Image
-          className=""
-          src="/crypto_logo.png"
-          width="190%"
-          height="100%"
-          objectFit="contain"
-          alt="CryptoMetrics-logo-large"
-          priority={true}
-        />
+        <Link href="/" passHref>
+          <a>
+            <Image
+              src="/crypto_logo.png"
+              width="190%"
+              height="100%"
+              objectFit="contain"
+              alt="CryptoMetrics-logo-large"
+              priority={true}
+            />
+          </a>
+        </Link>
       </span>
 
       {/* Sidebar Navigation */}

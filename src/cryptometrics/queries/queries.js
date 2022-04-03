@@ -16,7 +16,7 @@ export function useCryptoTimeSeriesData(name, days = 7, interval = "daily") {
     },
     {
       refetchOnWindowFocus: false,
-      staleTime: 5 * 60000, // 5 minutes,
+      staleTime: 5 * 60000, // 5 minutes
       onSuccess: () => {
         toast.dismiss(toastId);
       },
@@ -56,7 +56,7 @@ export function useCryptoTimeSeriesRangeData(
     },
     {
       refetchOnWindowFocus: false,
-      staleTime: 5 * 60000, // 5 minutes,
+      staleTime: 5 * 60000, // 5 minutes
       onSuccess: () => {
         toast.dismiss(toastId);
       },
@@ -102,6 +102,7 @@ export function useCryptoList(
 }
 
 export function useCryptoDetail(currencyId) {
+  const toastId = "detail-api";
   return useQuery(
     `${currencyId}-detail`,
     () => {
@@ -113,7 +114,15 @@ export function useCryptoDetail(currencyId) {
     },
     {
       refetchOnWindowFocus: false,
-      staleTime: 5 * 60000, // 5 minutes,
+      staleTime: 5 * 60000, // 5 minutes
+      onSuccess: () => {
+        toast.dismiss(toastId);
+      },
+      onError: () => {
+        toast.error("There was an error fetching the data.", {
+          id: toastId,
+        });
+      },
     }
   );
 }

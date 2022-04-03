@@ -1,7 +1,14 @@
 import classNames from "classnames";
 import React from "react";
 
-function DropdownItem({ children, className, onClick, selected, disabled }) {
+function DropdownItem({
+  children,
+  className,
+  onClick,
+  selected,
+  disabled,
+  id,
+}) {
   return (
     <div
       className={classNames(className, "py-2 px-4 rounded-xl mx-2", {
@@ -12,7 +19,13 @@ function DropdownItem({ children, className, onClick, selected, disabled }) {
       })}
       onMouseDown={selected || disabled ? undefined : onClick}
     >
-      {children}
+      <button
+        disabled={disabled}
+        id={id ? id : undefined}
+        className="text-left"
+      >
+        {children}
+      </button>
     </div>
   );
 }

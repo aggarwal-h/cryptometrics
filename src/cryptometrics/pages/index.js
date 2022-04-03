@@ -33,9 +33,10 @@ import Navbar from "../components/navbar/Navbar";
 import CryptoChartCardSkeleton from "../components/cards/skeletons/CryptoChartCardSkeleton";
 import TableHeaderWrapper from "../components/table/TableHeaderWrapper";
 import TableBodyWrapper from "../components/table/TableBodyWrapper";
+import { parseCookies, setCookie } from "../utils";
 
-export default function Home() {
-  const [filters, addFilter, removeFilter] = useFilters([]);
+export default function Home({ initialFilters }) {
+  const [filters, addFilter, removeFilter] = useFilters(initialFilters || []);
   const filterDropdownRef = useRef(null);
   const [dark, setDark] = useState(true);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -57,6 +58,10 @@ export default function Home() {
       mediaQueryList.removeEventListener("change", setDarkOnEvent);
     };
   }, []);
+
+  useEffect(() => {
+    setCookie("filters", filters);
+  }, [filters]);
 
   const setDarkOnEvent = (event) => {
     setDark(event.matches);
@@ -354,7 +359,7 @@ export default function Home() {
                                   <TableCell className="w-40">
                                     <p
                                       className={classNames(
-                                        "font-bold dark:font-lighttext-base mt-1",
+                                        "font-bold dark:font-light text-base mt-1",
                                         {
                                           "text-red-500 dark:text-red-400":
                                             coin.price_change_24h < 0,
@@ -364,9 +369,13 @@ export default function Home() {
                                       )}
                                       id="currency-price-change"
                                     >
-                                      {numeral(coin.price_change_24h).format(
-                                        "$0,0.[0000]"
-                                      )}
+                                      {coin.price_change_24h
+                                        ?.toString()
+                                        .includes("e")
+                                        ? coin.price_change_24h
+                                        : numeral(coin.price_change_24h).format(
+                                            "$0,0.[0000]"
+                                          )}
                                     </p>
                                   </TableCell>
                                   <TableCell>
@@ -401,3 +410,14 @@ export default function Home() {
     </div>
   );
 }
+
+Home.getInitialProps = async ({ req }) => {
+  const stringifiedFilters = parseCookies(req)?.filters;
+  let filters = [];
+  if (stringifiedFilters) {
+    filters = JSON.parse(stringifiedFilters);
+  }
+  return {
+    initialFilters: filters,
+  };
+};

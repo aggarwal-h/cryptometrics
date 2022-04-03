@@ -36,6 +36,7 @@ function RadioInputForm({
                     symbolLeft={inputLeftSymbol}
                     symbolRight={inputRightSymbol}
                     type={inputType}
+                    autoComplete="off"
                     id="radio-form-input"
                   />
                 )}
