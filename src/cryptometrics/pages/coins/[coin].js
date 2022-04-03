@@ -106,9 +106,15 @@ export default function DetailPage({ errorStatus, cryptocurrency }) {
                   })}
                 >
                   {coinDetail.data?.market_data?.price_change_24h ? (
-                    numeral(
+                    coinDetail.data?.market_data?.price_change_24h
+                      ?.toString()
+                      .includes("e") ? (
                       coinDetail.data?.market_data?.price_change_24h
-                    ).format("$0,0.[0000]")
+                    ) : (
+                      numeral(
+                        coinDetail.data?.market_data?.price_change_24h
+                      ).format("$0,0.[0000]")
+                    )
                   ) : (
                     <PlaceholderSkeleton className="h-7 w-32" />
                   )}

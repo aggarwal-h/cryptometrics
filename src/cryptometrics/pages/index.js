@@ -359,7 +359,7 @@ export default function Home({ initialFilters }) {
                                   <TableCell className="w-40">
                                     <p
                                       className={classNames(
-                                        "font-bold dark:font-lighttext-base mt-1",
+                                        "font-bold dark:font-light text-base mt-1",
                                         {
                                           "text-red-500 dark:text-red-400":
                                             coin.price_change_24h < 0,
@@ -369,9 +369,13 @@ export default function Home({ initialFilters }) {
                                       )}
                                       id="currency-price-change"
                                     >
-                                      {numeral(coin.price_change_24h).format(
-                                        "$0,0.[0000]"
-                                      )}
+                                      {coin.price_change_24h
+                                        ?.toString()
+                                        .includes("e")
+                                        ? coin.price_change_24h
+                                        : numeral(coin.price_change_24h).format(
+                                            "$0,0.[0000]"
+                                          )}
                                     </p>
                                   </TableCell>
                                   <TableCell>
