@@ -19,7 +19,11 @@ function DropdownItem({
       })}
       onMouseDown={selected || disabled ? undefined : onClick}
     >
-      <button disabled={disabled} id={id ? id : undefined}>
+      <button
+        disabled={disabled}
+        id={id ? id : undefined}
+        className="text-left"
+      >
         {children}
       </button>
     </div>
