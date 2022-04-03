@@ -140,11 +140,15 @@ export default function DetailPage({ errorStatus, cryptocurrency }) {
                 className="text-black dark:text-white px-4"
                 id="crypto-description"
               >
-                {coinDetail.data?.description?.en ? (
-                  ReactHtmlParser(
-                    coinDetail.data?.description?.en.replaceAll(
-                      "https://www.coingecko.com/en/coins/",
-                      "/coins/"
+                {coinDetail.data ? (
+                  coinDetail.data?.description?.en === "" ? (
+                    "No description available."
+                  ) : (
+                    ReactHtmlParser(
+                      coinDetail.data?.description?.en.replaceAll(
+                        "https://www.coingecko.com/en/coins/",
+                        "/coins/"
+                      )
                     )
                   )
                 ) : (
