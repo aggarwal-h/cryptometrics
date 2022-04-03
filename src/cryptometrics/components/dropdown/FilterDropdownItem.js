@@ -13,14 +13,16 @@ function FilterDropdownItem({
   return (
     <div
       className={classNames(
-        "py-3 px-4 rounded-xl dark:text-neutral-100 border-1 transition-all duration-100 cursor-pointer",
+        "py-3 px-4 rounded-xl text-neutral-900 dark:text-neutral-100 border-1 transition-all duration-100 cursor-pointer",
         {
           "border-transparent": !selected,
-          "bg-dark-800  border-indigo-600 font-semibold": selected,
-          "hover:bg-dark-800": !disabled,
+          "bg-gray-100 dark:bg-dark-800 border-indigo-600 font-semibold":
+            selected,
+          "hover:bg-gray-100 dark:hover:bg-dark-800": !disabled,
         }
       )}
       onClick={disabled || !onClick ? undefined : () => onClick(id)}
+      id={`${id}-option`}
     >
       <div className="flex flex-row items-center">
         {children}

@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 function Radio({ selected, radioValue, radioLabel, onChange }) {
   return (
-    <label className="inline-flex items-center w-full">
+    <label className="inline-flex items-center w-full cursor-pointer">
       <input
         type="radio"
         className="form-radio h-4 w-4 accent-indigo-600 hover:accent-indigo-700"

@@ -28,7 +28,7 @@ function CryptoChartCard({
   const cryptoQuery = useCryptoTimeSeriesData(currencyId, 1, "hourly");
   return (
     <Link href={`/coins/${currencyId}`} passHref>
-      <a className="w-full xl:w-[30.6%] hover:scale-[102%] cursor-pointer">
+      <a className="w-full md:w-[47%] xl:w-[30.4%] hover:scale-[102%] cursor-pointer">
         <div className="rounded-3xl shadow-[0_8px_25px_rgba(0,0,0,7%)] dark:bg-dark-700">
           <div className="relative h-60">
             <div className="absolute top-0 right-0 left-0 bottom-0 z-10 rounded-3xl overflow-hidden">
@@ -62,17 +62,23 @@ function CryptoChartCard({
                   ></Image>
                 </div>
                 <div>
-                  <p className="text-3xl font-poppins font-bold text-gray-700 dark:text-gray-100">
+                  <p
+                    className="text-3xl font-poppins font-bold text-gray-700 dark:text-gray-100"
+                    id="currency-name"
+                  >
                     {currencyName || (
                       <PlaceholderSkeleton className="h-9 w-[60%]" />
                     )}
                   </p>
-                  <p className="text-lg font-poppins font-medium text-gray-700 dark:text-gray-100">
+                  <p
+                    className="text-lg font-poppins font-medium text-gray-700 dark:text-gray-100"
+                    id="currency-symbol"
+                  >
                     {symbol}
                   </p>
                 </div>
                 <div className="ml-auto">
-                  <div className="dark:bg-white w-16 rounded-2xl mt-2">
+                  <div className="bg-neutral-100 dark:bg-white w-16 rounded-2xl mt-2">
                     <p className="text-center font-extrabold text-indigo-500">
                       24H
                     </p>
@@ -83,7 +89,10 @@ function CryptoChartCard({
               <div className="flex flex-col h-[9.5rem]">
                 <div className="mt-auto">
                   <div className="flex justify-end">
-                    <p className="text-4xl font-poppins font-bold text-black dark:text-white">
+                    <p
+                      className="text-4xl font-poppins font-bold text-black dark:text-white"
+                      id="currency-price"
+                    >
                       {info || (
                         <PlaceholderSkeleton className="h-9 w-[200px]" />
                       )}
@@ -95,6 +104,7 @@ function CryptoChartCard({
                         "text-lg font-poppins font-bold",
                         detailColor
                       )}
+                      id="currency-price-change-percentage"
                     >
                       {detail || <PlaceholderSkeleton className="h-4 w-20" />}
                     </p>

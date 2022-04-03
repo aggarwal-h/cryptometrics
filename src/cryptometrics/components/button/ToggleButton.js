@@ -14,21 +14,40 @@ import PropTypes from "prop-types";
  *   </ToggleButton>
  * )
  */
-function ToggleButton({ children, setActive, active, id, className }) {
+function ToggleButton({ children, setActive, active, id, className, tooltip }) {
   return (
-    <Button
-      className={classNames(
-        "px-3 py-2 rounded-md font-light",
-        {
-          "dark:bg-white dark:text-gray-800": active === id,
-          "dark:bg-black dark:text-gray-400": active !== id,
-        },
-        className
+    <div className="has-tooltip flex flex-col items-center relative">
+      <Button
+        className={classNames(
+          "px-3 py-2 rounded-md font-light",
+          {
+            "bg-dark-900 dark:bg-white text-gray-100 dark:text-gray-800":
+              active === id,
+            "bg-gray-100 dark:bg-black text-gray-800 dark:text-gray-400":
+              active !== id,
+          },
+          className
+        )}
+        onClick={() => setActive(id)}
+      >
+        {children}
+      </Button>
+      {tooltip && (
+        <span
+          className={classNames(
+            "tooltip absolute rounded-lg shadow-lg px-3 py-2 mt-11 w-max",
+            {
+              "bg-dark-900 dark:bg-white text-gray-100 dark:text-gray-800":
+                active === id,
+              "bg-white shadow-lg dark:bg-black text-gray-800 dark:text-gray-400":
+                active !== id,
+            }
+          )}
+        >
+          {tooltip}
+        </span>
       )}
-      onClick={() => setActive(id)}
-    >
-      {children}
-    </Button>
+    </div>
   );
 }
 

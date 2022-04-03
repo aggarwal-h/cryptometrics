@@ -13,14 +13,15 @@ import classNames from "classnames";
  *   </Button>
  * )
  */
-function Button({ children, className, onClick, type, disabled }) {
+function Button({ children, className, onClick, type, disabled, id }) {
   return (
     <button
       className={classNames("py-2 px-5 rounded-xl", className, {
-        "brightness-50 cursor-default": disabled,
+        "dark:brightness-50 brightness-75 cursor-default": disabled,
       })}
       onClick={disabled ? undefined : onClick}
       type={type ? type : "button"}
+      id={id ? id : undefined}
     >
       {children}
     </button>

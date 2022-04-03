@@ -6,7 +6,7 @@ function Tabs({ children }) {
 
   return (
     <div>
-      <div className="flex align-middle w-fit bg-dark-600 rounded-3xl py-2 px-2">
+      <div className="flex align-middle w-fit bg-gray-100 dark:bg-dark-600 rounded-3xl py-2 px-2">
         {children.map((child) => {
           const { id } = child.props;
           return (

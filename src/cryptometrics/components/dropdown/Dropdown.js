@@ -3,17 +3,9 @@ import classNames from "classnames";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import { useOnClickOutside } from "../../hooks";
 import DropdownItem from "./DropdownItem";
+import { getCoin } from "../../utils";
 
-function getCoin(list, id) {
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].id == id) {
-      return list[i];
-    }
-  }
-  return null;
-}
-
-function Dropdown({ list, value, setValue, disabled }) {
+function Dropdown({ list, value, setValue, disabled, buttonId }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
   const callbackDropdownClose = useCallback(() => setOpen(false), []);
@@ -26,11 +18,16 @@ function Dropdown({ list, value, setValue, disabled }) {
   return (
     <div className="relative" ref={ref}>
       <button
-        className={classNames(" px-3 py-2 rounded-md font-light", {
-          "dark:bg-white dark:text-gray-800": false,
-          "dark:bg-black dark:text-gray-400": true,
-        })}
+        className={classNames(
+          "px-3 py-2 rounded-md font-light border-1 border-transparent",
+          {
+            "bg-gray-100 text-gray-800 dark:bg-black dark:text-gray-400": !open,
+            "border-gray-300 bg-gray-100 dark:bg-black text-black dark:border-white dark:text-white":
+              open,
+          }
+        )}
         onClick={() => setOpen(!open)}
+        id={buttonId ? buttonId : undefined}
       >
         <div className="flex flex-row items-center space-x-2">
           <p>{getCoin(list, value)?.name}</p>
@@ -38,7 +35,7 @@ function Dropdown({ list, value, setValue, disabled }) {
         </div>
       </button>
       {open && (
-        <div className="absolute h-fit max-h-52 min-w-[9rem] w-fit bg-dark-900 top-12 right-0 rounded-xl z-50 overflow-y-scroll">
+        <div className="absolute h-fit max-h-52 min-w-[9rem] w-fit bg-gray-100 dark:bg-dark-900 top-12 right-0 rounded-xl z-50 overflow-y-scroll">
           <div className="my-2">
             {list.map((coin, index) => {
               return (
@@ -47,6 +44,7 @@ function Dropdown({ list, value, setValue, disabled }) {
                   key={index}
                   selected={coin.id === value}
                   disabled={disabled.includes(coin.id)}
+                  id={"dropdown_item_" + coin.id}
                 >
                   {coin.name}
                 </DropdownItem>

@@ -5,6 +5,7 @@ import BoldGradientHeading from "../components/titles/BoldGradientHeading";
 import Wrapper from "../components/content/Wrapper";
 import Sidebar from "../components/sidebar/Sidebar";
 import CompareChart from "../components/charts/CompareChart";
+import Navbar from "../components/navbar/Navbar";
 
 export default function Compare() {
   return (
@@ -14,6 +15,7 @@ export default function Compare() {
         <meta name="description" content="CryptoMetrics" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar />
       <Wrapper>
         <Sidebar active="compare" />
         <Main>

@@ -1,3 +1,6 @@
+import cookie from "cookie";
+import Cookies from "js-cookie";
+
 export function less_than_number(a, b) {
   return Number(a) < Number(b);
 }
@@ -16,4 +19,95 @@ export function equals_string(a, b) {
 
 export function contains_string(a, b) {
   return a.toLowerCase().includes(b.toLowerCase());
+}
+
+export function getCoin(list, id) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].id == id) {
+      return list[i];
+    }
+  }
+  return null;
+}
+
+export function sort_by_price_low_to_high(a, b) {
+  if (Number(a.current_price) < Number(b.current_price)) {
+    return -1;
+  } else if (Number(a.current_price) > Number(b.current_price)) {
+    return 1;
+  }
+  return 0;
+}
+
+export function sort_by_price_high_to_low(a, b) {
+  if (Number(a.current_price) > Number(b.current_price)) {
+    return -1;
+  } else if (Number(a.current_price) < Number(b.current_price)) {
+    return 1;
+  }
+  return 0;
+}
+
+export function sort_by_name_ascending(a, b) {
+  if (String(a.name) < String(b.name)) {
+    return -1;
+  } else if (String(a.name) > String(b.name)) {
+    return 1;
+  }
+  return 0;
+}
+
+export function sort_by_name_descending(a, b) {
+  if (String(a.name) > String(b.name)) {
+    return -1;
+  } else if (String(a.name) < String(b.name)) {
+    return 1;
+  }
+  return 0;
+}
+
+export function sort_by_price_change_percentage_low_to_high(a, b) {
+  if (
+    Number(a.price_change_percentage_24h) <
+    Number(b.price_change_percentage_24h)
+  ) {
+    return -1;
+  } else if (
+    Number(a.price_change_percentage_24h) >
+    Number(b.price_change_percentage_24h)
+  ) {
+    return 1;
+  }
+  return 0;
+}
+
+export function sort_by_price_change_percentage_high_to_low(a, b) {
+  if (
+    Number(a.price_change_percentage_24h) >
+    Number(b.price_change_percentage_24h)
+  ) {
+    return -1;
+  } else if (
+    Number(a.price_change_percentage_24h) <
+    Number(b.price_change_percentage_24h)
+  ) {
+    return 1;
+  }
+  return 0;
+}
+
+export function parseCookies(req) {
+  return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
+}
+
+export function getCookie(name, defaultValue) {
+  const temp = Cookies.get(name);
+  if (temp === null || temp === undefined) {
+    return defaultValue;
+  }
+  return JSON.parse(temp);
+}
+
+export function setCookie(name, value) {
+  Cookies.set(name, JSON.stringify(value));
 }
