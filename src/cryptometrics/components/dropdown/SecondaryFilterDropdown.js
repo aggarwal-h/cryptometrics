@@ -20,7 +20,7 @@ export function SecondaryFilterDropdown({
   return (
     <div
       className={classNames(
-        "bg-white dark:bg-dark-600 border-1 border-slate-600 sm:border-transparent w-72 max-h-72 rounded-xl sm:mt-2 transition-all duration-100 px-5 py-2 overflow-y-scroll shadow-xl dark:shadow-lg dark:shadow-dark-600",
+        "bg-white dark:bg-dark-600 border-1 border-slate-600 sm:border-transparent w-72 rounded-xl sm:mt-2 transition-all duration-100 px-5 py-2 overflow-y-scroll shadow-xl dark:shadow-lg dark:shadow-dark-600",
         {
           block: open,
           hidden: !open,
