@@ -87,7 +87,7 @@ export default function DetailPage({ errorStatus, cryptocurrency }) {
                   {coinDetail.data?.market_data ? (
                     numeral(
                       coinDetail.data?.market_data?.price_change_percentage_24h
-                    ).format("+0.0[00]%")
+                    ).format("+0.0[00]") + "%"
                   ) : (
                     <PlaceholderSkeleton className="h-7 w-32" />
                   )}
