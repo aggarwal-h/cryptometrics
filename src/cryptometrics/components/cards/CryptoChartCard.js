@@ -50,7 +50,7 @@ function CryptoChartCard({
                 />
               )}
             </div>
-            <div className="p-4 relative z-20">
+            <div className="px-4 pt-4 pb-2 relative z-20 flex flex-col justify-between h-full">
               <div className="flex flex-row">
                 <div className="mt-1 mr-2">
                   <Image
@@ -85,7 +85,7 @@ function CryptoChartCard({
                   </div>
                 </div>
               </div>
-              {/* TODO: Find a way to change height below so it is auto-adjusted to fit content */}
+
               <div className="flex flex-col h-[9.5rem]">
                 <div className="mt-auto">
                   <div className="flex justify-end">
