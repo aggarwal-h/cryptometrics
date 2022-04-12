@@ -4,6 +4,7 @@
 \usepackage{tabularx}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{ulem}
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -22,9 +23,7 @@
 }
 
 
-\date{February 11, 2022}
-
-% \input{../Comments}
+\date{\today}
 
 \begin{document}
 
@@ -40,8 +39,9 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Feb 4, 2021 & 1.0 & Initialize the document \\
-Feb 11, 2021 & 1.1 & Update and finalize the document \\
+Feb 4, 2022 & 1.0 & Initialize the document \\
+Feb 11, 2022 & 1.1 & Update and finalize the document \\
+Apr 6, 2022 & 1.2 & Added Fit Criterion to FRs \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -184,57 +184,71 @@ extending its functionality to provide users with more options to interact with 
 \begin{enumerate}[label = FR-\arabic*, left=\parindent, series=fr]
     \item \textbf{Description}: The product shall display every cryptocurrency's relevant pricing information in a table-like manner.
     \newline \textbf{Rationale}: This will ensure that the information pertaining to a cryptocurrency is organized and can be sorted with filters easily.
+    \newline \textcolor{red} {\textbf{Fit Criterion}: The user should be able to view every cryptocurrency's relevant pricing information in a table-like manner.}
     \newline \textbf{Priority}: High
 
     \item \textbf{Description}: The product shall allow users to search for a desired cryptocurrency to retrieve all relevant pricing information about it.
     \newline \textbf{Rationale}: This will ensure that viewing the relevant pricing information associated with a specific cryptocurrency is efficient and quick.
+    \newline \textcolor{red} {\textbf{Fit Criterion}: Users should be able to search for any cryptocurrency and view all of its relevant pricing information.}
     \newline \textbf{Priority}: High
 
     \item \textbf{Description}: The product shall display a desired cryptocurrency's historical pricing information data hourly, weekly, monthly and yearly.
     \newline \textbf{Rationale}: When a cryptocurrency's historical prices are displayed, it will help the user make more informed investment decisions
     as they will be able to predict the pricing trajectory easily.
+    \newline \textcolor{red} {\textbf{Fit Criterion}: The user should be able to view their desired cryptocurrency's historical pricing information data hourly, weekly, monthly and yearly.}
     \newline \textbf{Priority}: High
 
     \item \textbf{Description}: The product shall allow users to directly compare the current and historical pricing of one cryptocurrency with another.
     \newline \textbf{Rationale}: Through giving users the ability to compare the performance metrics of two different cryptocurrencies, they will have
     a better idea of the scale of the discrepancies between them. 
+    \newline \textcolor{red} {\textbf{Fit Criterion}: Users should be able to directly compare the current and historical pricing of one cryptocurrency with another.}
     \newline \textbf{Priority}: High
 
     \item \textbf{Description}: The product shall allow the users to filter and display cryptocurrencies along with their associated pricing information in a desired order. 
     \newline \textbf{Rationale}: Providing the user with the ability to filter the cryptocurrencies, for example, from highest to lowest market cap values, will save them much
     more time navigating the web application to reach their desired cryptocurrency quicker. 
+    \newline \textcolor{red} {\textbf{Fit Criterion}: Users should be able to filter and display cryptocurrencies along with their associated pricing information in a desired order.}
     \newline \textbf{Priority}: High
 
-    \item \textbf{Description}: The product shall allow users to manually select which cryptocurrency along with its associated pricing information can be shifted around the web application.
-    \newline \textbf{Rationale}: Providing the user with the ability to manually rearrange the order in which a cryptocurrency's information is displayed will give them control over specific cryptocurrencies they would like to access more information about quicker and more efficiently.
+   \item \textbf{Description}: \sout{The product shall allow users to manually select which cryptocurrency along with its associated pricing information can be shifted around the web application.} \textcolor{red}{The product shall allow the user to sort the list of cryptocurrencies in a distinct order.}
+    \newline \textbf{Rationale}: \sout{Providing the user with the ability to manually rearrange the order in which a cryptocurrency's information is displayed will give them control over specific cryptocurrencies they would like to access more information about quicker and more efficiently.} \textcolor{red}{Providing the user with the ability to sort the cryptocurrencies in a specific order will allow it to be more personalized for the user.}
+    \newline \textcolor{red} {\textbf{Fit Criterion}: The user should be able to view the list of cryptocurrencies sorted in a distinct order.}
     \newline \textbf{Priority}: High
+    
 
     \item \textbf{Description}: The product shall consistently refresh the web application with up-to-date cryptocurrency data every minute.
     \newline \textbf{Rationale}: This will allow the user to stay informed about the current prices of cryptocurrencies to make more informed investment decisions.
+    \newline \textcolor{red} {\textbf{Fit Criterion}: The user should see the web application consistently refresh with up-to-date cryptocurrency data every minute.}
     \newline \textbf{Priority}: High
     
     \item \textbf{Description}: The product shall display an error message to the user if an API is unable to load cryptocurrency data.
     \newline \textbf{Rationale}: Giving a user direct feedback during a failed API call will allow them to identify an issue as opposed to waiting for a non-existent response from the product. 
+    \newline \textcolor{red} {\textbf{Fit Criterion}: The user must see an error message if an API is unable to load cryptocurrency data.}
     \newline \textbf{Priority}: High
     
     \item \textbf{Description}: The product shall call the API at least two more times after a delay of 10 seconds if the initial API call results in an error.
     \newline \textbf{Rationale}: This will ensure that the product will have a chance to correct any initial data loading failures without the user's input.
+    \newline \textcolor{red} {\textbf{Fit Criterion}: The API must be called at least two more times after a delay of 10 seconds if the initial API call results in an error and this should be verified through print statements.}
     \newline \textbf{Priority}: High
     
     \item \textbf{Description}: The product should display temporary skeleton placeholder graphics while data is being loaded. 
     \newline \textbf{Rationale}: This function will provide the user with a clear view of the system retrieving information and conveys the state of the product more accurately. 
+    \newline \textcolor{red} {\textbf{Fit Criterion}: The user must see temporary skeleton placeholder graphics while data is being loaded.}
     \newline \textbf{Priority}: Low
     
     \item \textbf{Description}: The product shall timeout API calls after 10 seconds.
     \newline \textbf{Rationale}: Timing out API calls for failing after a given threshold of time ensures that the user is not wasting their time waiting longer than they need to for a response.
+    \newline \textcolor{red} {\textbf{Fit Criterion}: Timed out API calls after 10 seconds should notify the user through a print statement.}
     \newline \textbf{Priority}: Medium
     
     \item \textbf{Description}: The product should give the user the ability to manually change the theme.
     \newline \textbf{Rationale}: Providing the user with customisation options like changing the theme and font of the website will allow them to better personalise their experience. 
+    \newline \textcolor{red} {\textbf{Fit Criterion}: The user should be able to change the theme to their desired theme of light and dark and the website should update accordingly.}
     \newline \textbf{Priority}: Low
     
-    \item \textbf{Description}: The product shall allow users to save their preferences and load them automatically upon starting the product.
+    \item \textbf{Description}: \sout{The product shall allow users to save their preferences and load them automatically upon starting the product.} \textcolor{red}{The product shall automatically save filters and other preferences modified by the user and load them upon starting the product in the future.}
     \newline \textbf{Rationale}: Automatically loading up user preferences allows the user to save time.
+    \newline \textcolor{red} {\textbf{Fit Criterion}: Filters and other preferences modified by the user should be saved and loaded upon starting the product in the future.}
     \newline \textbf{Priority}: Medium
     
 \end{enumerate}
@@ -510,7 +524,7 @@ Since the project is using all free-to-use technologies and services, there are 
 The documentation of different modules and files would be provided by the developers which will include its operation, inputs/outputs and purpose of the function. The user of the final product would require no such special training or documentation to get started. The UI should be relatively easy for anyone to navigate without any confusion.
 
 \subsection{Waiting Room}
-N/A
+\sout{N/A} \textcolor{red}{There are no features for future implementation planned.}
 
 \subsection{Ideas for Solutions}
 \begin{itemize}
