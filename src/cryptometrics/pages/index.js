@@ -5,7 +5,7 @@ import Main from "../components/content/Main";
 import SearchInput from "../components/inputs/SearchInput";
 import BoldGradientHeading from "../components/titles/BoldGradientHeading";
 import CryptoChartCard from "../components/cards/CryptoChartCard";
-import { cryptoChartOptions } from "../constants";
+import { cryptoChartOptions, numberOfChartsToLoad } from "../constants";
 import { useCryptoList } from "../queries";
 import numeral from "numeral";
 import Wrapper from "../components/content/Wrapper";
@@ -35,6 +35,9 @@ import TableHeaderWrapper from "../components/table/TableHeaderWrapper";
 import TableBodyWrapper from "../components/table/TableBodyWrapper";
 import { parseCookies, setCookie } from "../utils";
 
+/**
+ * Home Page
+ */
 export default function Home({ initialFilters }) {
   const [filters, addFilter, removeFilter] = useFilters(initialFilters || []);
   const filterDropdownRef = useRef(null);
@@ -44,7 +47,7 @@ export default function Home({ initialFilters }) {
   const callbackDropdownClose = useCallback(() => setDropdownOpen(false), []);
   useOnClickOutside(filterDropdownRef, callbackDropdownClose);
   const [searchText, setSearchText] = useState("");
-  const listOfCoins = useCryptoList("usd", 21, false);
+  const listOfCoins = useCryptoList("usd", numberOfChartsToLoad, false);
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
@@ -196,7 +199,7 @@ export default function Home({ initialFilters }) {
               >
                 <div className="flex flex-wrap gap-x-10 gap-y-10 mt-3">
                   {listOfCoins.isLoading ? (
-                    [...Array(21)].map((e, i) => (
+                    [...Array(numberOfChartsToLoad)].map((e, i) => (
                       <CryptoChartCardSkeleton key={i} />
                     ))
                   ) : !listOfCoins.isLoading && filteredCoins?.length > 0 ? (

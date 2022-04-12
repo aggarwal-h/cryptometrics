@@ -7,6 +7,7 @@
 \usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{ulem}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks,
@@ -38,7 +39,7 @@
 		\\ Himanshu Aggarwal, aggarwah
 }
 
-\date{March 18, 2022}
+\date{\today}
 
 \begin{document}
 
@@ -58,6 +59,7 @@ Mar. 14, 2022 & 1.0 & Creation of MG Doc\\
 Mar. 15, 2022 & 1.1 & Add Introduction\\
 Mar. 17, 2022 & 1.1 & Complete Majority of sections\\
 Mar. 18, 2022 & 1.1 & All sections complete\\
+Apr. 7, 2022 & 1.2 & Updated Traceability Matrix
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -122,9 +124,9 @@ other shows the relation between anticipated changes and the modules. Section
 \subsection{Anticipated Changes} \label{SecAchange}
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acMulti}:] The user able to compare multiple cryptocurrency's graphs stacked together.
-\item[\refstepcounter{acnum} \actheacnum \label{acCoin}:] Clicking on the cryptocurrency card to get more information about the coin. 
-\item[\refstepcounter{acnum} \actheacnum \label{acError}:] Web application giving a pop up to the user when is unable to pull data through the API.
+\item[\sout{\refstepcounter{acnum} \actheacnum \label{acMulti}:}] \sout{The user able to compare multiple cryptocurrency's graphs stacked together.}
+\item[\sout{\refstepcounter{acnum} \actheacnum \label{acCoin}:}] \sout{Clicking on the cryptocurrency card to get more information about the coin.}
+\item[\sout{\refstepcounter{acnum} \actheacnum \label{acError}:}] \sout{Web application giving a pop up to the user when is unable to pull data through the API.}
 \end{description}
 
 \subsection{Unlikely Changes} \label{SecUchange}
@@ -511,14 +513,14 @@ FR-2 & \mref{mSearchInputModule}, \mref{mInputModule}\\
 FR-3 & \mref{mCompareChartModule}, \mref{mToggleButtonModule}\\
 FR-4 & \mref{mCompareChartModule}, \mref{mDropdownModule}, \mref{mDropdownItemModule}\\
 FR-5 & \mref{mFilterButtonModule}, \mref{mFilterDropdownModule}, \mref{mSecondaryFilterDropdownModule} \mref{mFilterModule}, \mref{mFiltersModule}, \mref{mRadioInputFormModule}, \mref{mRadioModule}, \mref{mButtonModule}\\
-FR-6 & Pending\\
+FR-6 & \sout{Pending} \textcolor{red}{\mref{mFiltersModule}}\\
 FR-7 & \mref{mQueriesModule}\\
 FR-8 & \mref{mQueriesModule}\\
 FR-9 & \mref{mQueriesModule}\\
 FR-10 & \mref{mPlaceholderSkeletonModule}\\
 FR-11 & \mref{mQueriesModule}\\
 FR-12 & \mref{mSidebarModule}, \mref{mSidebarItemModule}\\
-FR-13 & Pending\\
+FR-13 & \sout{Pending} \textcolor{red}{\mref{mHomeModule}} \\
 
 NFR-1 & \mref{mWrapperModule}, \mref{mContainerModule}, \mref{mMainModule}, \mref{mSidebarModule}, \mref{mSidebarItemModule}\\
 NFR-2 & \mref{mHomeModule}, \mref{mCompareModule}\\
@@ -536,9 +538,9 @@ NFR-4 & \mref{mBoldGradientHeadingModule}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acMulti} & \mref{mCompareModule}, \mref{mCompareChartModule}\\
-\acref{acCoin} & \mref{mHomeModule}\\
-\acref{acError} & \mref{mHomeModule}, \mref{mCompareModule}, \mref{mQueriesModule} \\
+\sout{\acref{acMulti}} & \sout{\mref{mCompareModule}, \mref{mCompareChartModule}}\\
+\sout{\acref{acCoin}} & \sout{\mref{mHomeModule}}\\
+\sout{\acref{acError}} & \sout{\mref{mHomeModule}, \mref{mCompareModule}, \mref{mQueriesModule}} \\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}

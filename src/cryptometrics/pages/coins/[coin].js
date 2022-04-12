@@ -15,6 +15,9 @@ import numeral from "numeral";
 import classNames from "classnames";
 import PlaceholderSkeleton from "../../components/skeletons/PlaceholderSkeleton";
 
+/**
+ * Detail Page
+ */
 export default function DetailPage({ errorStatus, cryptocurrency }) {
   const coinDetail = useCryptoDetail(cryptocurrency);
   if (errorStatus) {

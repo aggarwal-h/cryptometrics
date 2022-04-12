@@ -3,26 +3,25 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{fancyvrb}
 \hypersetup{
     colorlinks,
     citecolor=black,
     filecolor=black,
-    linkcolor=red,
+    linkcolor=blue,
     urlcolor=blue
 }
 \usepackage[round]{natbib}
 
-\title{SE 3XA3: Test Report\\Title of Project}
+\title{SE 3XA3: Test Report\\CryptoMetrics}
 
-\author{Team \#, Team Name
-		\\ Student 1 name and macid
-		\\ Student 2 name and macid
-		\\ Student 3 name and macid
+\author{Team 15
+		\\ Saif Fadhel, fadhels
+		\\ Vanshaj Verma, vermav2
+		\\ Himanshu Aggarwal, aggarwah
 }
 
 \date{\today}
-
-\input{../Comments}
 
 \begin{document}
 
@@ -48,36 +47,316 @@ Date 2 & 1.1 & Notes\\
 
 \pagenumbering{arabic}
 
-This document ...
-
 \section{Functional Requirements Evaluation}
+The purpose of these tests is to verify if the functional requirements have been met successfully.
+
+\begin{enumerate}
+    \item FT-HP-1: FR-1\\
+    \textbf{Description}: Test to verify the presence of a table to display every cryptocurrency’s relevant information\\
+    \textbf{Result}: The home page displays every cryptocurrency’s relevant information in a table-like manner.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-HP-2: FR-2\\
+    \textbf{Description}: Test to verify if searching a cryptocurrency by name filters out the rest\\
+    \textbf{Result}: The cryptocurrencies being displayed are filtered based on user’s input.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-HP-3: FR-2\\
+    \textbf{Description}: Test to verify if searching a an invalid name results in a message being displayed.\\
+    \textbf{Result}: The application displays a message to indicate that the search query did not find any results.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-HP-4: FR-5\\
+    \textbf{Description}: Test to verify if applying a filter filters the cryptocurrencies appropriately.\\
+    \textbf{Result}: The cryptocurrencies being displayed are updated based on the selected filters.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-HP-5: FR-5\\
+    \textbf{Description}: Test to verify if removing a filter also removes its effect from the filtration of the cryptocurrencies.\\
+    \textbf{Result}: The cryptocurrencies being displayed are updated based on the new filters.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-HP-6: FR-6\\
+    \textbf{Description}: Test to verify if sorting the cryptocurrencies works.\\
+    \textbf{Result}: The cryptocurrencies being displayed are sorted in the order selected and maintain this order on page refreshes.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-DP-1: FR-3\\
+    \textbf{Description}: Test to verify if the details page displays a chart with historical pricing.\\
+    \textbf{Result}: The cryptocurrency’s hourly, weekly, monthly and yearly historical pricing are displayed using a chart.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-CP-1: FR-4\\
+    \textbf{Description}: Test to verify if the compare page displays a chart with different options.\\
+    \textbf{Result}: A chart is displayed along with options to select different cryptocurrencies for comparison.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-CP-2: FR-4\\
+    \textbf{Description}: Test to verify if selecting a cryptocurrency for comparison does not allow it to be selected again.\\
+    \textbf{Result}: After the first cryptocurrency is selected, the option to select the same cryptocurrency a second time is disabled.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-FD-1: FR-7\\
+    \textbf{Description}: Test to verify if the data fetched from the API is cached for 5 minutes.\\
+    \textbf{Result}: The data fetched is cached for 5 minutes and refreshed after a page change after 5 minutes.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-FD-2: FR-8\\
+    \textbf{Description}: Test to verify if an error or toast message is displayed in case of API error.\\
+    \textbf{Result}: An error toast is displayed.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-FD-3: FR-9\\
+    \textbf{Description}: Test to verify if the application retries an API call in case of an error.\\
+    \textbf{Result}: The application waits several seconds and retries the API call.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-FD-4: FR-11\\
+    \textbf{Description}: Test to verify if the application times out API calls after 10 seconds of no response.\\
+    \textbf{Result}: The application cancels the request and treats it as an error if the API call does not respond in 10 seconds.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-FD-4: FR-11\\
+    \textbf{Description}: Test to verify if the application times out API calls after 10 seconds of no response.\\
+    \textbf{Result}: The application cancels the request and treats it as an error if the API call does not respond in 10 seconds.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-UI-1: FR-12\\
+    \textbf{Description}: Test to verify if the application adapts to the device's theme automatically.\\
+    \textbf{Result}: The application changes the theme of all the elements being displayed when device's theme changes.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-UI-2: FR-10\\
+    \textbf{Description}: Test to verify if skeleton placeholders are shown when data is being fetched.\\
+    \textbf{Result}: The application displays skeleton placeholders while waiting for an API response.\\
+    \textbf{Status}: Passed.\\
+    
+    \item FT-UI-3: FR-13\\
+    \textbf{Description}: Test to verify if filters are automatically saved and applied after a page is reloaded.\\
+    \textbf{Result}: The application automatically saves the filters to cookies and loads them automatically.\\
+    \textbf{Status}: Passed.\\
+\end{enumerate}
 
 \section{Nonfunctional Requirements Evaluation}
-
-\subsection{Usability}
+The following tests were conducted with a sample group of 10 users who represent the target audience of this product.
+\subsection{Look and Feel}
+\begin{enumerate}
+    \item NFT-LF-1: NFR-3\\
+    \textbf{Description}: Verify that more than 80\% of a sample group agree that the product feels professional, trustworthy, and informative.\\
+    \textbf{Result}: 90\% of the sample group agreed that the product is professional, trustworthy, and informative.\\
+    \textbf{Status}: Passed.\\
+\end{enumerate}
 		
-\subsection{Performance}
+\subsection{Usability and Humanity}
+\begin{enumerate}
+    \item NFT-UH-1: NFR-6\\
+    \textbf{Description}: Verify that at least 80\% of a sample group is able to navigate through the different pages without training.\\
+    \textbf{Result}: 100\% of the sample group was able to navigate through the different pages without training.\\
+    \textbf{Status}: Passed.\\
+    
+    \item NFT-UH-2: NFR-9\\
+    \textbf{Description}: Verify that at least 95\% of the users recognize the icons used.\\
+    \textbf{Result}: 100\% of the users in the sample group were able to recognize the icons used.\\
+    \textbf{Status}: Passed.\\
+    
+    \item NFT-UH-3: NFR-10\\
+    \textbf{Description}: Verify that web page adapts to different screen sizes at least 95\% of times.\\
+    \textbf{Result}: The web page adapted to different screen sizes 100\% of times when the users of the sample group were asked to open the web page on their own devices.\\
+    \textbf{Status}: Passed.\\
+\end{enumerate}
 
-\subsection{etc.}
+\subsection{Performance}
+\begin{enumerate}
+    \item NFT-P-1: NFR-11\\
+    \textbf{Description}: Verify that the web page initializes and sets up in less than 10 seconds.\\
+    \textbf{Result}: This was tested on multiple devices and the web page was able to initialize and set up in less than 10 seconds.\\
+    \textbf{Status}: Passed.\\
+    
+    \item NFT-P-2: NFR-12\\
+    \textbf{Description}: Verify that the web page transitions to the different pages within 1 second for 95\% of times, and within 5 seconds for the rest of the times.\\
+    \textbf{Result}: The web page transitioned to different pages in less than 1 second for 95\% of times.\\
+    \textbf{Status}: Passed.\\
+\end{enumerate}
 	
 \section{Comparison to Existing Implementation}	
 
-This section will not be appropriate for every project.
+There have been several changes and new additions separating CryptoMetrics, our project, from Cryptodash, the existing implementation. The existing application primarily displayed a list of cryptocurrencies in tabular form, whereas CryptoMetrics allows users to view this list in both a card view and a table view containing even more columns of information and a mini graph displaying cryptocurrency price changes in the past user specified time. CryptoMetrics also added a product page which allows users to get a detailed view of every cryptocurrency listed in the web app, which was not a part of the existing implementation. Furthermore, the project also adds a page dedicated to comparing cryptocurrencies with one another to indicate changes in projected price increases and decreases to better advise users so they make informed investment decisions. The original implementation did not include any testing within the project's files. Our implementation will be verified rigorously through the use of a test report.
 
 \section{Unit Testing}
-
+N/A
 \section{Changes Due to Testing}
 
 \section{Automated Testing}
+The tests: \texttt{FT-HP-1, FT-HP-2, FT-HP-3, FT-HP-4, FT-HP-5, FT-HP-6, FT-DP-1, FT-CP-1, FT-CP-2, FT-UI-3} were automated using the \texttt{cypress} library.
 		
 \section{Trace to Requirements}
-		
+\begin{table}[!ht]
+    \centering
+     
+    \begin{tabular}{|l|l|l|}
+    \hline
+        Test Case ID & Requirement ID \\ \hline
+        FT-HP-1 & FR-1 \\ \hline
+        FT-HP-2 & FR-2 \\ \hline
+        FT-HP-3 & FR-2 \\ \hline
+        FT-HP-4 & FR-5 \\ \hline
+        FT-HP-5 & FR-5 \\ \hline
+        FT-HP-6 & FR-6 \\ \hline
+        FT-DP-1 & FR-3 \\ \hline
+        FT-CP-1 & FR-4 \\ \hline
+        FT-CP-2 & FR-4 \\ \hline
+        FT-FD-1 & FR-7 \\ \hline
+        FT-FD-2 & FR-8 \\ \hline
+        FT-FD-3 & FR-9 \\ \hline
+        FT-FD-4 & FR-11 \\ \hline
+        FT-UI-1 & FR-12 \\ \hline
+        FT-UI-2 & FR-10 \\ \hline
+        FT-UI-3 & FR-13 \\ \hline
+        NFT-LF-11 & NFR-3 \\ \hline
+        NFT-UH-1 & NFR-6 \\ \hline
+        NFT-UI-2 & NFR-9 \\ \hline
+        NFT-UI-3 & NFR-10 \\ \hline
+        NFT-P-1 & NFR-11 \\ \hline
+        NFT-P-2 & NFR-12 \\ \hline
+    \end{tabular}
+    \label{Table}
+    \caption{\textbf{Traceability Matrix}}
+\end{table}
+
+\newpage
+
 \section{Trace to Modules}		
+\begin{table}[hbt!]
+\centering
+\begin{tabular}{p{0.2\textwidth} p{0.6\textwidth}}
+\toprule
+\textbf{Req.} & \textbf{Modules}\\
+\midrule
+FR-1 & M5.2.23, M5.2.25, M5.2.24, M5.2.26\\
+FR-2 & M5.2.17, M5.2.16\\
+FR-3 & M5.2.5, M5.2.2\\
+FR-4 & M5.2.5, M5.2.10, M5.2.11\\
+FR-5 & M5.2.3, M5.2.12, M5.2.13 M5.2.14, M5.2.15, M5.2.18,
+M5.2.19, M5.2.1\\
+FR-6 & M5.2.15\\
+FR-7 & M5.2.33\\
+FR-8 & M5.2.33\\
+FR-9 & M5.2.33\\
+FR-10 & M5.2.20\\
+FR-11 & M5.2.33\\
+FR-12 & M5.2.21, M5.2.22\\
+FR-13 & M5.2.30 \\
+
+NFR-1 & M5.2.9, M5.2.7, M5.2.8, M5.2.21, M5.2.22\\
+NFR-2 & M5.2.30, M5.2.31\\
+NFR-3 & M5.2.27, M5.2.28\\
+NFR-4 & M5.2.29\\
+\bottomrule
+\end{tabular}
+\caption{Trace Between Requirements and Modules}
+\label{TblRT}
+\end{table}
+
+\newpage
 
 \section{Code Coverage Metrics}
+\begin{verbatim}
+======================== Coverage summary =======================
+Statements   : 73.95% ( 213/288 )
+Branches     : 64.7% ( 154/238 )
+Functions    : 78.98% ( 109/138 )
+Lines        : 74.54% ( 205/275 )
+=================================================================
+\end{verbatim}
+\begin{scriptsize}
+\begin{verbatim}
 
-\bibliographystyle{plainnat}
 
-\bibliography{SRS}
+ -----------------------------|---------|----------|---------|---------|--------------------------
+File                         | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s        
+-----------------------------|---------|----------|---------|---------|--------------------------
+All files                    |   74.22 |     64.7 |   79.13 |   74.82 |                          
+ components/button           |   85.71 |     87.5 |      75 |   85.71 |                          
+  Button.js                  |     100 |    83.33 |     100 |     100 | 23                       
+  FilterButton.js            |     100 |      100 |     100 |     100 |                          
+  ToggleButton.js            |   66.66 |      100 |      50 |   66.66 | 31                       
+  index.js                   |       0 |        0 |       0 |       0 |                          
+ components/cards            |     100 |    72.72 |     100 |     100 |                          
+  CryptoChartCard.js         |     100 |    72.72 |     100 |     100 | 69-109                   
+ components/cards/skeletons  |     100 |      100 |     100 |     100 |                          
+  CryptoChartCardSkeleton.js |     100 |      100 |     100 |     100 |                          
+ components/charts           |      72 |    64.28 |      80 |      75 |                          
+  CompareChart.js            |   68.18 |    64.28 |      75 |   71.42 | 25-32                    
+  CryptoRowLineChart.js      |     100 |      100 |     100 |     100 |                          
+ components/content          |     100 |      100 |     100 |     100 |                          
+  Container.js               |     100 |      100 |     100 |     100 |                          
+  Main.js                    |     100 |      100 |     100 |     100 |                          
+  Wrapper.js                 |     100 |      100 |     100 |     100 |                          
+ components/dropdown         |   97.05 |    85.71 |   94.44 |   96.96 |                          
+  Dropdown.js                |     100 |       75 |     100 |     100 | 30                       
+  DropdownItem.js            |     100 |      100 |     100 |     100 |                          
+  FilterDropdown.js          |     100 |    83.33 |     100 |     100 | 52                       
+  FilterDropdownItem.js      |     100 |    85.71 |     100 |     100 | 24                       
+  SecondaryFilterDropdown.js |      50 |    66.66 |      50 |      50 | 45                       
+ components/filters          |     100 |      100 |     100 |     100 |                          
+  Filter.js                  |     100 |      100 |     100 |     100 |                          
+  Filters.js                 |     100 |      100 |     100 |     100 |                          
+  index.js                   |       0 |        0 |       0 |       0 |                          
+ components/inputs           |     100 |    88.46 |     100 |     100 |                          
+  Input.js                   |     100 |    94.44 |     100 |     100 | 39                       
+  SearchInput.js             |     100 |       75 |     100 |     100 | 16-17                    
+ components/navbar           |   66.66 |       50 |      50 |      80 |                          
+  Navbar.js                  |   66.66 |       50 |      50 |      80 | 53                       
+ components/radio            |     100 |       75 |     100 |     100 |                          
+  Radio.js                   |     100 |      100 |     100 |     100 |                          
+  RadioForm.js               |     100 |       75 |     100 |     100 | 15                       
+ components/sidebar          |     100 |      100 |     100 |     100 |                          
+  Sidebar.js                 |     100 |      100 |     100 |     100 |                          
+  SidebarItem.js             |     100 |      100 |     100 |     100 |                          
+ components/skeletons        |     100 |      100 |     100 |     100 |                          
+  PlaceholderSkeleton.js     |     100 |      100 |     100 |     100 |                          
+ components/table            |     100 |      100 |     100 |     100 |                          
+  Table.js                   |     100 |      100 |     100 |     100 |                          
+  TableBodyWrapper.js        |     100 |      100 |     100 |     100 |                          
+  TableCell.js               |     100 |      100 |     100 |     100 |                          
+  TableHeader.js             |     100 |      100 |     100 |     100 |                          
+  TableHeaderWrapper.js      |     100 |      100 |     100 |     100 |                          
+  TableRow.js                |     100 |      100 |     100 |     100 |                          
+  index.js                   |       0 |        0 |       0 |       0 |                          
+ components/tabs             |     100 |      100 |     100 |     100 |                          
+  Tab.js                     |     100 |      100 |     100 |     100 |                          
+  Tabs.js                    |     100 |      100 |     100 |     100 |                          
+  index.js                   |       0 |        0 |       0 |       0 |                          
+ components/titles           |     100 |      100 |     100 |     100 |                          
+  BoldGradientHeading.js     |     100 |      100 |     100 |     100 |                          
+ constants                   |     100 |    45.45 |     100 |     100 |                          
+  constants.js               |     100 |    45.45 |     100 |     100 | 18-19,41-91              
+  index.js                   |       0 |        0 |       0 |       0 |                          
+ cypress/plugins             |     100 |      100 |     100 |     100 |                          
+  index.js                   |     100 |      100 |     100 |     100 |                          
+ hooks                       |      80 |    57.14 |   88.88 |   79.16 |                          
+  index.js                   |       0 |        0 |       0 |       0 |                          
+  useFilters.js              |      80 |       40 |     100 |   78.57 | 16-21,30                 
+  useOnClickOutside.js       |      80 |      100 |      75 |      80 | 14-15                    
+ pages                       |   79.03 |    82.35 |   71.42 |   82.45 |                          
+  _app.js                    |    62.5 |      100 |      25 |     100 |                          
+  compare.js                 |     100 |      100 |     100 |     100 |                          
+  index.js                   |   81.13 |    82.35 |   78.26 |   80.39 | 57,61,70,127,181,418-423 
+ pages/coins                 |   44.44 |    86.36 |   33.33 |   44.44 |                          
+  [coin].js                  |   44.44 |    86.36 |   33.33 |   44.44 | 24,186-194               
+ queries                     |   70.96 |    21.42 |   76.19 |      70 |                          
+  index.js                   |       0 |        0 |       0 |       0 |                          
+  queries.js                 |   70.96 |    21.42 |   76.19 |      70 | 24,41-48,64,96,122       
+ utils                       |   30.43 |     14.7 |   46.66 |   28.88 |                          
+  index.js                   |       0 |        0 |       0 |       0 |                          
+  utils.js                   |   30.43 |     14.7 |   46.66 |   28.88 | 9,34-48,57-108 
+\end{verbatim}
+\end{scriptsize}
+
+\newpage
+
+\section{Appendix}
+
+The project's updated Gantt chart is located \href{https://gitlab.cas.mcmaster.ca/webapp/webapp_l02_grp15/-/tree/main/ProjectSchedule}{here}.
 
 \end{document}

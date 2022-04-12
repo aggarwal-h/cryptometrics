@@ -11,6 +11,7 @@ import {
   FcBarChart,
   FcLineChart,
 } from "react-icons/fc";
+import { numberOfChartsToLoad } from "../../constants";
 
 const unixNow = () => {
   return moment().unix();
@@ -35,7 +36,7 @@ function CompareChart({ singleChart, selectionDisabled, selectedCurrency }) {
   const [timerange, setTimerange] = useState("6month");
   const [chartType, setChartType] = useState("line");
   const chartRef = useRef(null);
-  const listOfCoins = useCryptoList("usd", 21, false);
+  const listOfCoins = useCryptoList("usd", numberOfChartsToLoad, false);
   const [firstCrypto, setFirstCrypto] = useState(
     selectedCurrency ? selectedCurrency : "solana"
   );

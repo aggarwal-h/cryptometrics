@@ -5,6 +5,7 @@
 \usepackage{mdframed}
 \usepackage{array}
 \usepackage{tikz}
+\usepackage{ulem}
 \newcommand*\emptycirc[1][1ex]{\tikz\draw[thick] (0,0) circle (#1);} 
 \newcommand*\halfcirc[1][1ex]{%
   \begin{tikzpicture}
@@ -32,8 +33,6 @@
 
 \date{\today}
 
-% \input{../Comments}
-
 \begin{document}
 
 \maketitle
@@ -50,6 +49,7 @@
 \midrule
 Mar 10, 2022 & 1.0 & Creation of the test plan document \\
 Mar 11, 2022 & 1.1 & Update and finalize the test plan \\
+Apr 10, 2022 & 1.2 & Update how tests would be performed \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -282,9 +282,9 @@ See the Gantt Chart \href{https://gitlab.cas.mcmaster.ca/webapp/webapp_l02_grp15
                     
 \textbf{Input/Condition:} The data is fetched using HTTP protocol.
                     
-\textbf{Output/Result:} The data fetched should be cached for 1 minute and refreshed after 1 minute.
+\textbf{Output/Result:} The data fetched should be cached for \sout{1 minute} \textcolor{red}{5 minutes} and refreshed after \sout{1 minute} \textcolor{red}{5 minutes}.
                     
-\textbf{How test will be performed:} This test will be performed manually to see if the data displayed refreshes on page change after 1 minute.
+\textbf{How test will be performed:} This test will be performed manually to see if the data displayed refreshes on page change after \sout{1 minute} \textcolor{red}{5 minutes}.
 
 
 \item{FT-FD-2}
@@ -352,7 +352,7 @@ See the Gantt Chart \href{https://gitlab.cas.mcmaster.ca/webapp/webapp_l02_grp15
                     
 \textbf{Output/Result:} The system shall display skeleton placeholders while waiting for an API response for the data.
                     
-\textbf{How test will be performed:} The \texttt{cypress} library will be used to verify that skeleton placeholders are being displayed while API is being loaded.
+\textbf{How test will be performed:} \sout{The \texttt{cypress} library} \textcolor{red}{Manual testing} will be used to verify that skeleton placeholders are being displayed while API is being loaded.
 
 \item{FT-UI-3}
 
@@ -364,7 +364,7 @@ See the Gantt Chart \href{https://gitlab.cas.mcmaster.ca/webapp/webapp_l02_grp15
                     
 \textbf{Output/Result:} The system shall automatically save the changes to local storage and load them automatically upon starting the product in the future.
                     
-\textbf{How test will be performed:} Manual testing will be used to observe if preferences are loaded back on page refreshes.
+\textbf{How test will be performed:} \sout{Manual testing} \textcolor{red}{The \texttt{cypress} library} will be used to observe if preferences are loaded back on page refreshes.
 \end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
@@ -537,7 +537,7 @@ See the Gantt Chart \href{https://gitlab.cas.mcmaster.ca/webapp/webapp_l02_grp15
 \newpage	
 \subsection{Search Feature Testing}
 \begin{enumerate}
-\item{POC-TCV-1}
+\item{POC-SFT-1}
 
 
 \textbf{Type:} Functional, Dynamic, Manual
