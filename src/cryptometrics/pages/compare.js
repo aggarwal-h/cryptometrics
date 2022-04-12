@@ -7,6 +7,9 @@ import Sidebar from "../components/sidebar/Sidebar";
 import CompareChart from "../components/charts/CompareChart";
 import Navbar from "../components/navbar/Navbar";
 
+/**
+ * Compare Page
+ */
 export default function Compare() {
   return (
     <div>

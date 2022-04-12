@@ -12,6 +12,8 @@ import {
   sort_by_price_change_percentage_high_to_low,
 } from "../utils";
 
+export const numberOfChartsToLoad = 21;
+
 export const cryptoChartOptions = (
   colors = [],
   dark = false,
