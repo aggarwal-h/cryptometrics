@@ -20,32 +20,15 @@ function Navbar() {
     >
       <div className="container flex flex-wrap justify-between items-center mx-auto pl-1 pr-2">
         <Link href="/">
-          <a className="relative h-10 w-10">
-            <span className="absolute left-0">
+          <a className="h-10 w-10">
+            <span className="ml-2">
               <Image
-                src="/usd_side.png"
-                width="100%"
-                height="100%"
+                src="/logo.png"
+                width="60%"
+                height="60%"
                 objectFit="contain"
                 alt="CryptoMetrics Icon"
                 priority={true}
-                className={classNames("transition-all duration-200", {
-                  "opacity-100": open,
-                  "opacity-0": !open,
-                })}
-              />
-            </span>
-            <span className="absolute left-0">
-              <Image
-                src="/usd_front.png"
-                width="100%"
-                height="100%"
-                objectFit="contain"
-                alt="CryptoMetrics Icon"
-                priority={true}
-                className={classNames("transition-all duration-200", {
-                  "opacity-0": open,
-                })}
               />
             </span>
           </a>
